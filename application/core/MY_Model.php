@@ -7,172 +7,173 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class MY_Model extends CI_Model {
 
-	/** @var string Contains current model table name. This variable is set on our models that extend this class, so this class knows witch table is working on. */
-	public $table_name;
+	protected $table_name = 'undefined';
 
-	public function __construct()
+	public $record_id;
+	public $insert_at;
+	public $update_at;
+	public $deleted_at;
+
+	public function __construct($properties = [])
 	{
 		parent::__construct();
-		$this->load->database();
+		$this->update_properties($properties);
 	}
 
-	/**
-	 * This method decides whether to insert or update given record.
-	 *
-	 * @param array $record Record to be saved. array key names must match database table columns
-	 *
-	 * @return bool TRUE on success, FALSE on failure
-	 */
-	public function save($record)
+	// TODO: remove this function and replace it with the set_properties one
+	public function update_properties($properties = [])
 	{
-		if (isset($record['record_id']) AND (int)$record['record_id']>0)
+		foreach ($properties as $property => $value)
 		{
-			$result = $this->update($record);
+			$this->$property = $value;
+		}
+	}
+
+	public function set_properties($properties = [])
+	{
+		foreach ($properties as $property => $value)
+		{
+			$this->$property = $value;
+		}
+	}
+
+	private function nullify_empty_properties()
+	{
+		foreach (get_object_vars($this) as $property => $value)
+		{
+			if (strlen(trim($this->$property)) == 0)
+			{
+				$this->$property = NULL;
+			}
+		}
+	}
+
+	public function get_record($where = [])
+	{
+		if (!$where) return NULL;
+
+		$called_class = get_called_class();
+
+		return $this->db->get_where($this->table_name, $where)->custom_row_object(0, $called_class);
+	}
+
+	public function get_records($where = [])
+	{
+		$called_class = get_called_class();
+		$where = array_merge($where, ['deleted_at' => NULL]);
+
+		return $this->db->get_where($this->table_name, $where)->custom_result_object($called_class);
+	}
+
+	public function get_deleted_records($where = [])
+	{
+		$called_class = get_called_class();
+		$where = array_merge($where, ['deleted_at IS NOT' => NULL]);
+
+		return $this->db->get_where($this->table_name, $where)->custom_result_object($called_class);
+	}
+
+	public function save()
+	{
+		if ((int)$this->record_id > 0)
+		{
+			$this->update();
 		}
 		else
 		{
-			$result = $this->insert($record);
+			$this->insert();
 		}
-		return $result;
 	}
 
-	public function save_and_get_record_id($record)
+	public function save_and_get_record_id()
 	{
-		if (isset($record['record_id']) AND (int)$record['record_id']>0)
+		if ((int)$this->record_id > 0)
 		{
-			$this->update($record);
-			$result = $record['record_id'];
+			$this->update();
+			$result = $this->record_id;
 		}
 		else
 		{
-			$this->insert($record);
+			$this->insert();
 			$result = $this->db->insert_id();
 		}
 		return $result;
 	}
 
-	/**
-	 * This method inserts a new record to the database. converting empty strings to NULL to save space on the database.
-	 *
-	 * @param array $record Record to be saved. array key names must match database table columns
-	 *
-	 * @return bool TRUE on success, FALSE on failure
-	 */
-	public function insert($record)
+	public function update()
 	{
-		/* set zero length values to NULL */
-		$record = array_map(function($v) { return strlen($v)==0 ? NULL : $v; }, $record);
+		$this->nullify_empty_properties();
+
+		$called_class = get_called_class();
 
 		$datetime_now = new DateTime('now', new DateTimeZone('UTC'));
-		$record['insert_at'] = $datetime_now->format('Y-m-d H:i:s');
-		$record['update_at'] = $datetime_now->format('Y-m-d H:i:s');
+		$this->update_at = $datetime_now->format('Y-m-d H:i:s');
 
-		return $this->db->insert($this->table_name, $record);
+		$this->db->update($this->table_name, $this, ['record_id' => $this->record_id]);
 	}
 
-	/**
-	 * This method updates a new record to the database based on it's record_id. converting empty strings to NULL to save space on the database.
-	 *
-	 * @param array $record Record to be updated. array key names must match database table columns, and must contain record_id
-	 *
-	 * @return bool TRUE on success, FALSE on failure
-	 */
-	public function update($record)
+	public function insert()
 	{
-		/* set zero length values to NULL */
-		$record = array_map(function($v) { return strlen($v)==0 ? NULL : $v; }, $record);
+		$this->nullify_empty_properties();
+
+		$called_class = get_called_class();
 
 		$datetime_now = new DateTime('now', new DateTimeZone('UTC'));
-		$record['update_at'] = $datetime_now->format('Y-m-d H:i:s');
+		$this->insert_at = $datetime_now->format('Y-m-d H:i:s');
+		$this->update_at = $datetime_now->format('Y-m-d H:i:s');
 
-		return $this->db->update($this->table_name, $record, array('record_id'=>$record['record_id']));
+		$this->db->insert($this->table_name, $this);
+
+		$this->record_id = $this->db->insert_id();
 	}
 
-
-	/**
-	 * This method deletes a record from the database based on it's record id.
-	 *
-	 * @param array $record Record to be deleted. This array must contain record_id.
-	 *
-	 * @return boolean TRUE on success, FALSE on failure.
-	 */
-	public function delete($record)
+	public function delete()
 	{
-		return $this->db->delete($this->table_name, array('record_id'=>$record['record_id']));
+		$called_class = get_called_class();
+
+		return $this->db->delete($this->table_name, ['record_id' => $this->record_id]);
 	}
 
-
-	/**
-	 * This function add's date in daleted_at field of row so we consider it as deleted.
-	 * This virtual delete method keeps the row for historical purposes or not to brake application consistency
-	 *
-	 * @param array $record Record to be soft deleted. This array must contain record_id.
-	 *
-	 * @return void
-	 */
-	public function soft_delete($record)
+	public function soft_delete()
 	{
+		$called_class = get_called_class();
 		$datetime_now = new DateTime('now', new DateTimeZone('UTC'));
-		$record['deleted_at'] = $datetime_now->format('Y-m-d H:i:s');
+		$this->deleted_at = $datetime_now->format('Y-m-d H:i:s');
 
-		$this->db->update($this->table_name, $record, array('record_id'=>$record['record_id']));
+		$this->db->update($this->table_name, $this, ['record_id' => $this->record_id]);
 	}
 
-	/**
-	 * This function restoring specified record in loaded model's table.
-	 *
-	 * @param array $record Record to be un_deleted. This array must contain record_id.
-	 *
-	 * @return void
-	 */
-	public function un_delete($record)
+	public function un_delete()
 	{
-		$record['deleted_at'] = NULL;
-		$this->db->update($this->table_name, $record, array('record_id'=>$record['record_id']));
+		$called_class = get_called_class();
+		$this->deleted_at = NULL;
+
+		$this->db->update($this->table_name, $this, ['record_id' => $this->record_id]);
 	}
 
-	/**
-	 * This function returns specified row from loaded model's table.
-	 *
-	 * @param int $record_id Record id from our auto increment record_id column.
-	 *
-	 * @return array|boolean Database row as array or FALSE if record not found.
-	 */
-	public function get_record($record_id)
+	public function is_unique($properties = [])
 	{
-		$query = $this->db->get_where($this->table_name, array('record_id' => $record_id));
-		if ($query->num_rows() == 1)
+		if (empty($properties)) return FALSE;
+
+		$where = [];
+		foreach ($properties as $property)
 		{
-			return $query->row_array();
+			$where[$property] = $this->$property;
 		}
-		return FALSE;
+
+		return !(bool)$this->db->get_where($this->table_name, $where)->num_rows();
 	}
 
-	/**
-	 * This function returns all records from loaded model's table
-	 *
-	 * @return array
-	 */
-	public function get_records($where = array())
+	public function is_empty($properties = [])
 	{
-		$where = array_merge($where, ['deleted_at' => NULL]);
-		return $this->db->get_where($this->table_name, $where)->result_array();
-	}
+		if (empty($properties)) return TRUE;
 
-	public function get_records_with_deleted($where = array())
-	{
-		return $this->db->get_where($this->table_name, $where)->result_array();
-	}
-
-	public function is_unique($record, $column)
-	{
-		if (isset($record['record_id']) AND (int)$record['record_id']>0)
+		foreach ($properties as $property)
 		{
-			$this->db->where('record_id !=', (int)$record['record_id']);
+			if (!empty($this->$property)) return FALSE;
 		}
-		$this->db->where($column, $record[$column]);
 
-		return $this->db->count_all_results($this->table_name) ? FALSE : TRUE;
+		return TRUE;
 	}
 
 }

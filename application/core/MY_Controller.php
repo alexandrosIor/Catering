@@ -12,102 +12,74 @@ class MY_Controller extends CI_Controller {
 	{
 		parent::__construct();
 
-		$this->load->library('mini_stats_lib');
-		$this->load->model('members_model');
-
 		if (!$this->session->userdata('logged_in'))
 		{
-			$this->load->library('authenticate_lib');
-			$this->authenticate_lib->logout();
+			$this->load->library('authenticate');
+			$this->authenticate->logout();
 
 			$this->load->helper('url');
 			redirect('login');
 			return ;
 		}
 
-		// ελεγχος αν ειναι cashier και η βάρδια που είναι ανοιχτή είναι δικιά του
-		$member = $this->session->userdata('member');
-		if ($member['role'] == 'cashier')
+		$this->load->model('user_model');
+		$this->logged_in_member = unserialize($this->session->userdata('logged_in_member'));
+		$this->logged_in_member->build_member_acl();
+		$this->view_data['logged_in_member'] = $this->logged_in_member;
+		$this->view_data['selector_stores'] = $this->acl_lib->get_stores_for_selector($this->logged_in_member);
+
+		// Set selected store
+		if ($this->session->selected_store)
 		{
-			$this->load->model('cashier_sessions_model');
-			$current_session = $this->cashier_sessions_model->get_current_open_session();
-			if ($current_session['member_record_id'] != $member['record_id'])
-			{
-				$this->load->library('authenticate_lib');
-				$this->authenticate_lib->logout();
-
-				$this->load->helper('url');
-				redirect('login');
-				return ;
-			}
-
-			if ($sessions_with_empty_turnover = $this->cashier_sessions_model->get_sessions_with_empty_turnover())
-			{
-				foreach ($sessions_with_empty_turnover as $session)
-				{
-					$member = $this->members_model->get_member_with_photo($session['member_record_id']);
-					$session['firstname'] = $member['firstname'];
-					$session['lastname'] = $member['lastname'];
-					$session['member_photo'] = $member['photo'];
-					$session['start_date'] = new DateTime($session['start_date'], new DateTimeZone('UTC'));
-					$session['start_date']->setTimezone(new DateTimeZone('Europe/Athens'));
-					$session['start_date'] = $session['start_date']->format('d M H:i');
-
-					$session['end_date'] = new DateTime($session['end_date'], new DateTimeZone('UTC'));
-					$session['end_date']->setTimezone(new DateTimeZone('Europe/Athens'));
-					$session['end_date'] = $session['end_date']->format('d M H:i');
-
-					$this->view_data['messages'][] = $this->load->view('_ui_messages/empty_turnover.php', $session, TRUE);
-				}
-			}
+			$this->selected_store = unserialize($this->session->selected_store);
+			$this->view_data['selected_store'] = $this->selected_store;
+		}
+		else
+		{
+			$this->selected_store = NULL;
 		}
 
-		$this->view_data['mini_stats'] = $this->mini_stats_lib->get_cached_mini_stats();
-		$this->view_data['member'] = $this->session->userdata('member');
-		$this->view_data['logged_in_member'] = $this->view_data['member'];
-		$this->view_data['member']['photo'] = $this->members_model->get_member_photo($member['record_id']);
-
 		$this->view_data['css_includes'] = array();
 		$this->view_data['js_includes'] = array();
 
-		$this->include_common_css();
-		$this->include_common_js();
+		$this->include_common_assets();
+		$this->generate_menu();
 	}
 
-	public function include_common_css()
+	private function include_common_assets()
 	{
-		$this->view_data['css_includes'][] = '/assets/css/bootstrap.min.css';
-		$this->view_data['css_includes'][] = '/assets/font-awesome/css/font-awesome.css';
-		$this->view_data['css_includes'][] = '/assets/css/animate.css';
-		$this->view_data['css_includes'][] = '/assets/css/style.css';
+		$this->layout_lib->add_additional_js('/assets/js/global.js');
 	}
 
-	public function include_css($css_file)
+	private function generate_menu()
 	{
-		$this->view_data['css_includes'][] = $css_file;
-	}
+		if ($this->session->userdata('logged_in') == TRUE)
+		{
+			$this->view_data['menu'] = array();
 
-	public function empty_css_includes()
-	{
-		$this->view_data['css_includes'] = array();
-	}
+			$this->view_data['menu'][] = array('icon' => 'fa-flask', 'name' => 'Dashboard', 'link' => '/dashboard');
+			
+			if ($this->acl_lib->isAllowed($this->logged_in_member->role, 'manage_campaign'))
+			{
+				$this->view_data['menu'][] = array('icon' => 'fa-tags', 'name' => 'Κουπόνια', 'link' => '/coupons/campaigns');
+			}
+			
+			$this->view_data['menu'][] = array('icon' => 'fa-area-chart', 'name' => 'Στατιστικά', 'link' => '#', 'submenu' => array(
+				array('name' => 'Ταμείων', 'link' => '/statistics'),
+				array('name' => 'Μελών', 'link' => '/statistics/members'),
+			));
 
-	public function include_common_js()
-	{
-		$this->view_data['js_includes'][] = '/assets/js/jquery-2.1.1.js';
-		$this->view_data['js_includes'][] = '/assets/js/bootstrap.min.js';
-		$this->view_data['js_includes'][] = '/assets/js/frappe.js';
-		$this->layout_lib->add_additional_js('/assets/js/frappe.js');
-	}
+			if ($this->acl_lib->isAllowed($this->logged_in_member->role, 'manage_users'))
+			{
+				$this->view_data['menu'][] = array('icon' => 'fa-group', 'name' => 'Χρήστες', 'link' => '/users');
+				$this->view_data['menu'][] = array('icon' => 'fa-university', 'name' => 'Καταστήματα', 'link' => '/stores');
+			}
 
-	public function include_js($js_file)
-	{
-		$this->view_data['js_includes'][] = $js_file;
-	}
-
-	public function empty_js_includes()
-	{
-		$this->view_data['js_includes'] = array();
+			if ($this->acl_lib->isAllowed($this->logged_in_member->role, 'manage_sms'))
+			{
+				$this->view_data['menu'][] = array('icon' => 'fa-send', 'name' => 'SMS', 'link' => '/sms/campaigns');
+			}
+		}
 	}
 
 }

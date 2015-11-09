@@ -1,0 +1,13 @@
+{
+	"description" : "The CodeIgniter framework",
+	"name" : "codeigniter/framework",
+	"license": "MIT",
+	"require": {
+		"php": ">=5.2.4"
+	},
+	"require": {
+		"cboden/ratchet": "0.3.*",
+		"textalk/websocket": "1.0.*",
+		"zendframework/zend-permissions-acl": "2.*"
+	}
+}

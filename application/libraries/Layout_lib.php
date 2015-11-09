@@ -12,12 +12,12 @@ class Layout_lib {
 	/** @var array επιπροσθετα αρχεια javascript που θα συμπερληφθουν στο τελος του layout */
 	private $additional_js = array();
 
-	function __construct()
+	public function __construct()
 	{
 		$this->ci =& get_instance();
 	}
 
-	function load($layout_view, $body_view = null, $data = null)
+	public function load($layout_view, $body_view = null, $data = null)
 	{
 		if ( ! is_null( $body_view ) )
 		{
@@ -40,12 +40,12 @@ class Layout_lib {
 		$this->ci->load->view($layout_view, $data);
 	}
 
-	function add_additional_css($css_path)
+	public function add_additional_css($css_path)
 	{
 		$this->additional_css[] = $css_path;
 	}
 
-	function print_additional_css()
+	public function print_additional_css()
 	{
 		echo '<!-- START OF print_additional_css -->' . "\n";
 		foreach ($this->additional_css as $additional_css_path)
@@ -55,12 +55,12 @@ class Layout_lib {
 		echo '<!-- END OF print_additional_css -->' . "\n";
 	}
 
-	function add_additional_js($js_path)
+	public function add_additional_js($js_path)
 	{
 		$this->additional_js[] = $js_path;
 	}
 
-	function print_additional_js()
+	public function print_additional_js()
 	{
 		echo '<!-- START OF print_additional_js -->' . "\n";
 		foreach ($this->additional_js as $additional_js_path)

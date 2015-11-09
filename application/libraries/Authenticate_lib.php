@@ -1,22 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Authenticate_lib {
-
-	var $ci;
+class Authenticate {
 
 	public function __construct()
 	{
 		$this->ci = &get_instance();
-		$this->ci->load->model('members_model');
+		$this->ci->load->model('user_model');
 	}
 
 	public function login($username, $password)
 	{
-		if ($member = $this->ci->members_model->get_member_by_email_pass($username, $password))
+		if ($user = $this->ci->user_model->get_record(['email' => $username, 'password' => $password]))
 		{
-			unset($member['password']);
 			$this->ci->session->set_userdata('logged_in', TRUE);
-			$this->ci->session->set_userdata('member', $member);
+			$this->ci->session->set_userdata('logged_in_member', serialize($user));
 			return TRUE;
 		}
 		return FALSE;
@@ -29,5 +26,5 @@ class Authenticate_lib {
 
 }
 
-/* End of file Authenticate_lib.php */
-/* Location: ./application/libraries/Authenticate_lib.php */
+/* End of file Authenticate.php */
+/* Location: ./application/libraries/Authenticate.php */
