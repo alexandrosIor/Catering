@@ -16,24 +16,24 @@ Project Catering
 Για την εγκατάσταση της εφαρμόγης τοπικά στον υπολογιστή σας χρειάζεται να 
 έχετε εγκατεστημένα:
 **************************************************************************
-- `Apache server`
-- `MySql`
+-	Apache server
+-	MySql
 
 *************
 Step by step:
 *************
--	`Κατεβάστε το zip της εφαρμογής και καντε το extract.`
--	`προσθέστε το DNS της εφαρμογης στα hosts .`
+-	Κατεβάστε το zip της εφαρμογής και καντε το extract.
+-	προσθέστε το DNS της εφαρμογης στα hosts .
 	(linux : /etc/hosts/, Windows: C:\windows\system32\drivers\etc\hosts)
 	127.0.0.1		catering.loc
--	`δημιουργήστε ένα virtual Host στον Apache Server, στο αρχειο httpd-vhost.conf προσθέστε`
+-	δημιουργήστε ένα virtual Host στον Apache Server, στο αρχειο httpd-vhost.conf προσθέστε
 	<VirtualHost *:80>
 	ServerName catering.loc
 	ServerAlias CateringPro
 	DocumentRoot your/path/to/project/catering/
 	</VirtualHost>
--	`Επαννεκινήστε τον Αpache server και τους browser σε πέριπτωση που ήταν ανοικτοί.`
--	`Ανοιξτε τον browser της επιλογής σας και κατευθύνετε τον στο URL catering.loc.`
+-	Επαννεκινήστε τον Αpache server και τους browser σε πέριπτωση που ήταν ανοικτοί.
+-	Ανοιξτε τον browser της επιλογής σας και κατευθύνετε τον στο URL catering.loc.
 
 ###################
 What is CodeIgniter
