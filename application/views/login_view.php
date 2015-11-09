@@ -39,25 +39,24 @@
 					<div class="row">
 						<div class="col-md-3 center">
 							<div class="login-box">
-								<a href="index.html" class="logo-name text-lg text-center">Catering</a>
-								<p class="text-center m-t-md">Please login into your account.</p>
-								<form class="m-t-md" action="/login">
+								<a href="/login" class="logo-name text-lg text-center">Catering</a>
+								<p class="text-center m-t-md">Παρακλώ συνδεθείτε στον λογαρισμό σας</p>
+								<form class="m-t-md" id="login_form">
 									<div class="form-group">
 										<input type="email" class="form-control" placeholder="Email" required>
 									</div>
 									<div class="form-group">
 										<input type="password" class="form-control" placeholder="Password" required>
 									</div>
-									<button type="submit" class="btn btn-success btn-block">Login</button>
+									<button type="submit" class="btn btn-success btn-block">Σύνδεση</button>
 								</form>
-								<p class="text-center m-t-xs text-sm">2015 &copy; icd.teicm.gr</p>
+								<p class="text-center m-t-xs text-sm">2015 &copy; icd.teicm.gr | Iordanidis Alexandros</p>
 							</div>
 						</div>
 					</div><!-- Row -->
 				</div><!-- Main Wrapper -->
 			</div><!-- Page Inner -->
 		</main><!-- Page Content -->
-	
 
 		<!-- Javascripts -->
 		<script src="../assets/plugins/jquery/jquery-2.1.4.min.js"></script>
@@ -72,5 +71,42 @@
 		<script src="../assets/plugins/waves/waves.min.js"></script>
 		<script src="../assets/js/modern.min.js"></script>
 		
+		<script>
+			window.onload=function()
+			{
+				$("input:first").focus();
+				
+				$('body').on('hidden.bs.modal', '.modal', function () {
+					$(this).removeData('bs.modal');
+				});
+				
+				$("#login_form").submit(function (e) {
+					e.preventDefault();
+					
+					$.ajax({
+						type: "POST",
+						url: "/login/check/",
+						data: $('form#login_form').serialize(),
+						dataType: 'json',
+						success: function(msg){
+							if (msg.hasOwnProperty('message'))
+							{
+								//TODO: να γινει swal
+								alert(msg.message);
+							}
+							if (msg.hasOwnProperty('redirect'))
+							{
+								window.location.replace(msg.redirect);
+							}
+						},
+						error: function() {
+							//TODO: να γινει swal
+							alert(failure);
+						}
+					});
+				});
+			}
+		</script>
+
 	</body>
 </html>

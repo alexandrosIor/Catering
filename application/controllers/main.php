@@ -7,7 +7,7 @@ class Main extends CI_Controller
 	{
 		$this->load->helper('url');
 	
-		/*if ($this->session->userdata('logged_in') === TRUE)
+		if ($this->session->userdata('logged_in') === TRUE)
 		{
 			$member = $this->session->userdata('member');
 			if ($member['role'] == 'admin')
@@ -26,8 +26,7 @@ class Main extends CI_Controller
 		else
 		{
 			redirect('/login', 'location');
-		}*/
-		redirect('/login', 'location');
+		}
 	}
 
 }
