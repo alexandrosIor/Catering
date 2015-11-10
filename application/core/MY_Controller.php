@@ -29,7 +29,7 @@ class MY_Controller extends CI_Controller {
 		$this->view_data['css_includes'] = array();
 		$this->view_data['js_includes'] = array();
 
-		//$this->include_common_assets();
+		$this->include_common_assets();
 		$this->generate_menu($this->view_data['logged_in_member']);
 	}
 

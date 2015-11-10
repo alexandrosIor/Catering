@@ -14,16 +14,8 @@
 		<!-- Styles -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
 		<link href="/assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
-		<link href="/assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
-		<link href="/assets/plugins/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css"/>	
-		<link href="/assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css" rel="stylesheet" type="text/css"/>	
 		<link href="/assets/plugins/waves/waves.min.css" rel="stylesheet" type="text/css"/>	
-		<link href="/assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css"/>
-		<link href="/assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css"/>	
-		<link href="/assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet" type="text/css"/>	
-		<link href="/assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet" type="text/css"/>	
-		<link href="/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css"/>	
 			
 		<!-- Theme Styles -->
 		<link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -31,9 +23,6 @@
 		<link href="/assets/css/modern.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/css/themes/green.css" class="theme-color" rel="stylesheet" type="text/css"/>
 		<link href="/assets/css/custom.css" rel="stylesheet" type="text/css"/>
-		
-		<script src="/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
-		<script src="/assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
 
 		<?=$this->layout_lib->print_additional_css()?>
 		
@@ -74,7 +63,6 @@
 					</div>
 				</div>
 			</div><!-- Navbar -->
-
 
 			<div class="page-sidebar sidebar">
 				<div class="page-sidebar-inner slimscroll">
@@ -172,28 +160,14 @@
 		<!-- Javascripts -->
 		<script src="/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
 		<script src="/assets/plugins/pace-master/pace.min.js"></script>
-		<script src="/assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-		<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-		<script src="/assets/plugins/switchery/switchery.min.js"></script>
-		<script src="/assets/plugins/uniform/jquery.uniform.min.js"></script>
-		<script src="/assets/plugins/offcanvasmenueffects/js/classie.js"></script>
-		<script src="/assets/plugins/offcanvasmenueffects/js/main.js"></script>
 		<script src="/assets/plugins/waves/waves.min.js"></script>
+		<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 		<script src="/assets/plugins/3d-bold-navigation/js/main.js"></script>
-		<script src="/assets/plugins/waypoints/jquery.waypoints.min.js"></script>
-		<script src="/assets/plugins/jquery-counterup/jquery.counterup.min.js"></script>
-		<script src="/assets/plugins/toastr/toastr.min.js"></script>
-		<script src="/assets/plugins/flot/jquery.flot.min.js"></script>
-		<script src="/assets/plugins/flot/jquery.flot.time.min.js"></script>
-		<script src="/assets/plugins/flot/jquery.flot.symbol.min.js"></script>
-		<script src="/assets/plugins/flot/jquery.flot.resize.min.js"></script>
-		<script src="/assets/plugins/flot/jquery.flot.tooltip.min.js"></script>
-		<script src="/assets/plugins/curvedlines/curvedLines.js"></script>
-		<script src="/assets/plugins/metrojs/MetroJs.min.js"></script>
+		<script src="/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
 		<script src="/assets/js/modern.min.js"></script>
-		<script src="/assets/js/pages/dashboard.js"></script>
 		<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 		<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<?$this->layout_lib->print_additional_js()?>
+		<?=$this->layout_lib->print_additional_js()?>
+
 	</body>
 </html>
