@@ -81,7 +81,7 @@
 					<div class="sidebar-header">
 						<div class="sidebar-profile">
 							<div class="sidebar-profile-image">
-								<img src="/assets/images/profile-menu-image.png" class="img-circle img-responsive" alt="">
+								<img src="/assets/images/blank-image.jpg" class="img-circle img-responsive" alt="">
 							</div>
 							<span><?=$logged_in_member->email?><br><small><?=$logged_in_member->role?></small></span>
 						</div>
