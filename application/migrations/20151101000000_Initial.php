@@ -7,7 +7,7 @@ class Migration_Initial extends CI_Migration {
 	public function up()
 	{
 		$attributes = array('ENGINE'=>'MyISAM');
-		/* TABLE: members */
+		/* TABLE: users */
 		$this->dbforge->add_field(array(
 			'record_id' => array(
 				'type' => 'BIGINT',
@@ -26,30 +26,43 @@ class Migration_Initial extends CI_Migration {
 				'type' => 'DATETIME',
 				'null' => TRUE
 			),
-			'member_group_id' => array(
-				'type' => 'BIGINT',
-				'unsigned' => TRUE,
-			),
-			'member_id' => array(
+			'email' => array(
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 				'null' => TRUE,
 			),
-			'lastname' => array(
+			'password' => array(
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 				'null' => TRUE,
-			),
-			'firstname' => array(
+			),			
+			'role' => array(
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 				'null' => TRUE,
-			),
+			)
+
 		));
 		$this->dbforge->add_key('record_id', TRUE);
-		$this->dbforge->create_table('members', TRUE, $attributes);
+		$this->dbforge->create_table('users', TRUE, $attributes);
+
+		$this->insert_common_records();
+	}
+
+	private function insert_common_records()
+	{
+		$datatime_now = new DateTime('NOW', new DateTimeZone('UTC'));
+		/* users */
+		$dummy_records = array(
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'email' => 'admin@catering.gr',
+				'password' => 'admin',
+				'role' => 'admin',
+			)
+		);
+		$this->db->insert_batch('users', $dummy_records);
 	}
 
 }
-
 ?>

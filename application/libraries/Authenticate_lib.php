@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Authenticate {
+class Authenticate_lib {
 
 	public function __construct()
 	{
@@ -26,5 +26,5 @@ class Authenticate {
 
 }
 
-/* End of file Authenticate.php */
-/* Location: ./application/libraries/Authenticate.php */
+/* End of file Authenticate_lib.php */
+/* Location: ./application/libraries/Authenticate_lib.php */

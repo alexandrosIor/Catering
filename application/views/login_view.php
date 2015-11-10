@@ -43,10 +43,10 @@
 								<p class="text-center m-t-md">Παρακλώ συνδεθείτε στον λογαρισμό σας</p>
 								<form class="m-t-md" id="login_form">
 									<div class="form-group">
-										<input type="email" class="form-control" placeholder="Email" required>
+										<input type="email" class="form-control" name="username" placeholder="Email" required>
 									</div>
 									<div class="form-group">
-										<input type="password" class="form-control" placeholder="Password" required>
+										<input type="password" class="form-control" name="password" placeholder="Password" required>
 									</div>
 									<button type="submit" class="btn btn-success btn-block">Σύνδεση</button>
 								</form>
@@ -70,43 +70,6 @@
 		<script src="../assets/plugins/offcanvasmenueffects/js/classie.js"></script>
 		<script src="../assets/plugins/waves/waves.min.js"></script>
 		<script src="../assets/js/modern.min.js"></script>
-		
-		<script>
-			window.onload=function()
-			{
-				$("input:first").focus();
-				
-				$('body').on('hidden.bs.modal', '.modal', function () {
-					$(this).removeData('bs.modal');
-				});
-				
-				$("#login_form").submit(function (e) {
-					e.preventDefault();
-					
-					$.ajax({
-						type: "POST",
-						url: "/login/check/",
-						data: $('form#login_form').serialize(),
-						dataType: 'json',
-						success: function(msg){
-							if (msg.hasOwnProperty('message'))
-							{
-								//TODO: να γινει swal
-								alert(msg.message);
-							}
-							if (msg.hasOwnProperty('redirect'))
-							{
-								window.location.replace(msg.redirect);
-							}
-						},
-						error: function() {
-							//TODO: να γινει swal
-							alert(failure);
-						}
-					});
-				});
-			}
-		</script>
-
+		<script src="../assets/js/views/login.js"></script>
 	</body>
 </html>

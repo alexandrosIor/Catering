@@ -14,7 +14,7 @@ class MY_Controller extends CI_Controller {
 
 		if (!$this->session->userdata('logged_in'))
 		{
-			$this->load->library('authenticate');
+			$this->load->library('authenticate_lib');
 			$this->authenticate->logout();
 
 			$this->load->helper('url');
@@ -24,26 +24,13 @@ class MY_Controller extends CI_Controller {
 
 		$this->load->model('user_model');
 		$this->logged_in_member = unserialize($this->session->userdata('logged_in_member'));
-		$this->logged_in_member->build_member_acl();
 		$this->view_data['logged_in_member'] = $this->logged_in_member;
-		$this->view_data['selector_stores'] = $this->acl_lib->get_stores_for_selector($this->logged_in_member);
-
-		// Set selected store
-		if ($this->session->selected_store)
-		{
-			$this->selected_store = unserialize($this->session->selected_store);
-			$this->view_data['selected_store'] = $this->selected_store;
-		}
-		else
-		{
-			$this->selected_store = NULL;
-		}
 
 		$this->view_data['css_includes'] = array();
 		$this->view_data['js_includes'] = array();
 
-		$this->include_common_assets();
-		$this->generate_menu();
+		//$this->include_common_assets();
+		$this->generate_menu($this->view_data['logged_in_member']);
 	}
 
 	private function include_common_assets()
@@ -51,33 +38,22 @@ class MY_Controller extends CI_Controller {
 		$this->layout_lib->add_additional_js('/assets/js/global.js');
 	}
 
-	private function generate_menu()
+	private function generate_menu($member)
 	{
 		if ($this->session->userdata('logged_in') == TRUE)
 		{
 			$this->view_data['menu'] = array();
 
-			$this->view_data['menu'][] = array('icon' => 'fa-flask', 'name' => 'Dashboard', 'link' => '/dashboard');
+			$this->view_data['menu'][] = array('icon' => 'glyphicon-home', 'name' => 'Dashboard', 'link' => '/store/dashboard');
 			
-			if ($this->acl_lib->isAllowed($this->logged_in_member->role, 'manage_campaign'))
-			{
-				$this->view_data['menu'][] = array('icon' => 'fa-tags', 'name' => 'Κουπόνια', 'link' => '/coupons/campaigns');
-			}
-			
-			$this->view_data['menu'][] = array('icon' => 'fa-area-chart', 'name' => 'Στατιστικά', 'link' => '#', 'submenu' => array(
-				array('name' => 'Ταμείων', 'link' => '/statistics'),
-				array('name' => 'Μελών', 'link' => '/statistics/members'),
-			));
+			$this->view_data['menu'][] = array('icon' => 'glyphicon-edit', 'name' => 'Παραγγελίες', 'link' => '#');
 
-			if ($this->acl_lib->isAllowed($this->logged_in_member->role, 'manage_users'))
+			if ($member->role == 'admin')
 			{
-				$this->view_data['menu'][] = array('icon' => 'fa-group', 'name' => 'Χρήστες', 'link' => '/users');
-				$this->view_data['menu'][] = array('icon' => 'fa-university', 'name' => 'Καταστήματα', 'link' => '/stores');
-			}
-
-			if ($this->acl_lib->isAllowed($this->logged_in_member->role, 'manage_sms'))
-			{
-				$this->view_data['menu'][] = array('icon' => 'fa-send', 'name' => 'SMS', 'link' => '/sms/campaigns');
+				$this->view_data['menu'][] = array('icon' => 'glyphicon-user', 'name' => 'Χρήστες', 'link' => '#', 'submenu' => array(
+					array('name' => 'menu 1', 'link' => '#'),
+					array('name' => 'menu 2', 'link' => '#'),
+				));
 			}
 		}
 	}
