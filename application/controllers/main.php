@@ -14,15 +14,15 @@ class Main extends CI_Controller
 
 			if ($logged_in_member->role == 'admin')
 			{
-				redirect('/store/dashboard', 'location');
+				redirect('/store', 'location');
 			}
 			elseif ($logged_in_member->role == 'store')
 			{
-				redirect('/store/dashboard', 'location');
+				redirect('/store', 'location');
 			}			
 			elseif ($logged_in_member->role == 'waiter')
 			{
-				redirect('/waiter/dashboard', 'location');
+				redirect('/waiter', 'location');
 			}
 		}
 		else

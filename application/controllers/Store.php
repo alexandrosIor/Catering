@@ -11,11 +11,6 @@ class Store extends MY_Controller {
 
 	public function index()
 	{
-		$this->dashboard();
-	}
-
-	public function dashboard()
-	{
 		$this->load->model('user_model');
 		//$this->layout_lib->add_additional_css('');
 		//$this->layout_lib->add_additional_js('');
@@ -24,6 +19,7 @@ class Store extends MY_Controller {
 		
 		$this->layout_lib->load('store_layout_view', 'store/dashboard', $this->view_data);
 	}
+	
 }
 
 /* End of file Store.php */
