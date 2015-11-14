@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller {
 		if (!$this->session->userdata('logged_in'))
 		{
 			$this->load->library('authenticate_lib');
-			$this->authenticate->logout();
+			$this->authenticate_lib->logout();
 
 			$this->load->helper('url');
 			redirect('login');
@@ -53,16 +53,27 @@ class MY_Controller extends CI_Controller {
 		{
 			$this->view_data['menu'] = array();
 
-			$this->view_data['menu'][] = array('icon' => 'glyphicon-home', 'name' => 'Dashboard', 'link' => '/store');
-			
-			$this->view_data['menu'][] = array('icon' => 'glyphicon-edit', 'name' => 'Παραγγελίες', 'link' => '#');
-
-			if ($member->role == 'admin')
+			if ($member->role == 'waiter')
 			{
-				$this->view_data['menu'][] = array('icon' => 'glyphicon-user', 'name' => 'Χρήστες', 'link' => '#', 'submenu' => array(
-					array('name' => 'menu 1', 'link' => '#'),
-					array('name' => 'menu 2', 'link' => '#'),
-				));
+				$this->view_data['menu'][] = array('icon' => 'fa fa-th-large fa-fw', 'name' => 'τραπέζια', 'link' => '/waiter');
+				//$this->view_data['menu'][] = array('icon' => 'fa fa-pencil-square-o fa-fw', 'name' => 'παραγγελίες', 'link' => '#');
+				$this->view_data['menu'][] = array('icon' => 'fa fa-plus fa-fw', 'name' => 'νέα παραγγελία', 'link' => '#');
+				$this->view_data['menu'][] = array('icon' => 'fa fa-book', 'name' => 'μενού', 'link' => '#');
+				$this->view_data['menu'][] = array('icon' => 'fa fa-bell-o fa-fw', 'name' => 'ειδοποιήσεις', 'link' => '#');
+			}
+			else
+			{
+				$this->view_data['menu'][] = array('icon' => 'glyphicon-home', 'name' => 'Dashboard', 'link' => '/store');
+				
+				$this->view_data['menu'][] = array('icon' => 'glyphicon-edit', 'name' => 'Παραγγελίες', 'link' => '#');
+
+				if ($member->role == 'admin')
+				{
+					$this->view_data['menu'][] = array('icon' => 'glyphicon-user', 'name' => 'Χρήστες', 'link' => '#', 'submenu' => array(
+						array('name' => 'menu 1', 'link' => '#'),
+						array('name' => 'menu 2', 'link' => '#'),
+					));
+				}
 			}
 		}
 	}
