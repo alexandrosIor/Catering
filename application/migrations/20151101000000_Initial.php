@@ -200,6 +200,39 @@ class Migration_Initial extends CI_Migration {
 		$this->dbforge->add_key('record_id',  TRUE);
 		$this->dbforge->create_table('orders', TRUE, $attributes);
 
+				/* TABLE: orders */
+		$this->dbforge->add_field(array(
+			'record_id' => array(
+				'type' => 'INT',
+				'unsigned' => TRUE,
+				'auto_increment' => TRUE
+			),
+			'deleted_at' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE
+			),
+			'insert_at' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE
+			),
+			'update_at' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE
+			),
+			'caption' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 255,
+				'null' => TRUE,
+			),				
+			'seats' => array(
+				'type' => 'INT',
+				'null' => TRUE,
+			)
+		));
+
+		$this->dbforge->add_key('record_id',  TRUE);
+		$this->dbforge->create_table('tables', TRUE, $attributes);
+
 		$this->insert_common_records();
 	}
 
@@ -213,6 +246,12 @@ class Migration_Initial extends CI_Migration {
 				'email' => 'admin@catering.gr',
 				'password' => 'admin',
 				'role' => 'admin',
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'email' => 'waiter@catering.gr',
+				'password' => 'waiter',
+				'role' => 'waiter',
 			)
 		);
 		$this->db->insert_batch('users', $dummy_records);
