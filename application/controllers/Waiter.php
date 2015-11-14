@@ -12,12 +12,22 @@ class Waiter extends MY_Controller {
 	public function index()
 	{
 		$this->load->model('user_model');
-		//$this->layout_lib->add_additional_css('');
-		//$this->layout_lib->add_additional_js('');
+		$this->load->model('table_model');
 
 		$this->view_data['logged_in_member'] = unserialize($this->session->userdata('logged_in_member'));
-		
-		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/dashboard', $this->view_data);
+		$this->view_data['title'] = 'Τραπέζια';
+		$this->view_data['tables'] = $this->table_model->get_records();
+
+		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/tables', $this->view_data);
+	}
+
+	public function orders($table_record_id)
+	{
+		$this->view_data['title'] = 'Παραγγελίες';
+		$this->view_data['home'] = '/waiter';
+		$this->view_data['table_record_id'] = $table_record_id;
+
+		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/orders', $this->view_data);
 	}
 	
 }
