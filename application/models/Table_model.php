@@ -6,6 +6,7 @@ class Table_model extends MY_Model
 
 	public $caption;
 	public $seats;
+	public $in_use;
 
 	function __construct($properties = [])
 	{
