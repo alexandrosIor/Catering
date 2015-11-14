@@ -78,12 +78,12 @@
         "version_normalized": "2.7.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/HttpFoundation.git",
+            "url": "https://github.com/symfony/http-foundation.git",
             "reference": "863af6898081b34c65d42100c370b9f3c51b70ca"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/863af6898081b34c65d42100c370b9f3c51b70ca",
+            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/863af6898081b34c65d42100c370b9f3c51b70ca",
             "reference": "863af6898081b34c65d42100c370b9f3c51b70ca",
             "shasum": ""
         },
@@ -133,12 +133,12 @@
         "version_normalized": "2.7.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/EventDispatcher.git",
+            "url": "https://github.com/symfony/event-dispatcher.git",
             "reference": "9310b5f9a87ec2ea75d20fec0b0017c77c66dac3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/9310b5f9a87ec2ea75d20fec0b0017c77c66dac3",
+            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/9310b5f9a87ec2ea75d20fec0b0017c77c66dac3",
             "reference": "9310b5f9a87ec2ea75d20fec0b0017c77c66dac3",
             "shasum": ""
         },
