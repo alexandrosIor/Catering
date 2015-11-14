@@ -20,10 +20,11 @@ class Login extends CI_Controller {
 			if (strlen($post['username']) > 0  AND strlen($post['password']) > 0)
 			{
 				$this->load->library('authenticate_lib');
-				if ($this->authenticate_lib->login($post['username'], $post['password']))
+				$location = $this->authenticate_lib->login($post['username'], $post['password']);
+				if ($location)
 				{
 					$response['login_result'] = TRUE;
-					$response['redirect'] = 'store/dashboard';
+					$response['redirect'] = $location;
 					echo json_encode($response);
 					return ;
 				}
