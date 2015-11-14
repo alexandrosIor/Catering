@@ -14,7 +14,21 @@ class Authenticate_lib {
 		{
 			$this->ci->session->set_userdata('logged_in', TRUE);
 			$this->ci->session->set_userdata('logged_in_member', serialize($user));
-			return TRUE;
+
+			if ($user->role == 'admin')
+			{
+				$location = '/store';
+			}
+			elseif ($user->role == 'store')
+			{
+				$location = '/store';
+			}			
+			elseif ($user->role == 'waiter')
+			{
+				$location = '/waiter';
+			}
+
+			return $location;
 		}
 		return FALSE;
 	}
