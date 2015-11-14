@@ -22,8 +22,17 @@ class MY_Controller extends CI_Controller {
 			return ;
 		}
 
+		$this->load->helper('url');
 		$this->load->model('user_model');
+
+		$called_class = get_called_class();
 		$this->logged_in_member = unserialize($this->session->userdata('logged_in_member'));
+		
+		if ($this->logged_in_member->role == 'waiter' AND $called_class == 'Store')
+		{
+			redirect('/waiter', 'location');
+		}
+
 		$this->view_data['logged_in_member'] = $this->logged_in_member;
 
 		$this->view_data['css_includes'] = array();
@@ -44,7 +53,7 @@ class MY_Controller extends CI_Controller {
 		{
 			$this->view_data['menu'] = array();
 
-			$this->view_data['menu'][] = array('icon' => 'glyphicon-home', 'name' => 'Dashboard', 'link' => '/store/dashboard');
+			$this->view_data['menu'][] = array('icon' => 'glyphicon-home', 'name' => 'Dashboard', 'link' => '/store');
 			
 			$this->view_data['menu'][] = array('icon' => 'glyphicon-edit', 'name' => 'Παραγγελίες', 'link' => '#');
 
