@@ -239,6 +239,7 @@ class Migration_Initial extends CI_Migration {
 	private function insert_common_records()
 	{
 		$datatime_now = new DateTime('NOW', new DateTimeZone('UTC'));
+
 		/* users */
 		$dummy_records = array(
 			array(
@@ -255,6 +256,45 @@ class Migration_Initial extends CI_Migration {
 			)
 		);
 		$this->db->insert_batch('users', $dummy_records);
+
+		/* tables */
+		$dummy_records = array(
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '1',
+				'seats' => '4'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '2',
+				'seats' => '6'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => 'παράθυρο',
+				'seats' => '2'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => 'μεγάλο',
+				'seats' => '10'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'seats' => '4'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '6',
+				'seats' => '4'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '7',
+				'seats' => '2'
+			)
+		);
+		$this->db->insert_batch('tables', $dummy_records);
 	}
 
 }
