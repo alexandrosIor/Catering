@@ -34,7 +34,7 @@
 		<!-- Settings Modal -->
 			<div id="settings_modal" class="modal">
 				<header class="bar bar-nav">
-					<a class="close-settings icon icon-close pull-right" href="#"></a>
+					<a class="close-settings icon icon-close pull-right"></a>
 					<h1 class="title">Ρυθμίσεις</h1>
 				</header>
 

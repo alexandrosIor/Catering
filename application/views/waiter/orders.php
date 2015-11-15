@@ -12,17 +12,15 @@
 			</div>
 		</li>
 		<li class="table-view-cell" data-order-record-id="<?=$order_record_id?>">
-			<a class="open" href="#order_details_Modal">
-				<div class="order_num pull-left">
-					<span><?=$order_record_id?></span>
-				</div>
-				<div class="order_time" style="margin-left:50%;">
-					<span>13:30</span>
-				</div>
-				<div class="order_cost badge badge-inverted">
-					53€
-				</div>
-			</a>
+			<div class="order_num pull-left">
+				<span><?=$order_record_id?></span>
+			</div>
+			<div class="order_time" style="margin-left:50%;">
+				<span>13:30</span>
+			</div>
+			<div class="order_cost badge badge-inverted">
+				53€
+			</div>
 		</li>
 	</ul>
 	<div class="content-padded">
@@ -34,7 +32,7 @@
 
 <div id="order_details_Modal" class="modal">
 	<header class="bar bar-nav">
-		<a class="close-order icon icon-close pull-right" href="#"></a>
+		<a class="close-order icon icon-close pull-right"></a>
 		<h1 class="title">Λεπτομέρειες παραγγελίας</h1>
 	</header>
 	<div class="content order-details">
