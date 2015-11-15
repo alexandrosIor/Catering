@@ -4,7 +4,7 @@
 <?php foreach ($tables as $key => $table)
 {?>
 			<li class="table-view-cell">
-				<a href="/waiter/orders/<?=$table->record_id?>" class="navigate-right">
+				<a href="/orders/table_orders/<?=$table->record_id?>" class="navigate-right">
 					<?=($table->in_use) ? '<span class="badge badge-inverted"><i class="fa fa-users fa-lg"></i></span>' : ''?>
 					<span><?=$table->caption?></span>
 				</a>

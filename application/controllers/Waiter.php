@@ -25,15 +25,6 @@ class Waiter extends MY_Controller {
 		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/tables', $this->view_data);
 	}
 	
-	public function orders($table_record_id)
-	{
-		$this->view_data['title'] = 'Παραγγελίες';
-		$this->view_data['home'] = '/waiter';
-		$this->view_data['table_record_id'] = $table_record_id;
-
-		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/orders', $this->view_data);
-	}
-	
 }
 
 /* End of file Waiter.php */
