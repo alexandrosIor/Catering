@@ -20,15 +20,6 @@ class MY_Model extends CI_Model {
 		$this->update_properties($properties);
 	}
 
-	// TODO: remove this function and replace it with the set_properties one
-	public function update_properties($properties = [])
-	{
-		foreach ($properties as $property => $value)
-		{
-			$this->$property = $value;
-		}
-	}
-
 	public function set_properties($properties = [])
 	{
 		foreach ($properties as $property => $value)

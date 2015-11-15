@@ -2,8 +2,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// νομιζω οτι ισος χρειαστει να εγκαταληψουμε την ιδεα να κανουμε layout δουλιες σε extension του
-// Controler να για μπορουμε να εχουμε περισσοτερη ευεληξια στους Controlers. πχ ajax calls
+/**
+ * This Class extends CI_Controller class and is used in our Controller classes for common tasks accross all application Controllers.
+ */
 class MY_Controller extends CI_Controller {
 
 	public $view_data = array();
@@ -56,7 +57,6 @@ class MY_Controller extends CI_Controller {
 			if ($member->role == 'waiter')
 			{
 				$this->view_data['menu'][] = array('icon' => 'fa fa-th-large fa-fw', 'name' => 'τραπέζια', 'link' => '/waiter');
-				//$this->view_data['menu'][] = array('icon' => 'fa fa-pencil-square-o fa-fw', 'name' => 'παραγγελίες', 'link' => '#');
 				$this->view_data['menu'][] = array('icon' => 'fa fa-plus fa-fw', 'name' => 'νέα παραγγελία', 'link' => '#');
 				$this->view_data['menu'][] = array('icon' => 'fa fa-book', 'name' => 'μενού', 'link' => '#');
 				$this->view_data['menu'][] = array('icon' => 'fa fa-bell-o fa-fw', 'name' => 'ειδοποιήσεις', 'link' => '#');
