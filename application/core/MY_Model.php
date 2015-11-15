@@ -17,7 +17,7 @@ class MY_Model extends CI_Model {
 	public function __construct($properties = [])
 	{
 		parent::__construct();
-		$this->update_properties($properties);
+		$this->set_properties($properties);
 	}
 
 	public function set_properties($properties = [])
