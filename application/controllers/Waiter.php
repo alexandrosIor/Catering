@@ -11,6 +11,10 @@ class Waiter extends MY_Controller {
 
 	public function index()
 	{
+		$this->tables();
+	}
+	public function tables()
+	{
 		$this->load->model('user_model');
 		$this->load->model('table_model');
 
@@ -20,7 +24,7 @@ class Waiter extends MY_Controller {
 
 		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/tables', $this->view_data);
 	}
-
+	
 	public function orders($table_record_id)
 	{
 		$this->view_data['title'] = 'Παραγγελίες';
