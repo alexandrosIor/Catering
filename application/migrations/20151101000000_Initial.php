@@ -271,16 +271,17 @@ class Migration_Initial extends CI_Migration {
 			),			
 			array(
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
-				'caption' => 'παράθυρο',
+				'caption' => '3',
 				'seats' => '2'
 			),
 			array(
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
-				'caption' => 'μεγάλο',
+				'caption' => '4',
 				'seats' => '10'
 			),
 			array(
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '5',
 				'seats' => '4'
 			),
 			array(
@@ -290,7 +291,7 @@ class Migration_Initial extends CI_Migration {
 			),
 			array(
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
-				'caption' => '7',
+				'caption' => 'πίσω γωνία',
 				'seats' => '2'
 			)
 		);
