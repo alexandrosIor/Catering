@@ -14,7 +14,7 @@ class Store extends MY_Controller {
 		$this->load->model('user_model');
 		//$this->layout_lib->add_additional_css('');
 		//$this->layout_lib->add_additional_js('');
-
+		$this->view_data['page_title'] = 'Dashboard';
 		$this->view_data['logged_in_member'] = unserialize($this->session->userdata('logged_in_member'));
 		
 		$this->layout_lib->load('store_layout_view', 'store/dashboard', $this->view_data);

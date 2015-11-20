@@ -78,7 +78,7 @@
 <?php foreach ($menu as $menu_item) {?>
 						<li class="<?=(isset($menu_item['submenu'])) ? 'droplink' : '' ?>">
 							<a href="<?=$menu_item['link']?>" class="waves-effect waves-button">
-								<span class="menu-icon glyphicon <?=$menu_item['icon']?>"></span>
+								<span class="menu-icon <?=$menu_item['icon']?>"></span>
 								<p><?=$menu_item['name']?></p>
 								<?=(isset($menu_item['submenu'])) ? '<span class="arrow"></span>' : ''?>
 							</a>
@@ -95,9 +95,20 @@
 				</div><!-- Page Sidebar Inner -->
 			</div><!-- Page Sidebar -->
 
-			<?=$body?>
+			<div class="page-inner" style="min-height:1330px !important">
+				<div class="page-title">
+					<h3><?=$page_title?></h3>
+				</div>
+				<div id="main-wrapper">
+					<?=$body?>
+				</div>
+				<div class="page-footer">
+					<p class="no-s">2015 &copy; icd.teicm.gr | Iordanidis Alexandros</p>
+				</div>
+			</div><!-- Page Inner -->
 
 		</main><!-- Page Content -->
+		
 		<!--left slide page diamond-->
 		<nav class="cd-nav-container" id="cd-nav">
 			<header>
