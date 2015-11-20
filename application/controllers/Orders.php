@@ -21,7 +21,7 @@ class Orders extends MY_Controller {
 		$this->view_data['table_record_id'] = $table_record_id;
 		$this->view_data['order_record_id'] = 150;
 
-		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/orders', $this->view_data);
+		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/orders_view', $this->view_data);
 	}
 
 	public function ajax_order_details($order_record_id = NULL)
