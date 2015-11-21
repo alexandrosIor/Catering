@@ -63,15 +63,20 @@ class MY_Controller extends CI_Controller {
 			}
 			else
 			{
-				$this->view_data['menu'][] = array('icon' => 'glyphicon-home', 'name' => 'Dashboard', 'link' => '/store');
+				$this->view_data['menu'][] = array('icon' => 'fa fa-home', 'name' => 'Dashboard', 'link' => '/store');
 				
-				$this->view_data['menu'][] = array('icon' => 'glyphicon-edit', 'name' => 'Παραγγελίες', 'link' => '#');
+				$this->view_data['menu'][] = array('icon' => 'fa fa-pencil-square-o', 'name' => 'Παραγγελίες', 'link' => '#');
 
 				if ($member->role == 'admin')
 				{
-					$this->view_data['menu'][] = array('icon' => 'glyphicon-user', 'name' => 'Χρήστες', 'link' => '#', 'submenu' => array(
+					$this->view_data['menu'][] = array('icon' => 'fa fa-users', 'name' => 'Χρήστες', 'link' => '#', 'submenu' => array(
 						array('name' => 'menu 1', 'link' => '#'),
 						array('name' => 'menu 2', 'link' => '#'),
+					));					
+					$this->view_data['menu'][] = array('icon' => 'fa fa-list', 'name' => 'Κατάλογος', 'link' => '#', 'submenu' => array(
+						array('name' => 'Προβολή', 'link' => '/catalogue'),
+						array('name' => 'Κατηγορίες', 'link' => '/catalogue/product_categories'),
+						array('name' => 'Προϊόντα', 'link' => '/catalogue/products'),
 					));
 				}
 			}

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-	
 	<head>
 		
 		<!-- Title -->
@@ -18,8 +17,10 @@
 		<link href="/assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css"/>
 			
 		<!-- Theme Styles -->
+		<link href="/assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+
 		<link href="/assets/css/modern.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/css/themes/green.css" class="theme-color" rel="stylesheet" type="text/css"/>
 		<link href="/assets/css/custom.css" rel="stylesheet" type="text/css"/>
@@ -167,6 +168,15 @@
 			</ul>
 		</nav>
 		<div class="cd-overlay"></div>
+
+		<!-- Modal dialog-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+				</div>
+			</div>
+		</div>
 	
 		<!-- Javascripts -->
 		<script src="/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
@@ -175,6 +185,7 @@
 		<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 		<script src="/assets/plugins/3d-bold-navigation/js/main.js"></script>
 		<script src="/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
+		<script src="/assets/plugins/switchery/switchery.min.js"></script>
 		<script src="/assets/js/modern.min.js"></script>
 		<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 		<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
