@@ -20,6 +20,7 @@
 		<link href="/assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+		<link href="/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
 
 		<link href="/assets/css/modern.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/css/themes/green.css" class="theme-color" rel="stylesheet" type="text/css"/>
@@ -186,6 +187,7 @@
 		<script src="/assets/plugins/3d-bold-navigation/js/main.js"></script>
 		<script src="/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
 		<script src="/assets/plugins/switchery/switchery.min.js"></script>
+		<script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
 		<script src="/assets/js/modern.min.js"></script>
 		<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 		<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>

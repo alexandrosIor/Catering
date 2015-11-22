@@ -24,20 +24,7 @@
 						<th>Διαγραφή</th>
 					</tr>
 				</tfoot>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td><a href="javascript:void(0);">product</a></td>
-						<td><a href="javascript:void(0);">description</a></td>
-						<td class="category"><a href="javascript:void(0);">category</a></td>
-						<td>
-							<div class="ios-switch switch-md">
-								<input type="checkbox" class="js-switch compact-menu-check">
-							</div>
-						</td>
-						<td><i class="fa fa-times fa-2x fa-fw text-danger"></i></td>
-					</tr>
-				</tbody>
+				<tbody></tbody>
 			</table>
 		</div>
 	</div>

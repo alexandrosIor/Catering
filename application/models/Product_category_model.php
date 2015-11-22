@@ -6,11 +6,38 @@ class Product_category_model extends MY_Model
 
 	public $name;
 	public $description;
+	public $parent_record_id;
 
 	function __construct($properties = [])
 	{
 		// Call the Model constructor
 		parent::__construct($properties);
+	}
+
+	public function parent_name()
+	{
+		$parent_product_category = $this->get_record(['record_id' => $this->parent_record_id]);
+		
+		if ($parent_product_category)
+		{
+			return $parent_product_category->name;
+		}
+		else
+		{
+			return ' ';
+		}
+	}
+
+	public function status()
+	{
+		if ($this->deleted_at)
+		{
+			return  ' ';
+		}
+		else
+		{
+			return 'checked';
+		}
 	}
 
 }

@@ -64,6 +64,13 @@ class MY_Model extends CI_Model {
 		return $this->db->get_where($this->table_name, $where)->custom_result_object($called_class);
 	}
 
+	public function get_all_records($where = [])
+	{
+		$called_class = get_called_class();
+
+		return $this->db->get_where($this->table_name, $where)->custom_result_object($called_class);
+	}
+
 	public function save()
 	{
 		if ((int)$this->record_id > 0)

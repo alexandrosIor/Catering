@@ -2,3 +2,18 @@
 {
 	width: 100%; cellspacing: 0;
 }
+
+.sweet-alert 
+{
+	border-radius: 0px;
+}
+
+.sweet-alert button
+{
+	border-radius: 0px;
+}
+
+.delete-product-category
+{
+	cursor: pointer;
+}
