@@ -26,7 +26,7 @@
 				</tfoot>
 				<tbody>
 					<tr>
-						<td><a href="javascript:void(0);">1</a></td>
+						<td>1</td>
 						<td><a href="javascript:void(0);">product category</a></td>
 						<td><a href="javascript:void(0);">description</a></td>
 						<td class="category"><a href="javascript:void(0);">parent category</a></td>

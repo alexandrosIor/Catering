@@ -13,7 +13,7 @@ $(document).ready(function() {
 			source: function() {return source;},
 	});
 
-	$('#product_categories td a:not(:first)').editable({
+	$('#product_categories td a').editable({
 				url: '#',
 				type: 'text',
 				pk: 1,
