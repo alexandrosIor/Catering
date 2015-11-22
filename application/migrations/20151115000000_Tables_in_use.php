@@ -9,7 +9,7 @@ class Migration_Tables_in_use extends CI_Migration {
 		/* TABLE: tables */
 		$fields = array(
 			'in_use' => array(
-				'type' => 'BIT(1)',
+			'type' => 'BIT(1)',
 			)
 		);
 		$this->dbforge->add_column('tables', $fields);
