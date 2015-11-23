@@ -6,58 +6,10 @@ $(document).ready(function() {
 		'responsive': true,
 		'ajax': '/catalogue/datatable_product_categories_data',
 		'initComplete': function(settings, json) {
-			/* editables */
-			$.fn.editable.defaults.mode = 'inline';
-
-			/* update product_category data via editable */
-			$('a.category').each(function(){
-				var product_category_record_id = $(this).parent().siblings(":first").text();
-				var name = $(this).data('column_name');
-				$(this).editable({
-					url: '/catalogue/update_product_category',
-					pk: product_category_record_id,
-					type: 'select',
-					name: name,
-					source: function() {return get_product_categories();},
-				});
-			});
-
-			/* update product_category  parent via editable */
-			$('#product_categories td a').each(function(){
-				var product_category_record_id = $(this).parent().siblings(":first").text();
-				var name = $(this).data('column_name');
-				$(this).editable({
-					url: '/catalogue/update_product_category',
-					type: 'text',
-					pk: product_category_record_id,
-					name: name
-				});
-			});
-			
-			/* status checkbox type switchery */
-			var n = Array.prototype.slice.call(document.querySelectorAll(".js-switch"));
-			n.forEach(function(e) {
-				new Switchery(e, {
-				color: "#449d44"
-				});
-			});
-
-			/* change product_category status event */
-			$('.js-switch').each(function(){
-				$(this).on('change', function(){
-					change_status($(this));
-				});
-			});
-
-			/* product_category delete event */
-			$('.delete-product-category').each(function(){
-				$(this).on('click', function(){
-					delete_product_category($(this));
-				});
-			});
+			events();
 		}
-	});	
-		
+	});
+
 });
 
 function save_category(element)
@@ -161,4 +113,64 @@ function delete_product_category(element)
 			});  
 		} 
 	});
+}
+
+function events()
+{
+	/* editables */
+	$.fn.editable.defaults.mode = 'inline';
+
+	/* update product_category data via editable */
+	$('a.category').each(function(){
+		var product_category_record_id = $(this).parent().siblings(":first").text();
+		var name = $(this).data('column_name');
+		$(this).editable({
+			url: '/catalogue/update_product_category',
+			pk: product_category_record_id,
+			type: 'select',
+			name: name,
+			source: function() {return get_product_categories();},
+		});
+	});
+
+	/* update product_category  parent via editable */
+	$('#product_categories td a').each(function(){
+		var product_category_record_id = $(this).parent().siblings(":first").text();
+		var name = $(this).data('column_name');
+		$(this).editable({
+			url: '/catalogue/update_product_category',
+			type: 'text',
+			pk: product_category_record_id,
+			name: name
+		});
+	});
+	
+	/* status checkbox type switchery */
+	var n = Array.prototype.slice.call(document.querySelectorAll(".js-switch"));
+	n.forEach(function(e) {
+		if(!$(e).next().hasClass('switchery'))
+		{
+			new Switchery(e, {
+			color: "#449d44"
+			});
+		}
+	});
+
+	/* change product_category status event */
+	$('.js-switch').each(function(){
+		$(this).on('change', function(){
+			change_status($(this));
+		});
+	});
+
+	/* product_category delete event */
+	$('.delete-product-category').each(function(){
+		$(this).on('click', function(){
+			delete_product_category($(this));
+		});
+	});
+
+	$(this).on( 'draw.dt', function () {
+		events();
+	} );
 }

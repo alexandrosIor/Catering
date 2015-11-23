@@ -1,21 +1,12 @@
 $( document ).ready(function() {
+	
 	// Nestable
-	var updateOutput = function(e) {
-		var list   = e.length ? e : $(e.target),
-			output = list.data('output');
-		if (window.JSON) {
-			output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
-		} else {
-			output.val('JSON browser support required for this demo.');
-		}
-	};
-	
-	$('#nestable').nestable({group: 1}).on('change', updateOutput);
-	
-	$('#nestable2').nestable({group: 1}).on('change', updateOutput);
-	
-	updateOutput($('#nestable').data('output', $('#nestable-output')));
-	updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+	$('.dd').nestable();
+
+	$(".dd-nodrag").on("mousedown", function(e){
+		e.preventDefault();
+		return false;
+	});
 
 	$('#nestable-menu').on('click', function(e)  {
 		var target = $(e.target),
@@ -28,4 +19,5 @@ $( document ).ready(function() {
 		}
 	});
 	$('.dd').nestable('collapseAll');
+	
 });

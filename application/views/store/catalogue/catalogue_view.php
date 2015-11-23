@@ -7,59 +7,37 @@
 					<button type="button" class="btn btn-primary" data-action="collapse-all">Collapse All</button>
 				</menu>
 				<div class="row">
+<?php foreach ($product_categories as $key => $product_category){?>
+
 					<div class="col-md-4">
 						<div class="dd" id="nestable">
 							<ol class="dd-list">
-								<li class="dd-item" data-id="1">
-									<div class="dd-handle">Ορεκτικά</div>
-								</li>
-								<li class="dd-item" data-id="2">
-									<div class="dd-handle">Σαλάτες</div>
+								<li class="dd-item">
+									<div class="dd-handle dd-nodrag"><?=$product_category->name?></div>
 									<ol class="dd-list">
-										<li class="dd-item" data-id="3"><div class="dd-handle">Item 3</div></li>
-										<li class="dd-item" data-id="4"><div class="dd-handle">Item 4</div></li>
-										<li class="dd-item" data-id="5">
-											<div class="dd-handle">Item 5</div>
+	<?php foreach ($product_category->products() as $key => $product){?>
+										<li class="dd-item"><div class="dd-handle dd-nodrag"><?=$product->name?></div></li>
+	<?php } 
+	if ($product_category->children()){
+		foreach ($product_category->children() as $key => $children){?>
+										<li class="dd-item">
+											<div class="dd-handle"><?=$children->name?></div>
 											<ol class="dd-list">
-												<li class="dd-item" data-id="6"><div class="dd-handle">Item 6</div></li>
-												<li class="dd-item" data-id="7"><div class="dd-handle">Item 7</div></li>
-												<li class="dd-item" data-id="8"><div class="dd-handle">Item 8</div></li>
+			<?php foreach ($children->products() as $key => $product){?>
+												<li class="dd-item"><div class="dd-handle dd-nodrag"><?=$product->name?></div></li>
+			<?php }?>
 											</ol>
 										</li>
-										<li class="dd-item" data-id="9"><div class="dd-handle">Item 9</div></li>
-										<li class="dd-item" data-id="10"><div class="dd-handle">Item 10</div></li>
+		<?php }?>
+	<?php }?>
 									</ol>
 								</li>
 							</ol>
 						</div>
 					</div>
-					<div class="col-md-4">
-						<div class="dd" id="nestable2">
-							<ol class="dd-list">
-								<li class="dd-item" data-id="11">
-									<div class="dd-handle">Ποτά</div>
-								</li>
-								<li class="dd-item" data-id="12">
-									<div class="dd-handle">Item 12</div>
-								</li>
-								<li class="dd-item" data-id="13">
-									<div class="dd-handle">Item 13</div>
-								</li>
-								<li class="dd-item" data-id="14">
-									<div class="dd-handle">Item 14</div>
-								</li>
-								<li class="dd-item" data-id="15">
-									<div class="dd-handle">Item 15</div>
-									<ol class="dd-list">
-										<li class="dd-item" data-id="16"><div class="dd-handle">Item 16</div></li>
-										<li class="dd-item" data-id="17"><div class="dd-handle">Item 17</div></li>
-										<li class="dd-item" data-id="18"><div class="dd-handle">Item 18</div></li>
-									</ol>
-								</li>
-							</ol>
-						</div>
-					</div>	
-				</div>
+				<div class="clearfix"></div>
+<?php }?>
+</div>
 			</div>
 		</div>
 	</div>

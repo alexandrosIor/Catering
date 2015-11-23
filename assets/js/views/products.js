@@ -5,55 +5,7 @@ $(document).ready(function() {
 		'responsive': true,
 		'ajax': '/catalogue/datatable_products_data',
 		'initComplete': function(settings, json) {
-			/* editables */
-			$.fn.editable.defaults.mode = 'inline';
-
-			/* update product data via editable */
-			$('a.category').each(function(){
-				var product_category_record_id = $(this).parent().siblings(":first").text();
-				var name = $(this).data('column_name');
-				$(this).editable({
-					url: '/catalogue/update_product',
-					pk: product_category_record_id,
-					type: 'select',
-					name: name,
-					source: function() {return get_product_categories();},
-				});
-			});
-
-			/* update product category via editable */
-			$('#products td a').each(function(){
-				var product_category_record_id = $(this).parent().siblings(":first").text();
-				var name = $(this).data('column_name');
-				$(this).editable({
-					url: '/catalogue/update_product',
-					type: 'text',
-					pk: product_category_record_id,
-					name: name
-				});
-			});
-
-			/* status checkbox type switchery */
-			var n = Array.prototype.slice.call(document.querySelectorAll(".js-switch"));
-			n.forEach(function(e) {
-				new Switchery(e, {
-				color: "#449d44"
-				});
-			});
-
-			/* change product status event */
-			$('.js-switch').each(function(){
-				$(this).on('change', function(){
-					change_status($(this));
-				});
-			});
-
-			/* product delete event */
-			$('.delete-product').each(function(){
-				$(this).on('click', function(){
-					delete_product($(this));
-				});
-			});
+			events();
 		}
 	});
 
@@ -160,4 +112,64 @@ function delete_product(element)
 			});  
 		} 
 	});
+}
+
+function events()
+{
+	/* editables */
+	$.fn.editable.defaults.mode = 'inline';
+
+	/* update product data via editable */
+	$('a.category').each(function(){
+		var product_category_record_id = $(this).parent().siblings(":first").text();
+		var name = $(this).data('column_name');
+		$(this).editable({
+			url: '/catalogue/update_product',
+			pk: product_category_record_id,
+			type: 'select',
+			name: name,
+			source: function() {return get_product_categories();},
+		});
+	});
+
+	/* update product category via editable */
+	$('#products td a').each(function(){
+		var product_category_record_id = $(this).parent().siblings(":first").text();
+		var name = $(this).data('column_name');
+		$(this).editable({
+			url: '/catalogue/update_product',
+			type: 'text',
+			pk: product_category_record_id,
+			name: name
+		});
+	});
+
+	/* status checkbox type switchery */
+	var n = Array.prototype.slice.call(document.querySelectorAll(".js-switch"));
+	n.forEach(function(e) {
+		if(!$(e).next().hasClass('switchery'))
+		{
+			new Switchery(e, {
+			color: "#449d44"
+			});
+		}
+	});
+
+	/* change product status event */
+	$('.js-switch').each(function(){
+		$(this).on('change', function(){
+			change_status($(this));
+		});
+	});
+
+	/* product delete event */
+	$('.delete-product').each(function(){
+		$(this).on('click', function(){
+			delete_product($(this));
+		});
+	});
+
+	$(this).on( 'draw.dt', function () {
+		events();
+	} );
 }

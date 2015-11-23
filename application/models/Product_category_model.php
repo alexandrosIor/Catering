@@ -40,6 +40,17 @@ class Product_category_model extends MY_Model
 		}
 	}
 
+	public function products()
+	{
+		$this->load->model('product_model');
+
+		return $this->product_model->get_records(['category_record_id' => $this->record_id]);
+	}
+
+	public function children()
+	{
+		return $this->get_records(['parent_record_id' => $this->record_id]);
+	}
 }
 
 /* End of file Product_category_model.php */
