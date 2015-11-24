@@ -1,14 +1,6 @@
 $(function(){
 
 //===================== Modals START=====================
-	$('.open-settings').on('touchend', function(){
-		$('#settings_modal').addClass('active');		
-	});
-
-	$('.close-settings').on('touchend', function(){
-		$('#settings_modal').removeClass('active');
-	});
-
 	$('.orders li').each(function(i){
 		if (i > 0)
 		{

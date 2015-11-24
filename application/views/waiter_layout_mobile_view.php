@@ -24,11 +24,11 @@
 	<body>
 
 		<!-- Make sure all your bars are the first things in your <body> -->
-		<header class="bar bar-nav">
-			<a class="open-settings icon icon-gear pull-right"></a>
+ 		<header class="bar bar-nav">
+			<a class="open-settings icon icon-gear pull-right" ></a>
 			<?=isset($home) ? '<a href="' . $home . '" class="icon icon-left-nav pull-left"></a>' : ''?>
-			<h1 class="title"><?=$title?></h1>
-		</header>
+			<h1 class="title <?=isset($title) ? '' : 'select-table'?>"><?=isset($title) ? $title : 'Επιλογή τραπεζιού <i class="fa fa-angle-down"></i>'?></h1>
+		</header> 
 
 		<?=$body?>
 
@@ -42,9 +42,8 @@
 		</div>
 
 		<nav class="bar bar-tab">
-<?php foreach ($menu as $key => $menu_item)
-{?>
-			<a class="tab-item" href="<?=$menu_item['link']?>" data-transition="slide-in">
+<?php foreach ($menu as $key => $menu_item){?>
+			<a class="tab-item" href="<?=$menu_item['link']?>">
 				<span class="icon"><i class="<?=$menu_item['icon']?>"></i></span>
 				<span class="tab-label"><?=$menu_item['name']?></span>
 			</a>
