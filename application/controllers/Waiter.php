@@ -24,6 +24,15 @@ class Waiter extends MY_Controller {
 
 		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/tables_view', $this->view_data);
 	}
+
+	public function ajax_settings_modal()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$post = $this->input->post();
+			$this->load->view('waiter/settings_modal', $this->view_data);
+		}
+	}
 	
 }
 
