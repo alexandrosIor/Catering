@@ -14,9 +14,9 @@ $(function(){
 		{
 			$(this).on('touchend', function(){
 				$.ajax({
-					type: 'GET',
-					url: '/orders/ajax_order_details/' + $(this).data('order-record-id'),
-					dataType: 'html',
+					type: 'POST',
+					url: '/orders/ajax_order_details/',
+					data: {'order-record-id' : $(this).data('order-record-id')},
 					async: false,
 					success: function(response) {
 						$('.order-details').append(response);
