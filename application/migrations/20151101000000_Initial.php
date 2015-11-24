@@ -296,7 +296,57 @@ class Migration_Initial extends CI_Migration {
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
 				'caption' => 'πίσω γωνία',
 				'seats' => '2'
-			)
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '7',
+				'seats' => '4'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '8',
+				'seats' => '6'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '9',
+				'seats' => '2'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '10',
+				'seats' => '6'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '11',
+				'seats' => '4'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '12',
+				'seats' => '5'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => 'ΜΕΓΑΛΟ ΑΡΙΣΤΕΡΑ',
+				'seats' => '10'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '13',
+				'seats' => '4'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '14',
+				'seats' => '5'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'caption' => '15',
+				'seats' => '8'
+			),
 		);
 		$this->db->insert_batch('tables', $dummy_records);
 
