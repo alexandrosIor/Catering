@@ -7,6 +7,7 @@ class Product_model extends MY_Model
 	public $category_record_id;
 	public $name;
 	public $description;
+	public $price;
 
 	function __construct($properties = [])
 	{

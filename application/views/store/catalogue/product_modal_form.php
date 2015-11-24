@@ -18,6 +18,9 @@
 <?php }?>
 		</select>
 		</div>
+		<div class="form-group">
+			<input type="number" min="0" step="0.50" id="price-input" class="form-control" name="price" placeholder="Τιμή" required tabindex="4">
+		</div>
 		<div class="form-group"> 
 			<div class="ios-switch switch-md">
 				Ενεργοποίηση

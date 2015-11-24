@@ -77,6 +77,9 @@ class Migration_Initial extends CI_Migration {
 			'description' => array(
 				'type' => 'TEXT',
 				'null' => TRUE,
+			),
+			'price' => array(
+				'type' => 'FLOAT',
 			)
 		));
 
@@ -296,6 +299,229 @@ class Migration_Initial extends CI_Migration {
 			)
 		);
 		$this->db->insert_batch('tables', $dummy_records);
+
+		/* product_categories */
+		$dummy_records = array(
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Σαλάτες'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Ορεκτικά κρύα'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Ορεκτικά ζεστά'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Θαλασσινά'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Ψάρια'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Κρεατικά'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Μπύρες'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Χωρις αλκοόλ',
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Ούζα - Τσίπουρα'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Ρετσίνες'
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Κρασιά χύμα'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Κρασιά λευκά εμφιαλωμένα'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'Κρασιά κόκκινα εμφιαλωμένα'
+			)
+		);
+		$this->db->insert_batch('product_categories', $dummy_records);
+
+		/* products */
+		$dummy_records = array(
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΠΙΚΑΝΤΙΚΗ / ΠΟΛΙΤΙΚΗ',
+				'description' => '',
+				'category_record_id' => '1',
+				'price' => '3'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΧΩΡΙΑΤΙΚΗ',
+				'description' => '',
+				'category_record_id' => '1',
+				'price' => '5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΧΤΥΠΗΤΗ',
+				'description' => '',
+				'category_record_id' => '2',
+				'price' => '3.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΤΖΑΤΖΙΚΙ',
+				'description' => '',
+				'category_record_id' => '2',
+				'price' => '3'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΣΚΟΥΜΠΡΙ ΚΑΠΝΙΣΤΟ',
+				'description' => '',
+				'category_record_id' => '3',
+				'price' => '4'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΚΑΥΤΕΡΗ ΠΙΠΕΡΙΑ',
+				'description' => '',
+				'category_record_id' => '3',
+				'price' => '1'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΧΤΑΠΟΔΙ ΣΤΑ ΚΑΡΒΟΥΝΑ',
+				'description' => '',
+				'category_record_id' => '4',
+				'price' => '9.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΚΑΛΑΜΑΡΙ ΤΗΓΑΝΙΤΟ',
+				'description' => '',
+				'category_record_id' => '4',
+				'price' => '7'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΑΘΕΡΙΝΑ',
+				'description' => '',
+				'category_record_id' => '5',
+				'price' => '6.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΜΑΡΙΔΑ',
+				'description' => '',
+				'category_record_id' => '5',
+				'price' => '6.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΠΑΝΣΕΤΑ',
+				'description' => '',
+				'category_record_id' => '6',
+				'price' => '6.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΣΟΥΤΖΟΥΚΑΚΙΑ',
+				'description' => '',
+				'category_record_id' => '6',
+				'price' => '6.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΜΠΥΡΑ ΧΥΜΑ',
+				'description' => '400ml',
+				'category_record_id' => '7',
+				'price' => '3'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'AMSTEL',
+				'description' => '500ml',
+				'category_record_id' => '7',
+				'price' => '3'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΗΒΗ ΠΟΡΤΟΚΑΛΑΔΑ',
+				'description' => '250ml',
+				'category_record_id' => '8',
+				'price' => '1.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΣΟΥΡΩΤΗ',
+				'description' => '250ml',
+				'category_record_id' => '8',
+				'price' => '1.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΠΛΩΜΑΡΙΟΥ',
+				'description' => '200ml',
+				'category_record_id' => '9',
+				'price' => '5.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΤΣΑΝΤΑΛΗ',
+				'description' => '200ml',
+				'category_record_id' => '9',
+				'price' => '5.5'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΜΑΛΑΜΑΤΙΝΑ',
+				'description' => '500ml',
+				'category_record_id' => '10',
+				'price' => '3'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΚΕΧΡΙΜΠΑΡΙ',
+				'description' => '50ml',
+				'category_record_id' => '10',
+				'price' => '4'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΚΑΡΑΣΙ ΛΕΥΚΟ ΞΗΡΟ',
+				'description' => '50ml',
+				'category_record_id' => '11',
+				'price' => '3'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΒΙΒΛΙΑ ΧΩΡΑ',
+				'description' => '750ml',
+				'category_record_id' => '12',
+				'price' => '20'
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'name' => 'ΝΑΟΥΣΑ ΜΠΟΥΤΑΡΗ',
+				'description' => '750ml',
+				'category_record_id' => '12',
+				'price' => '15'
+			),
+		);
+		$this->db->insert_batch('products', $dummy_records);
 	}
 
 }

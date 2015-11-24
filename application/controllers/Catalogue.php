@@ -169,8 +169,9 @@ class Catalogue extends MY_Controller {
 				1 => '<a href="javascript:void(0);" data-column_name="name">' . $product->name . '</a>',
 				2 => '<a href="javascript:void(0);" data-column_name="description">' . $product->description . '</a>',
 				3 => '<a href="javascript:void(0);" data-column_name="category_record_id" class="category">' . $product->category_name() . '</a>',
-				4 => '<div class="ios-switch switch-md"><input type="checkbox" class="js-switch compact-menu-check"' . $product->status() . '></div>',
-				5 => '<i class="fa fa-times fa-2x fa-fw text-danger delete-product"></i>',
+				4 => '<a href="javascript:void(0);" data-column_name="price">' . $product->price . '</a>',
+				5 => '<div class="ios-switch switch-md"><input type="checkbox" class="js-switch compact-menu-check"' . $product->status() . '></div>',
+				6 => '<i class="fa fa-times fa-2x fa-fw text-danger delete-product"></i>',
 			]);
 		}
 
