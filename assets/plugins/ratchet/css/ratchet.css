@@ -265,7 +265,7 @@ a:active {
   left: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  background-color: #fff;
+  background-color: #F1F4F9;
 }
 
 .content > * {
@@ -492,7 +492,7 @@ input[type="button"] {
   height: 44px;
   padding-right: 10px;
   padding-left: 10px;
-  background-color: white;
+  background-color: #22BAA0;
   border-bottom: 1px solid #ddd;
 
   -webkit-backface-visibility: hidden;
@@ -535,7 +535,7 @@ input[type="button"] {
   font-size: 17px;
   font-weight: 500;
   line-height: 44px;
-  color: #000;
+  color: #fff;
   text-align: center;
   white-space: nowrap;
 }
@@ -545,6 +545,7 @@ input[type="button"] {
 }
 
 .bar-tab {
+  background: #34425A;
   bottom: 0;
   display: table;
   width: 100%;
@@ -558,7 +559,7 @@ input[type="button"] {
   display: table-cell;
   width: 1%;
   height: 50px;
-  color: #929292;
+  color: #899DC1;
   text-align: center;
   vertical-align: middle;
 }
@@ -723,7 +724,7 @@ input[type="button"] {
   margin-top: 0;
   margin-bottom: 15px;
   list-style: none;
-  background-color: #fff;
+  background-color: #E9EDF2;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 }
@@ -741,7 +742,7 @@ input[type="button"] {
   position: relative;
   display: block;
   padding: inherit;
-  margin: -11px -65px -11px -15px;
+  margin: -11px -65px -11px -25px;
   overflow: hidden;
   color: inherit;
 }

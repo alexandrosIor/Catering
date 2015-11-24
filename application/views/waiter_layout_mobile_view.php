@@ -14,6 +14,7 @@
 
 		<!-- Include the compiled Ratchet CSS -->
 		<link href="/assets/plugins/ratchet/css/ratchet.css" rel="stylesheet">
+		<link href="/assets/css/custom_mobile.css" rel="stylesheet">
 
 		<!-- fonts-awesome -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">

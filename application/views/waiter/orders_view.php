@@ -35,7 +35,5 @@
 		<a class="close-order icon icon-close pull-right"></a>
 		<h1 class="title">Λεπτομέρειες παραγγελίας</h1>
 	</header>
-	<div class="content order-details">
-		
-	</div>
+	<div class="content order-details"></div>
 </div>
