@@ -4,6 +4,7 @@ class Order_model extends MY_Model
 {
 	protected $table_name = 'orders';
 
+	public $table_record_id;
 	public $user_record_id;
 	public $shift_record_id;
 	public $order_data;

@@ -1,3 +1,8 @@
+.small 
+{
+	font-size: 85%;
+}
+
 .title
 {
 	font-weight: 600;
@@ -33,4 +38,19 @@ header a
 {
 	background: #22BAA0;
 	border-radius: 5px 5px 0 0;
+}
+
+.subcategories
+{
+	margin-bottom: 0px;
+	border: none;
+}
+.subcategories .table-view-cell
+{
+	padding: 11px 0px 4px 15px;
+
+}
+.subcategories span
+{
+	font-style: italic;
 }

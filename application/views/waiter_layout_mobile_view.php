@@ -14,10 +14,8 @@
 
 		<!-- Include the compiled Ratchet CSS -->
 		<link href="/assets/plugins/ratchet/css/ratchet.css" rel="stylesheet">
+		<link href="/assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/css/custom_mobile.css" rel="stylesheet">
-
-		<!-- fonts-awesome -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 		<?=$this->layout_lib->print_additional_css()?>
 	</head>
@@ -35,8 +33,8 @@
 		<!-- Modal -->
 		<div id="myModal" class="modal">
 			<header class="bar bar-nav">
-				<a class="close-settings icon icon-close pull-right"></a>
-				<h1 class="title">Ρυθμίσεις</h1>
+				<a class="close-modal icon icon-close pull-right"></a>
+				<h1 class="title"></h1>
 			</header>
 			<div class="content"></div>
 		</div>

@@ -1,10 +1,11 @@
 $(function(){
 
 	$('.open-settings').on('touchend', function(){
-		open_settings_modal($('#myModal'));		
+		modal_title('Ρυθμίσεις')
+		open_settings_modal($('#myModal'));	
 	});
 
-	$('.close-settings').on('touchend', function(){
+	$('.close-modal').on('touchend', function(){
 		close_modal($('#myModal'));
 	});
 
@@ -32,6 +33,11 @@ function close_modal(modal)
 	$(modal).removeClass('active');
 	$(modal).removeClass('active').css('z-index','0');
 	$(modal).find('.content').children().remove();
+}
+
+function modal_title(title)
+{
+	$('#myModal .title').html(title);
 }
 
 function open_popover(element)
