@@ -113,7 +113,13 @@ class Migration_Initial extends CI_Migration {
 			'description' => array(
 				'type' => 'TEXT',
 				'null' => TRUE,
-			)
+			),
+			'parent_record_id' => array(
+				'type' => 'INT',
+				'unsigned' => TRUE,
+				'null' => TRUE,
+				'default' => 0
+			),
 		));
 
 		$this->dbforge->add_key('record_id', TRUE);
@@ -182,6 +188,10 @@ class Migration_Initial extends CI_Migration {
 				'type' => 'INT',
 				'null' => TRUE,
 			),				
+			'table_record_id' => array(
+				'type' => 'INT',
+				'null' => TRUE,
+			),				
 			'shift_record_id' => array(
 				'type' => 'INT',
 				'null' => TRUE,
@@ -203,7 +213,7 @@ class Migration_Initial extends CI_Migration {
 		$this->dbforge->add_key('record_id',  TRUE);
 		$this->dbforge->create_table('orders', TRUE, $attributes);
 
-				/* TABLE: orders */
+		/* TABLE: tables */
 		$this->dbforge->add_field(array(
 			'record_id' => array(
 				'type' => 'INT',
@@ -230,6 +240,9 @@ class Migration_Initial extends CI_Migration {
 			'seats' => array(
 				'type' => 'INT',
 				'null' => TRUE,
+			),
+			'in_use' => array(
+				'type' => 'BIT(1)',
 			)
 		));
 
