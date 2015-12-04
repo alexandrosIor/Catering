@@ -45,7 +45,7 @@ class MY_Controller extends CI_Controller {
 
 	private function include_common_assets()
 	{
-		$this->layout_lib->add_additional_js('/assets/js/global.js');
+		$this->layout_lib->add_additional_js('/assets/js/store_global.js');
 	}
 
 	private function generate_menu($member)

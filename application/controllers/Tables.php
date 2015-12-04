@@ -18,7 +18,7 @@ class Tables extends MY_Controller {
 		$this->view_data['title'] = 'Τραπέζια';
 		$this->view_data['tables'] = $this->table_model->get_records();
 
-		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/tables_view', $this->view_data);
+		$this->load->view('waiter_layout_mobile_view', $this->view_data);
 	}
 
 	public function table_orders($table_record_id = NULL)
