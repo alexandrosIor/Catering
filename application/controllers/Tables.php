@@ -35,6 +35,20 @@ class Tables extends MY_Controller {
 		$this->layout_lib->load('waiter_layout_mobile_view', 'waiter/orders/orders_view', $this->view_data);
 	}
 	
+	public function ajax_get_tables_for_waiter()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('table_model');
+
+			$tables = $this->table_model->get_records();
+			$tables_array = array();
+			foreach ($tables as $key => $table) {
+				array_push($tables_array, $table->caption);
+			}
+			echo json_encode($tables_array);
+		}
+	}
 }
 
 /* End of file Tables.php */
