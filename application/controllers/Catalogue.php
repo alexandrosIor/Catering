@@ -11,19 +11,7 @@ class Catalogue extends MY_Controller {
 
 	public function index()
 	{
-		/* nestable plugin */
-		$this->layout_lib->add_additional_css('/assets/plugins/nestable/nestable.css');
-		$this->layout_lib->add_additional_js('/assets/plugins/nestable/jquery.nestable.js');
-
-		/* catalogue_view custom javascript */
-		$this->layout_lib->add_additional_js('/assets/js/views/catalogue.js');
-
-		$this->load->model('product_category_model');
-
-		$this->view_data['page_title'] = 'Κατάλογος';
-		$this->view_data['product_categories'] = $this->product_category_model->get_records();
-
-		$this->layout_lib->load('store_layout_view', 'store/catalogue/catalogue_view', $this->view_data);
+		$this->products();
 	}
 
 	public function product_categories()

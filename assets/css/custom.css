@@ -17,3 +17,8 @@
 {
 	cursor: pointer;
 }
+
+.page-footer a:hover
+{
+	text-decoration: none;
+}

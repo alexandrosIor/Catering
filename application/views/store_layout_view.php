@@ -105,7 +105,7 @@
 					<?=$body?>
 				</div>
 				<div class="page-footer">
-					<p class="no-s">2015 &copy; icd.teicm.gr | Iordanidis Alexandros</p>
+					<p class="no-s">2015 &copy; <a href="http://icd.teicm.gr" target="_blank">icd.teicm.gr | <a href="http://alexiordanidis.com" target="_blank">Iordanidis Alexandros</a></p>
 				</div>
 			</div><!-- Page Inner -->
 

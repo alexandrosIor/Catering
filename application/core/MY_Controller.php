@@ -71,7 +71,6 @@ class MY_Controller extends CI_Controller {
 					$this->view_data['menu'][] = array('icon' => 'fa fa-users', 'name' => 'Χρήστες', 'link' => '/users');
 				
 					$this->view_data['menu'][] = array('icon' => 'fa fa-list', 'name' => 'Κατάλογος', 'link' => '#', 'submenu' => array(
-						array('name' => 'Προβολή', 'link' => '/catalogue'),
 						array('name' => 'Κατηγορίες', 'link' => '/catalogue/product_categories'),
 						array('name' => 'Προϊόντα', 'link' => '/catalogue/products'),
 					));
