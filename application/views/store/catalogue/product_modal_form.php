@@ -39,7 +39,10 @@
 	new Switchery(document.querySelector('.status'));
 
 	$('.save-product').on('click', function(){
-		save_product($('.product-form'));
+		if (!form_empty($('.product-form')))
+		{
+			save_product($('.product-form'));
+		}
 	});
 
 </script>

@@ -11,7 +11,7 @@
 			<input type="text" id="position-input" class="form-control" name="lastname" placeholder="Επίθετο" required tabindex="2">
 		</div>		
 		<div class="form-group">
-			<input type="text" id="position-input" class="form-control" name="email" placeholder="Email" required tabindex="3">
+			<input type="email" id="position-input" class="form-control" name="email" placeholder="Email" required tabindex="3">
 		</div>		
 		<div class="form-group">
 			<input type="password" id="position-input" class="form-control" name="password" placeholder="Κωδικός" required tabindex="4">
@@ -42,7 +42,11 @@
 	new Switchery(document.querySelector('.status'));
 
 	$('.save-user').on('click', function(){
-		save_user($('.user-form'));
+		if (!form_empty($('.user-form')))
+		{
+			
+			save_user($('.user-form'));
+		}
 	});
 
 </script>

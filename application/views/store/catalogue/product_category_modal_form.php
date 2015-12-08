@@ -36,7 +36,10 @@
 	new Switchery(document.querySelector('.status'));
 
 	$('.save-product-category').on('click', function(){
-		save_category($('.product-category-form'));
+		if (!form_empty($('.product-category-form')))
+		{
+			save_category($('.product-category-form'));
+		}
 	});
 
 </script>
