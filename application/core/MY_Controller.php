@@ -68,10 +68,8 @@ class MY_Controller extends CI_Controller {
 
 				if ($member->role == 'admin')
 				{
-					$this->view_data['menu'][] = array('icon' => 'fa fa-users', 'name' => 'Χρήστες', 'link' => '#', 'submenu' => array(
-						array('name' => 'menu 1', 'link' => '#'),
-						array('name' => 'menu 2', 'link' => '#'),
-					));					
+					$this->view_data['menu'][] = array('icon' => 'fa fa-users', 'name' => 'Χρήστες', 'link' => '/users');
+				
 					$this->view_data['menu'][] = array('icon' => 'fa fa-list', 'name' => 'Κατάλογος', 'link' => '#', 'submenu' => array(
 						array('name' => 'Προβολή', 'link' => '/catalogue'),
 						array('name' => 'Κατηγορίες', 'link' => '/catalogue/product_categories'),
