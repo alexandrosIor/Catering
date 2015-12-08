@@ -18,7 +18,19 @@ class User_model extends MY_Model
 
 	public function get_user_roles()
 	{
-		return ['waiter', 'store_user', 'store_admin'];
+		return ['waiter', 'store', 'admin'];
+	}
+
+	public function status()
+	{
+		if ($this->deleted_at)
+		{
+			return  ' ';
+		}
+		else
+		{
+			return 'checked';
+		}
 	}
 
 }

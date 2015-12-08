@@ -26,6 +26,16 @@ class Migration_Initial extends CI_Migration {
 				'type' => 'DATETIME',
 				'null' => TRUE
 			),
+			'firstname' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 255,
+				'null' => TRUE,
+			),			
+			'lastname' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 255,
+				'null' => TRUE,
+			),			
 			'email' => array(
 				'type' => 'VARCHAR',
 				'constraint' => 255,
@@ -260,6 +270,8 @@ class Migration_Initial extends CI_Migration {
 		$dummy_records = array(
 			array(
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'firstname' => 'admin',
+				'lastname' => 'admin',
 				'email' => 'admin@catering.gr',
 				'password' => 'admin',
 				'role' => 'admin',
@@ -267,6 +279,8 @@ class Migration_Initial extends CI_Migration {
 			array(
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
 				'email' => 'waiter@catering.gr',
+				'firstname' => 'waiter',
+				'lastname' => 'waiter',
 				'password' => 'waiter',
 				'role' => 'waiter',
 			)

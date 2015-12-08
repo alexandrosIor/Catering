@@ -10,7 +10,7 @@ class Authenticate_lib {
 
 	public function login($username, $password)
 	{
-		if ($user = $this->ci->user_model->get_record(['email' => $username, 'password' => $password]))
+		if ($user = $this->ci->user_model->get_record(['email' => $username, 'password' => $password, 'deleted_at' => NULL]))
 		{
 			$this->ci->session->set_userdata('logged_in', TRUE);
 			$this->ci->session->set_userdata('logged_in_member', serialize($user));
