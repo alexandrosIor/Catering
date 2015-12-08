@@ -11,6 +11,7 @@ $(document).ready(function() {
 
 });
 
+/* save new product */
 function save_product(element)
 {
 	$.ajax({
@@ -29,6 +30,7 @@ function save_product(element)
 	});
 }
 
+/* get available product categories */
 function get_product_categories()
 {	var categories;
 	$.ajax({
@@ -45,6 +47,7 @@ function get_product_categories()
 	return categories;
 }
 
+/* change product status enable or disable without deleting it*/
 function change_status(element)
 {
 	var product_record_id = element.parent().parent().siblings(":first").text();
@@ -68,6 +71,7 @@ function change_status(element)
 	});
 }
 
+/* permanently delete product */
 function delete_product(element)
 {
 	var product_record_id = element.parent().siblings(":first").text();
@@ -114,32 +118,33 @@ function delete_product(element)
 	});
 }
 
+/* initialize all needed event */
 function events()
 {
 	/* editables */
 	$.fn.editable.defaults.mode = 'inline';
 
-	/* update product data via editable */
+	/* update product category via editable */
 	$('a.category').each(function(){
-		var product_category_record_id = $(this).parent().siblings(":first").text();
+		var product_record_id = $(this).parent().siblings(":first").text();
 		var name = $(this).data('column_name');
 		$(this).editable({
 			url: '/catalogue/update_product',
-			pk: product_category_record_id,
+			pk: product_record_id,
 			type: 'select',
 			name: name,
 			source: function() {return get_product_categories();},
 		});
 	});
 
-	/* update product category via editable */
+	/* update product data via editable */
 	$('#products td a').each(function(){
-		var product_category_record_id = $(this).parent().siblings(":first").text();
+		var product_record_id = $(this).parent().siblings(":first").text();
 		var name = $(this).data('column_name');
 		$(this).editable({
 			url: '/catalogue/update_product',
 			type: 'text',
-			pk: product_category_record_id,
+			pk: product_record_id,
 			name: name
 		});
 	});
@@ -169,6 +174,7 @@ function events()
 		});
 	});
 
+	/* to init events and plugins when datatable updates */
 	$(this).on( 'draw.dt', function () {
 		events();
 	} );

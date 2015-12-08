@@ -12,6 +12,7 @@ $(document).ready(function() {
 
 });
 
+/* save new product category */
 function save_category(element)
 {
 	$.ajax({
@@ -30,6 +31,7 @@ function save_category(element)
 	});
 }
 
+/* get available product categories */
 function get_product_categories()
 {	var categories;
 	$.ajax({
@@ -46,6 +48,7 @@ function get_product_categories()
 	return categories;
 }
 
+/* change product_category status enable or disable without deleting it*/
 function change_status(element)
 {
 	var product_category_record_id = element.parent().parent().siblings(":first").text();
@@ -69,6 +72,7 @@ function change_status(element)
 	});
 }
 
+/* permanently delete product_category*/
 function delete_product_category(element)
 {
 	var product_category_record_id = element.parent().siblings(":first").text();
@@ -115,6 +119,7 @@ function delete_product_category(element)
 	});
 }
 
+/* initialize all needed event */
 function events()
 {
 	/* editables */
@@ -170,6 +175,7 @@ function events()
 		});
 	});
 
+	/* to init events and plugins when datatable updates */
 	$(this).on( 'draw.dt', function () {
 		events();
 	} );
