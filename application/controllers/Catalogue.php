@@ -206,6 +206,9 @@ class Catalogue extends MY_Controller {
 		$post = $this->input->post();
 		$product = $this->product_model->get_record(['record_id' => $post['pk']]);
 		$product->set_properties([$post['name'] => $post['value']]);
+		
+		($product->price) ? $product->price = str_replace(',', '.', $product->price) : '';
+
 		$product->save();
 	}
 
