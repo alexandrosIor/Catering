@@ -21,18 +21,6 @@ class User_model extends MY_Model
 		return ['waiter', 'store', 'admin'];
 	}
 
-	public function status()
-	{
-		if ($this->deleted_at)
-		{
-			return  ' ';
-		}
-		else
-		{
-			return 'checked';
-		}
-	}
-
 }
 
 /* End of file User_model.php */

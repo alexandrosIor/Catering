@@ -1,9 +1,9 @@
 $(document).ready(function() {
 		
 	/* Datatables */
-	$('#users').DataTable({
+	$('#store-tables').DataTable({
 		'responsive': true,
-		'ajax': '/users/datatable_users_data',
+		'ajax': '/store_tables/datatable_store_tables_data',
 		'initComplete': function(settings, json) {
 			events();
 		}
@@ -12,11 +12,11 @@ $(document).ready(function() {
 });
 
 /* save new user */
-function save_user(element)
+function save_store_table(element)
 {
 	$.ajax({
 		type: 'POST',
-		url: '/users/ajax_save_user',
+		url: '/store_tables/ajax_save_store_table',
 		async: false,
 		data: element.serialize(),
 		success: function(data) {		
@@ -30,27 +30,10 @@ function save_user(element)
 	});
 }
 
-/* get available user roles */
-function get_user_roles()
-{	var roles;
-	$.ajax({
-		type: 'POST',
-		url: '/users/editable_user_roles_data',
-		async: false,
-		success: function(response) {		
-			categories = JSON.parse(response);
-		},
-		error: function() {
-			alert('failure');
-		}
-	});
-	return categories;
-}
-
-/* change user status enable or disable him without deleting */
+/* change store table status enable or disable it without deleting */
 function change_status(element)
 {
-	var user_record_id = element.parent().parent().siblings(":first").text();
+	var store_table_record_id = element.parent().parent().siblings(":first").text();
 	var status = 'unchecked';
 	if ($(element).is(':checked'))
 	{
@@ -59,9 +42,9 @@ function change_status(element)
 
 	$.ajax({
 		type: 'POST',
-		url: '/users/ajax_change_status',
+		url: '/store_tables/ajax_change_status',
 		async: false,
-		data: {'user_record_id' : user_record_id, 'status' : status},
+		data: {'store_table_record_id' : store_table_record_id, 'status' : status},
 		success: function(data) {		
 
 		},
@@ -72,12 +55,12 @@ function change_status(element)
 }
 
 /* permanently delete user */
-function delete_user(element)
+function delete_store_table(element)
 {
-	var user_record_id = element.parent().siblings(":first").text();
+	var store_table_record_id = element.parent().siblings(":first").text();
 	swal({   
 		title: "Είστε σίγουροι?",   
-		text: "Ο χρήστης θα διαγραφή μόνιμα.",   
+		text: "Το τραπέζι θα διαγραφή μόνιμα.",   
 		type: "warning",   
 		showCancelButton: true,   
 		confirmButtonColor: "#DD6B55",  
@@ -90,14 +73,14 @@ function delete_user(element)
 		if (isConfirm) { 
 			$.ajax({
 				type: 'POST',
-				url: '/users/ajax_delete_user',
+				url: '/store_tables/ajax_delete_store_table',
 				async: false,
-				data: {'user_record_id' : user_record_id},
+				data: {'store_table_record_id' : store_table_record_id},
 				success: function(data) {		
 					element.parent().parent().remove();
 					swal({   
 						title: "Διεγράφη!",   
-						text: "Ο χρήστης διεγράφη επιτυχώς.",   
+						text: "Το τραπέζι διεγράφη επιτυχώς.",   
 						type: "success",     
 						confirmButtonColor: "#22BAA0"
 					});
@@ -110,7 +93,7 @@ function delete_user(element)
 		else {
 			swal({   
 				title: "Ακύρωση!",   
-				text: "Η διαγραφή του χρήστη ακυρώθηκέ.",   
+				text: "Η διαγραφή του τραπεζιού ακυρώθηκέ.",   
 				type: "error",     
 				confirmButtonColor: "#22BAA0"
 			});  
@@ -125,26 +108,26 @@ function events()
 	$.fn.editable.defaults.mode = 'inline';
 
 	/* update user role data via editable */
-	$('a.role').each(function(){
-		var user_record_id = $(this).parent().siblings(":first").text();
+	/*$('a.role').each(function(){
+		var store_table_record_id = $(this).parent().siblings(":first").text();
 		var name = $(this).data('column_name');
 		$(this).editable({
-			url: '/users/update_user',
-			pk: user_record_id,
+			url: '/store_tables/update_store_table',
+			pk: store_table_record_id,
 			type: 'select',
 			name: name,
 			source: function() {return get_user_roles();},
 		});
-	});
+	});*/
 
-	/* update user info via editable */
-	$('#users td a').each(function(){
-		var user_record_id = $(this).parent().siblings(":first").text();
+	/* update store table info via editable */
+	$('#store-tables td a').each(function(){
+		var store_table_record_id = $(this).parent().siblings(":first").text();
 		var name = $(this).data('column_name');
 		$(this).editable({
-			url: '/users/update_user',
+			url: '/store_tables/update_store_table',
 			type: 'text',
-			pk: user_record_id,
+			pk: store_table_record_id,
 			name: name
 		});
 	});
@@ -168,9 +151,9 @@ function events()
 	});
 
 	/* user delete event */
-	$('.delete-user').each(function(){
+	$('.delete-store-table').each(function(){
 		$(this).on('click', function(){
-			delete_user($(this));
+			delete_store_table($(this));
 		});
 	});
 

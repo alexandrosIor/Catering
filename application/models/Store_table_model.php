@@ -1,8 +1,8 @@
 <?php
 
-class Table_model extends MY_Model
+class Store_table_model extends MY_Model
 {
-	protected $table_name = 'tables';
+	protected $table_name = 'store_tables';
 
 	public $caption;
 	public $seats;

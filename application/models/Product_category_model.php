@@ -28,18 +28,6 @@ class Product_category_model extends MY_Model
 		}
 	}
 
-	public function status()
-	{
-		if ($this->deleted_at)
-		{
-			return  ' ';
-		}
-		else
-		{
-			return 'checked';
-		}
-	}
-
 	public function products()
 	{
 		$this->load->model('product_model');

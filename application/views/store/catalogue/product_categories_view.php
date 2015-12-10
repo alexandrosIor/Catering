@@ -1,7 +1,7 @@
 
 <div class="panel panel-white">
 	<div class="panel-body">
-		<a class="btn btn-success m-b-sm" href="/catalogue/product_category_modal_form" data-toggle="modal" data-target="#myModal">Νέα κατηγόρια</a>
+		<a class="btn btn-success m-b-sm" href="/catalogue/product_category_modal_form" data-toggle="modal" data-target="#myModal">Νέα κατηγόρια <i class="fa fa-plus"></i></a>
 		<div class="table-responsive">
 			<table id="product_categories" class="display table">
 				<thead>

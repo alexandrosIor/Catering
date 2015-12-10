@@ -31,18 +31,6 @@ class Product_model extends MY_Model
 		}
 	}
 
-	public function status()
-	{
-		if ($this->deleted_at)
-		{
-			return  ' ';
-		}
-		else
-		{
-			return 'checked';
-		}
-	}
-
 }
 
 /* End of file Product_model.php */

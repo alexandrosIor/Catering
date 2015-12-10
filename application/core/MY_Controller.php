@@ -55,7 +55,7 @@ class MY_Controller extends CI_Controller {
 			$this->view_data['menu'] = array();
 			if ($member->role == 'waiter')
 			{
-				$this->view_data['menu'][] = array('icon' => 'fa fa-th-large fa-fw', 'name' => 'τραπέζια', 'link' => '/tables');
+				$this->view_data['menu'][] = array('icon' => 'fa fa-th-large fa-fw', 'name' => 'τραπέζια', 'link' => '/store_tables');
 				$this->view_data['menu'][] = array('icon' => 'fa fa-plus fa-fw', 'name' => 'νέα παραγγελία', 'link' => '/orders/new_order/');
 				$this->view_data['menu'][] = array('icon' => 'fa fa-book', 'name' => 'μενού', 'link' => '#');
 				$this->view_data['menu'][] = array('icon' => 'fa fa-bell-o fa-fw', 'name' => 'ειδοποιήσεις', 'link' => '#');
@@ -68,12 +68,12 @@ class MY_Controller extends CI_Controller {
 
 				if ($member->role == 'admin')
 				{
-					$this->view_data['menu'][] = array('icon' => 'fa fa-users', 'name' => 'Χρήστες', 'link' => '/users');
-				
+					$this->view_data['menu'][] = array('icon' => 'fa fa-th-large', 'name' => 'Τραπέζια', 'link' => '/store_tables');
 					$this->view_data['menu'][] = array('icon' => 'fa fa-list', 'name' => 'Κατάλογος', 'link' => '#', 'submenu' => array(
 						array('name' => 'Κατηγορίες', 'link' => '/catalogue/product_categories'),
 						array('name' => 'Προϊόντα', 'link' => '/catalogue/products'),
 					));
+					$this->view_data['menu'][] = array('icon' => 'fa fa-users', 'name' => 'Χρήστες', 'link' => '/users');
 				}
 			}
 		}

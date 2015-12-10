@@ -223,7 +223,7 @@ class Migration_Initial extends CI_Migration {
 		$this->dbforge->add_key('record_id',  TRUE);
 		$this->dbforge->create_table('orders', TRUE, $attributes);
 
-		/* TABLE: tables */
+		/* TABLE: store_tables */
 		$this->dbforge->add_field(array(
 			'record_id' => array(
 				'type' => 'INT',
@@ -248,7 +248,8 @@ class Migration_Initial extends CI_Migration {
 				'null' => TRUE,
 			),				
 			'seats' => array(
-				'type' => 'INT',
+				'type' => 'VARCHAR',
+				'constraint' => 255,
 				'null' => TRUE,
 			),
 			'in_use' => array(
@@ -257,7 +258,7 @@ class Migration_Initial extends CI_Migration {
 		));
 
 		$this->dbforge->add_key('record_id',  TRUE);
-		$this->dbforge->create_table('tables', TRUE, $attributes);
+		$this->dbforge->create_table('store_tables', TRUE, $attributes);
 
 		$this->insert_common_records();
 	}
@@ -375,7 +376,7 @@ class Migration_Initial extends CI_Migration {
 				'seats' => '8'
 			),
 		);
-		$this->db->insert_batch('tables', $dummy_records);
+		$this->db->insert_batch('store_tables', $dummy_records);
 
 		/* product_categories */
 		$dummy_records = array(

@@ -174,4 +174,16 @@ class MY_Model extends CI_Model {
 		return TRUE;
 	}
 
+	public function status()
+	{
+		if ($this->deleted_at)
+		{
+			return  ' ';
+		}
+		else
+		{
+			return 'checked';
+		}
+	}
+
 }
