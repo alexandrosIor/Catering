@@ -8,10 +8,13 @@
 			<input type="text" id="name-input" class="form-control" name="name" placeholder="Όνομα" required tabindex="1">
 		</div>
 		<div class="form-group">
-			<input type="text" id="position-input" class="form-control" name="description" placeholder="Περιγραφή" required tabindex="2">
+			<input type="text" id="position-input" class="form-control" name="short_description" placeholder="Σύντομη περιγραφή" required tabindex="2">
+		</div>		
+		<div class="form-group">
+			<input type="text" id="position-input" class="form-control" name="description" placeholder="Περιγραφή" required tabindex="3">
 		</div>
 		<div class="form-group">
-		<select class="form-control" name="category_record_id" tabindex="3">
+		<select class="form-control" name="category_record_id" tabindex="4">
 			<option value="0">γονική κατηγορία</option>
 <?php foreach ($product_categories as $key => $product_category) {?>
 			<option value="<?=$product_category->record_id?>"><?=$product_category->name?></option>
@@ -19,7 +22,7 @@
 		</select>
 		</div>
 		<div class="form-group">
-			<input type="number" min="0" step="0.50" id="price-input" class="form-control" name="price" placeholder="Τιμή" required tabindex="4">
+			<input type="number" min="0" step="0.50" id="price-input" class="form-control" name="price" placeholder="Τιμή" required tabindex="5">
 		</div>
 		<div class="form-group"> 
 			<div class="ios-switch switch-md">

@@ -155,11 +155,12 @@ class Catalogue extends MY_Controller {
 			array_push($data, [
 				0 => $product->record_id,
 				1 => '<a href="javascript:void(0);" data-column_name="name">' . $product->name . '</a>',
-				2 => '<a href="javascript:void(0);" data-column_name="description">' . $product->description . '</a>',
-				3 => '<a href="javascript:void(0);" data-column_name="category_record_id" class="category">' . $product->category_name() . '</a>',
-				4 => '<a href="javascript:void(0);" data-column_name="price">' . $product->price . '</a>',
-				5 => '<div class="ios-switch switch-md"><input type="checkbox" class="js-switch compact-menu-check"' . $product->status() . '></div>',
-				6 => '<i class="fa fa-times fa-2x fa-fw text-danger delete-product"></i>',
+				2 => '<a href="javascript:void(0);" data-column_name="short_description">' . $product->short_description . '</a>',
+				3 => '<a href="javascript:void(0);" data-column_name="description">' . $product->description . '</a>',
+				4 => '<a href="javascript:void(0);" data-column_name="category_record_id" class="category">' . $product->category_name() . '</a>',
+				5 => '<a href="javascript:void(0);" data-column_name="price">' . $product->price . '</a>',
+				6 => '<div class="ios-switch switch-md"><input type="checkbox" class="js-switch compact-menu-check"' . $product->status() . '></div>',
+				7 => '<i class="fa fa-times fa-2x fa-fw text-danger delete-product"></i>',
 			]);
 		}
 
