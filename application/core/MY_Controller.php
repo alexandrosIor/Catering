@@ -74,6 +74,7 @@ class MY_Controller extends CI_Controller {
 						array('name' => 'Προϊόντα', 'link' => '/catalogue/products'),
 					));
 					$this->view_data['menu'][] = array('icon' => 'fa fa-users', 'name' => 'Χρήστες', 'link' => '/users');
+					$this->view_data['menu'][] = array('icon' => 'fa fa-history', 'name' => 'Βάρδιες', 'link' => '/shifts');
 				}
 			}
 		}
