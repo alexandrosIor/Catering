@@ -6,6 +6,7 @@ class Product_model extends MY_Model
 
 	public $category_record_id;
 	public $name;
+	public $short_description;
 	public $description;
 	public $price;
 
