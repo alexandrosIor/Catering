@@ -36,7 +36,7 @@
 													<div class="item-inner">
 														<div class="item-title">
 															<?=$product->name?>
-															<em><?=$product->description?></em>
+															<em><?=$product->short_description?></em>
 														</div>
 														<div class="right product-price"><?=$product->price?> €</div>
 													</div>
