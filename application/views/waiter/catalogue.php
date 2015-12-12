@@ -36,8 +36,14 @@
 													<div class="item-inner">
 														<div class="item-title">
 															<?=$product->name?>
-															<em><?=$product->short_description?></em>
+															<em><?=substr($product->short_description, 0, 10)?></em>
 														</div>
+		<?php if ($product->description){?>
+														<div class="right description">
+															<a href="#" data-popover=".my-popover" class="link open-popover"><i class="fa fa-info-circle fa-lg"></i></a>
+															<span class="hidden"><?=$product->description?></span>
+														</div>
+		<?php }?>
 														<div class="right product-price"><?=$product->price?> €</div>
 													</div>
 												</div>
@@ -101,5 +107,6 @@
 			</div>
 		</div>
 	</div>
+
 
 </div>

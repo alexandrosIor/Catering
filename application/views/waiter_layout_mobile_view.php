@@ -24,7 +24,7 @@
 					<div data-page="panel-left" class="page">
 						<div class="navbar">
 							<div class="navbar-inner">
-								<div class="center">Left Panel</div>
+								<div class="center"><?=$logged_in_user->firstname . ' ' . $logged_in_user->lastname?></div>
 							</div>
 						</div>
 					<div class="page-content">
@@ -54,7 +54,7 @@
 									<li>
 										<a href="/shifts/close_shift" class="item-link item-content external">
 											<div class="item-inner">
-												<div class="item-title">Κλείσιμο ταμείου</div>
+												<div class="item-title">Κλείσιμο βάρδιας</div>
 												<div class="item-after"><i class="fa fa-history fa-lg"></i></div>
 											</div>
 										</a>
@@ -79,22 +79,15 @@
 		<div class="panel panel-right panel-reveal">
 			<div class="view view-right">
 				<div class="pages navbar-fixed">
-					<div data-page="panel-right1" class="page">
+					<div data-page="panel-right1" class="page"><!-- data page για να φορτωθει στο δεξι μενου-->
 						<div class="navbar">
 							<div class="navbar-inner">
-								<div class="center">Cart</div>
+								<div class="center">....</div>
 							</div>
 						</div>
 						<div class="page-content">
 							<div class="content-block">
-								<a href="#" class="close-panel">close me</a>
-							</div>
-							<div class="card">
-								<div class="card-header">Product</div>
-								<div class="card-content">
-									<div class="card-content-inner">description</div>
-								</div>
-								<div class="card-footer">add  remove</div>
+								<a href="#" class="close-panel">κλείσιμο</a>
 							</div>
 						</div>
 					</div>
@@ -115,10 +108,17 @@
 						<a href="/orders/new_order" class="floating-button"><i class="icon icon-plus"></i></a>
 						<div class="page-content">
 							<h2>Dashboard</h2>
-							<p><a href="#" class="prompt-title-ok-cancel">Prompt with text, title, Ok and Cancel callback</a></p>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<!-- popover modal -->
+		<div class="popover my-popover">
+			<div class="popover-angle"></div>
+			<div class="popover-inner">
+				<div class="content-block"></div>
 			</div>
 		</div>
 

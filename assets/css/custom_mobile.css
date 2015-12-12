@@ -71,7 +71,7 @@ body {
 	padding-left: 0px !important;
 }
 
-.current-order .list-block{
+.current-order .list-block {
 	margin-top: -5px;
 }
 
@@ -79,6 +79,14 @@ body {
 	text-align: center;
 }
 
-.order-product .action3{
+.order-product .action3 {
 	background-color: #ff0000 !important;
+}
+
+.hidden {
+	display: none;
+}
+
+.list-block .item-content {
+	padding-left: 5px;
 }

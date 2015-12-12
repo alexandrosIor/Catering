@@ -17,6 +17,14 @@ $('.fa-plus').each(function(){
 	
 });
 
+// Append product description to popover element
+$('.description').each(function(){
+	$(this).on('click', function(){
+		$('.my-popover .content-block').children().remove();
+		$('.my-popover .content-block').append($(this).find('span').clone().removeClass('hidden'));
+	});
+});
+
 // Add product to new order    !!πρεπει να αλλαξει το quantity change για να λειτουργει και μετα το append , επισης να δημιουργηθει η φορμα για το submit
 $('.add-product').each(function(){
 	var product = $(this).parent().parent().clone();
@@ -86,7 +94,6 @@ var pickerDevice = myApp.picker({
 });
 var col = pickerDevice.cols[0];
 console.log(col.value);
-
 
 function completed_order_radio_boxes()
 {
