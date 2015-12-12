@@ -1,17 +1,17 @@
 // Add product comment modal 
-$$('.add-comment').on('click', function () {
+$$('.add-comment').on('touchend', function () {
 		myApp.prompt('', 'Σχόλια');
 });
 
 // Change product quantity
 $('.fa-minus').each(function(){
-	$(this).on('click', function(){
+	$(this).on('touchend', function(){
 		quantity_change($(this).next(), '-');
 	})
 });
 
 $('.fa-plus').each(function(){
-	$(this).on('click', function(){
+	$(this).on('touchend', function(){
 		quantity_change($(this).prev(), '+');
 	})
 	
@@ -19,7 +19,7 @@ $('.fa-plus').each(function(){
 
 // Append product description to popover element
 $('.description').each(function(){
-	$(this).on('click', function(){
+	$(this).on('touchend', function(){
 		$('.my-popover .content-block').children().remove();
 		$('.my-popover .content-block').append($(this).find('span').clone().removeClass('hidden'));
 	});
@@ -28,7 +28,7 @@ $('.description').each(function(){
 // Add product to new order    !!πρεπει να αλλαξει το quantity change για να λειτουργει και μετα το append , επισης να δημιουργηθει η φορμα για το submit
 $('.add-product').each(function(){
 	var product = $(this).parent().parent().clone();
-	$(this).on('click', function(){
+	$(this).on('touchend', function(){
 		$('.order-product').append(product);
 		product.find('*').removeAttr('style');
 		$('.order-product .add-product').removeClass('add-product').addClass('remove-product');

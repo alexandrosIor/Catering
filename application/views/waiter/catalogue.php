@@ -7,7 +7,7 @@
 			<div class="right"><a href="#" class="link open-panel icon-only"><i class="icon icon-bars"></i></a></div>
 		</div>
 	</div>
-	<div class="toolbar tabbar tabbar-labels">
+	<div class="toolbar tabbar">
 		<div class="toolbar-inner">
 			<a href="#tab-1" class="tab-link active"><i class="fa fa-list fa-lg"></i><span class="tabbar-label">Καταλογος</span></a>
 			<a href="#tab-2" class="tab-link"><i class="fa fa-edit fa-lg"></i><span class="tabbar-label">Παραγγελια</span></a>

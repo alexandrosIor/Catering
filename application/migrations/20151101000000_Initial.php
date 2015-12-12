@@ -232,6 +232,54 @@ class Migration_Initial extends CI_Migration {
 		$this->dbforge->add_key('record_id',  TRUE);
 		$this->dbforge->create_table('orders', TRUE, $attributes);
 
+		/* TABLE: order_products */
+		$this->dbforge->add_field(array(
+			'record_id' => array(
+				'type' => 'INT',
+				'unsigned' => TRUE,
+				'auto_increment' => TRUE
+			),
+			'deleted_at' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE
+			),
+			'insert_at' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE
+			),
+			'update_at' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE
+			),
+			'order_record_id' => array(
+				'type' => 'INT',
+				'null' => TRUE,
+			),				
+			'product_record_id' => array(
+				'type' => 'INT',
+				'null' => TRUE,
+			),				
+			'comments' => array(
+				'type' => 'TEXT',
+				'null' => TRUE,
+			),			
+			'quantity' => array(
+				'type' => 'INT',
+				'null' => TRUE,
+			),		
+			'start_datetime' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE,
+			),			
+			'end_datetime' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE,
+			)
+		));
+
+		$this->dbforge->add_key('record_id',  TRUE);
+		$this->dbforge->create_table('order_products', TRUE, $attributes);
+
 		/* TABLE: store_tables */
 		$this->dbforge->add_field(array(
 			'record_id' => array(

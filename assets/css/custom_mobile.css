@@ -15,9 +15,28 @@ body {
 }
 
 .product-quantity {
-	margin: 0 20px 0 20px;
+	margin: 0 0px 0 0px;
 }
 
+.fa-plus {
+	padding: 15px 15px 15px 20px;
+}
+
+.fa-minus {
+	padding: 15px 20px 15px 15px;
+}
+
+.fa-check {
+	padding: 10px;
+}
+
+.list-block .swipeout-actions-left a, .list-block .swipeout-actions-right a {
+	padding: 0 15px;
+}
+
+.add-comment {
+	padding: 10px 0 10px 0;
+}
 .tabbar-labels span.tabbar-label {
 	margin-top: 0px;
 }
