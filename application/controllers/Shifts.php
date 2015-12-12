@@ -24,6 +24,20 @@ class Shifts extends MY_Controller {
 
 	}
 
+	public function close_shift()
+	{
+		$this->load->model('shift_model');
+		$this->load->library('authenticate_lib');
+
+		$shift = new $this->shift_model(['user_record_id' => $this->logged_in_user->record_id]);
+
+		$shift->get_current_open_shift();
+		//αφου περαστουν ολα τα απαραιτητα data θα γινει το κλεισιμο (data: turnover delivered, turnover calculated)
+		$shift->close_shift();
+
+		$this->authenticate_lib->logout();
+	}
+
 }
 
 /* End of file Shifts.php */

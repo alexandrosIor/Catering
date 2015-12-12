@@ -27,20 +27,20 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('user_model');
 
 		$called_class = get_called_class();
-		$this->logged_in_member = unserialize($this->session->userdata('logged_in_member'));
+		$this->logged_in_user = unserialize($this->session->userdata('logged_in_user'));
 		
-		if ($this->logged_in_member->role == 'waiter' AND $called_class == 'Store')
+		if ($this->logged_in_user->role == 'waiter' AND $called_class == 'Store')
 		{
 			redirect('/waiter', 'location');
 		}
 
-		$this->view_data['logged_in_member'] = $this->logged_in_member;
+		$this->view_data['logged_in_user'] = $this->logged_in_user;
 
 		$this->view_data['css_includes'] = array();
 		$this->view_data['js_includes'] = array();
 
 		$this->include_common_assets();
-		$this->generate_menu($this->view_data['logged_in_member']);
+		$this->generate_menu($this->view_data['logged_in_user']);
 	}
 
 	private function include_common_assets()
@@ -48,12 +48,12 @@ class MY_Controller extends CI_Controller {
 		$this->layout_lib->add_additional_js('/assets/js/store_global.js');
 	}
 
-	private function generate_menu($member)
+	private function generate_menu($user)
 	{
 		if ($this->session->userdata('logged_in') == TRUE)
 		{
 			$this->view_data['menu'] = array();
-			if ($member->role == 'waiter')
+			if ($user->role == 'waiter')
 			{
 				$this->view_data['menu'][] = array('icon' => 'fa fa-th-large fa-fw', 'name' => 'τραπέζια', 'link' => '/store_tables');
 				$this->view_data['menu'][] = array('icon' => 'fa fa-plus fa-fw', 'name' => 'νέα παραγγελία', 'link' => '/orders/new_order/');
@@ -66,7 +66,7 @@ class MY_Controller extends CI_Controller {
 				
 				$this->view_data['menu'][] = array('icon' => 'fa fa-pencil-square-o', 'name' => 'Παραγγελίες', 'link' => '#');
 
-				if ($member->role == 'admin')
+				if ($user->role == 'admin')
 				{
 					$this->view_data['menu'][] = array('icon' => 'fa fa-th-large', 'name' => 'Τραπέζια', 'link' => '/store_tables');
 					$this->view_data['menu'][] = array('icon' => 'fa fa-list', 'name' => 'Κατάλογος', 'link' => '#', 'submenu' => array(

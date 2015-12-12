@@ -14,7 +14,7 @@ class Login extends CI_Controller {
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
 		{
 			$post = $this->input->post();
-			
+
 			$response = array();
 			
 			if (strlen($post['username']) > 0  AND strlen($post['password']) > 0)

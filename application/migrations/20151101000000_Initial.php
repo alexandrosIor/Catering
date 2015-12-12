@@ -163,15 +163,23 @@ class Migration_Initial extends CI_Migration {
 				'type' => 'INT',
 				'null' => TRUE,
 			),			
-			'start_datetime' => array(
+			'start_date' => array(
 				'type' => 'DATETIME',
 				'null' => TRUE,
 			),			
-			'end_datetime' => array(
+			'end_date' => array(
 				'type' => 'DATETIME',
 				'null' => TRUE,
 			),
-			'total_sales' => array(
+			'turnover_delivered' => array(
+				'type' => 'FLOAT',
+				'null' => TRUE,
+			),
+			'turnover_calculated' => array(
+				'type' => 'FLOAT',
+				'null' => TRUE,
+			),
+			'turnover_diff' => array(
 				'type' => 'FLOAT',
 				'null' => TRUE,
 			)
@@ -210,11 +218,7 @@ class Migration_Initial extends CI_Migration {
 			'shift_record_id' => array(
 				'type' => 'INT',
 				'null' => TRUE,
-			),				
-			'order_data' => array(
-				'type' => 'LONGBLOB',
-				'null' => TRUE,
-			),			
+			),		
 			'start_datetime' => array(
 				'type' => 'DATETIME',
 				'null' => TRUE,

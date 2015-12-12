@@ -125,7 +125,7 @@ function get_tables()
 	var tables;
 	$.ajax({
 		type: 'POST',
-		url: '/tables/ajax_get_tables_for_waiter',
+		url: '/store_tables/ajax_get_tables_for_waiter',
 		async: false,
 		success: function(response) {		
 			tables = JSON.parse(response);
@@ -134,6 +134,6 @@ function get_tables()
 			alert('failure');
 		}
 	});
-
+	
 	return tables;
 }

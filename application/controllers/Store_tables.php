@@ -136,6 +136,24 @@ class Store_tables extends MY_Controller {
 		}
 	}
 
+	public function ajax_get_tables_for_waiter()
+	{
+		$this->load->model('store_table_model');
+
+		$tables = $this->store_table_model->get_records();
+		$data = array();
+
+		foreach ($tables as $table)
+		{
+			array_push($data, $table->caption);
+		}
+		
+		$obj = (object) array();
+		$obj = array_values($data);
+
+		echo json_encode($obj);
+	}
+
 }
 
 /* End of file Store_tables.php */

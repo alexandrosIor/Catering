@@ -10,17 +10,17 @@ class Main extends CI_Controller
 		if ($this->session->userdata('logged_in') === TRUE)
 		{
 			$this->load->model('user_model');
-			$logged_in_member = unserialize($this->session->userdata('logged_in_member'));
+			$logged_in_user = unserialize($this->session->userdata('logged_in_user'));
 
-			if ($logged_in_member->role == 'admin')
+			if ($logged_in_user->role == 'admin')
 			{
 				redirect('/store', 'location');
 			}
-			elseif ($logged_in_member->role == 'store')
+			elseif ($logged_in_user->role == 'store')
 			{
 				redirect('/store', 'location');
 			}			
-			elseif ($logged_in_member->role == 'waiter')
+			elseif ($logged_in_user->role == 'waiter')
 			{
 				redirect('/waiter', 'location');
 			}

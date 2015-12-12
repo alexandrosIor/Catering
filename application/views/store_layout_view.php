@@ -54,7 +54,14 @@
 									<a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
 								</li>
 							</ul>
-							<ul class="nav navbar-nav navbar-right">								
+							<ul class="nav navbar-nav navbar-right">
+<?php if ($logged_in_user->role == 'store'){?>								
+								<li>
+									<a href="/shifts/close_shift" class="close-shift waves-effect waves-button waves-classic">
+										<span><i class="fa fa-history m-r-xs fa-lg"></i>Κλείσιμο βάρδιας</span>
+									</a>
+								</li>
+<?php }?>
 								<li>
 									<a href="/logout" class="log-out waves-effect waves-button waves-classic">
 										<span><i class="fa fa-sign-out m-r-xs fa-lg"></i>Αποσύνδεση</span>
@@ -73,7 +80,7 @@
 							<div class="sidebar-profile-image">
 								<img src="/assets/images/blank-image.jpg" class="img-circle img-responsive" alt="">
 							</div>
-							<span><?=$logged_in_member->email?><br><small><?=$logged_in_member->role?></small></span>
+							<span><?=$logged_in_user->email?><br><small><?=$logged_in_user->role?></small></span>
 						</div>
 					</div>
 					<ul class="menu accordion-menu">

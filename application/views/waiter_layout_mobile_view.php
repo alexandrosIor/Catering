@@ -52,6 +52,14 @@
 										</a>
 									</li>
 									<li>
+										<a href="/shifts/close_shift" class="item-link item-content external">
+											<div class="item-inner">
+												<div class="item-title">Κλείσιμο ταμείου</div>
+												<div class="item-after"><i class="fa fa-history fa-lg"></i></div>
+											</div>
+										</a>
+									</li>									
+									<li>
 										<a href="/logout" class="item-link item-content external">
 											<div class="item-inner">
 												<div class="item-title">Αποσύνδεση</div>
