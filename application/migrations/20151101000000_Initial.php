@@ -276,9 +276,9 @@ class Migration_Initial extends CI_Migration {
 		$dummy_records = array(
 			array(
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'email' => 'admin@catering.gr',
 				'firstname' => 'admin',
 				'lastname' => 'admin',
-				'email' => 'admin@catering.gr',
 				'password' => 'admin',
 				'role' => 'admin',
 			),
@@ -289,6 +289,14 @@ class Migration_Initial extends CI_Migration {
 				'lastname' => 'waiter',
 				'password' => 'waiter',
 				'role' => 'waiter',
+			),
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'email' => 'store@catering.gr',
+				'firstname' => 'store',
+				'lastname' => 'store',
+				'password' => 'store',
+				'role' => 'store',
 			)
 		);
 		$this->db->insert_batch('users', $dummy_records);
