@@ -218,14 +218,6 @@ class Migration_Initial extends CI_Migration {
 			'shift_record_id' => array(
 				'type' => 'INT',
 				'null' => TRUE,
-			),		
-			'start_datetime' => array(
-				'type' => 'DATETIME',
-				'null' => TRUE,
-			),			
-			'end_datetime' => array(
-				'type' => 'DATETIME',
-				'null' => TRUE,
 			)
 		));
 
@@ -265,14 +257,6 @@ class Migration_Initial extends CI_Migration {
 			),			
 			'quantity' => array(
 				'type' => 'INT',
-				'null' => TRUE,
-			),		
-			'start_datetime' => array(
-				'type' => 'DATETIME',
-				'null' => TRUE,
-			),			
-			'end_datetime' => array(
-				'type' => 'DATETIME',
 				'null' => TRUE,
 			)
 		));

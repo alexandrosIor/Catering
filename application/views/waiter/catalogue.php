@@ -29,7 +29,7 @@
 								</a>
 								<div class="accordion-item-content">
 									<div class="list-block">
-										<ul class="products-list">
+										<ul class="products-list" data-order_record_id="">
 	<?php foreach ($product_category->products() as $key => $product){?>
 											<li class="swipeout product">
 												<div class="swipeout-content item-content">
@@ -50,14 +50,14 @@
 												<div class="swipeout-actions-left">
 													<a href="#" class="action1 bg-gray">
 														<i class="fa fa-minus"></i>
-														<div class="product-quantity"> 0 </div>
+														<div class="product-quantity"> 1 </div>
 														<i class="fa fa-plus"></i>
 													</a>	
 													<a href="#" class="action2 bg-orange">
 														<div href="#" class="add-comment">Σχόλια</div>
 													</a>
-													<a href="#" class="action3 bg-green add-product">
-														<i class="fa fa-check"></i>
+													<a href="#" class="action3 bg-green add-product" data-product_record_id="<?=$product->record_id?>" data-comments="" data-quantity="" data-order_record_id="">
+														<i class="fa fa-check fa-lg"></i>
 													</a>
 												</div>
 											</li>

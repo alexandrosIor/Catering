@@ -1,15 +1,22 @@
-// Add product comment modal 
-$$('.add-comment').on('touchend', function () {
-		myApp.prompt('', 'Σχόλια');
+/* Add product comment modal */
+$$('.add-comment').each(function(){
+	var comments = $(this).parent().siblings('.add-product');
+
+	$(this).on('touchend', function () {
+		myApp.prompt('', 'Σχόλια', function(value){
+			$(comments).data('comments', value);
+		});
+	});
 });
 
-// Change product quantity
+/* increase product quantity event*/
 $('.fa-minus').each(function(){
 	$(this).on('touchend', function(){
 		quantity_change($(this).next(), '-');
 	})
 });
 
+/* decrease product quantity event*/
 $('.fa-plus').each(function(){
 	$(this).on('touchend', function(){
 		quantity_change($(this).prev(), '+');
@@ -17,7 +24,7 @@ $('.fa-plus').each(function(){
 	
 });
 
-// Append product description to popover element
+/* Append product description to popover element */
 $('.description').each(function(){
 	$(this).on('touchend', function(){
 		$('.my-popover .content-block').children().remove();
@@ -25,24 +32,38 @@ $('.description').each(function(){
 	});
 });
 
-// Add product to new order    !!πρεπει να αλλαξει το quantity change για να λειτουργει και μετα το append , επισης να δημιουργηθει η φορμα για το submit
+/* Add product to new order */
 $('.add-product').each(function(){
-	var product = $(this).parent().parent().clone();
-	$(this).on('touchend', function(){
-		$('.order-product').append(product);
-		product.find('*').removeAttr('style');
-		$('.order-product .add-product').removeClass('add-product').addClass('remove-product');
-		$('.order-product .fa-check').removeClass('fa-check').addClass('fa-times');
+	var product = $(this);
+	
+	$(product).on('touchend', function(){
+		$(product).find('i').removeClass('fa-check').addClass('loader');
 
-		$('.remove-product').each(function(){
-			$(this).on('click', function(){
-				$(this).parent().parent().remove();
-			})
-		})
+		var product_data = {
+			'order_record_id' : $('.products-list').data('order_record_id'),
+			'product_record_id' : $(product).data('product_record_id'),
+			'quantity' : $(product).data('quantity'),
+			'comments' : $(product).data('comments'),
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: '/orders/ajax_add_product_for_order',
+			data: product_data,
+			async: false,
+			success: function(response) {		
+				$(product).find('i').removeClass('loader').addClass('fa-check');
+				$('.products-list').data('order_record_id', response);
+				close_swipe($('.product'));
+			},
+			error: function() {
+				alert('failure');
+			}
+		});
 	});
 });
 
-// Complete order modal
+/* Complete order modal */
 $$('.complete-order').on('click', function () {
 	  myApp.modal({
 		title:  'Εξόφληση',
@@ -78,7 +99,7 @@ $$('.complete-order').on('click', function () {
 	})
 });
 
-// Table select picker
+/* Table select picker */
 var pickerDevice = myApp.picker({
 	input: '#picker-device',
 	cols: [
@@ -95,23 +116,7 @@ var pickerDevice = myApp.picker({
 var col = pickerDevice.cols[0];
 console.log(col.value);
 
-function completed_order_radio_boxes()
-{
-	var radio_boxes = '<div class="list-block">\
-							<label class="label-radio item-content">\
-								<input type="radio" name="pay" value="later" checked="checked">\
-								<div class="item-media"><i class="icon icon-form-radio"></i></div>\
-								<div class="item-inner"><div class="item-title">Μετά</div></div>\
-							</label>\
-							<label class="label-radio item-content">\
-								<input type="radio" name="pay" value="now">\
-								<div class="item-media"><i class="icon icon-form-radio"></i></div>\
-								<div class="item-inner"><div class="item-title">Τώρα</div></div>\
-							</label>\
-						</div>';
-	return radio_boxes;
-}
-
+/* product quantity change */
 function quantity_change(element, action)
 {
 	var current_val = parseInt(element.text(), 10);
@@ -121,12 +126,14 @@ function quantity_change(element, action)
 	}
 	else
 	{
-		if (current_val > 0) current_val--;
+		if (current_val > 1) current_val--;
 	}
 
 	element.text(current_val);
+	element.parent().siblings('.add-product').data('quantity', current_val);
 }
 
+/* get tables list */
 function get_tables()
 {
 	var tables;
@@ -143,4 +150,13 @@ function get_tables()
 	});
 	
 	return tables;
+}
+
+/* close product swipe actions */
+function close_swipe(element)
+{
+	element.removeClass('swipeout-opened');
+	element.find('.swipeout-content').removeAttr('style');
+	element.find('.swipeout-action-left').removeClass('swipeout-actions-opened');
+	element.find('a').removeAttr('style');
 }
