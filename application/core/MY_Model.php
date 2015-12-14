@@ -186,4 +186,19 @@ class MY_Model extends CI_Model {
 		}
 	}
 
+	/**
+	 * This function returns local timezone from UTC that database works *
+	 * @return string datetime formated 'Y-m-d H:i:s'
+	 */
+	public function time_zone_greece($datetime = NULL)
+	{
+		if ($datetime)
+		{
+			$local_date = new DateTime($datetime, new DateTimeZone('UTC'));
+			$local_date = $local_date->setTimezone(new DateTimeZone('Europe/Athens'));
+			
+			return  $local_date->format('Y-m-d H:i:s');		
+		}
+	}
+	
 }

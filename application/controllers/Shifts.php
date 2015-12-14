@@ -32,8 +32,8 @@ class Shifts extends MY_Controller {
 		{
 			array_push($data, [
 				0 => $shift->record_id,
-				1 => $shift->start_date,
-				2 => $shift->end_date,
+				1 => $shift->time_zone_greece($shift->start_date),
+				2 => $shift->time_zone_greece($shift->end_date),
 				3 => $shift->user('name'),
 				4 => $shift->user('role'),
 				5 => $shift->total_orders(),
