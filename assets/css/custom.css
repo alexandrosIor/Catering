@@ -22,3 +22,9 @@
 {
 	text-decoration: none;
 }
+
+#shifts tr td:last-child
+{
+	text-align: center;
+	cursor: pointer;
+}

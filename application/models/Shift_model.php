@@ -42,6 +42,27 @@ class Shift_model extends MY_Model
 		}
 	}
 
+	public function user($property = NULL)
+	{
+		$this->load->model('user_model');
+
+		$user = $this->user_model->get_record(['record_id' => $this->user_record_id]);
+
+		if ($property == 'name')
+		{
+			return $user->lastname . ' ' . $user->firstname;
+		}
+
+		return $user->$property;
+	}
+
+	public function total_orders()
+	{
+		$this->load->model('order_model');
+
+		return count($this->order_model->get_records(['shift_record_id' => $this->record_id]));
+	}
+
 	public function close_shift()
 	{
 		$datatime_now = new DateTime('NOW', new DateTimeZone('UTC'));

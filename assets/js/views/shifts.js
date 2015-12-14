@@ -8,14 +8,14 @@ $(document).ready(function() {
 	/* initialize DataTable */
 	var table = $('#shifts').DataTable({
 		'responsive': true,
-		//'ajax': '/shifts/datatable_shifts_data',
-		//'initComplete': function(settings, json) {
+		'ajax': '/shifts/datatable_shifts_data',
+		'initComplete': function(settings, json) {
 			//events();
-			//add_search_fields(table);
-		//}
+			add_search_fields(table);
+		}
 	});
 
- 	add_search_fields(table);
+ 	//add_search_fields(table);
 
 });
 
