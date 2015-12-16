@@ -9,14 +9,14 @@
 	</div>
 	<div class="toolbar tabbar">
 		<div class="toolbar-inner">
-			<a href="#tab-1" class="tab-link active"><i class="fa fa-list fa-lg"></i><span class="tabbar-label">Καταλογος</span></a>
-			<a href="#tab-2" class="tab-link"><i class="fa fa-edit fa-lg"></i><span class="tabbar-label">Παραγγελια</span></a>
+			<a href="#catalogue-tab" class="tab-link active"><i class="fa fa-list fa-lg"></i><span class="tabbar-label">Καταλογος</span></a>
+			<a href="#order-tab" class="tab-link"><i class="fa fa-edit fa-lg"></i><span class="tabbar-label">Παραγγελια</span></a>
 		</div>
 	</div>
 
 	<div class="page-content">
 		<div class="tabs">
-			<div id="tab-1" class="tab active">
+			<div id="catalogue-tab" class="tab active">
 				<div class="content-block">
 					<div class="list-block accordion-list">
 						<ul>
@@ -56,7 +56,7 @@
 													<a href="#" class="action2 bg-orange">
 														<div href="#" class="add-comment">Σχόλια</div>
 													</a>
-													<a href="#" class="action3 bg-green add-product" data-product_record_id="<?=$product->record_id?>" data-comments="" data-quantity="" data-order_record_id="">
+													<a href="#" class="action3 bg-green add-product" data-product_record_id="<?=$product->record_id?>" data-comments="" data-quantity="1" data-order_record_id="">
 														<i class="fa fa-check fa-lg"></i>
 													</a>
 												</div>
@@ -71,7 +71,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="tab-2" class="tab">
+			<div id="order-tab" class="tab">
 				<div class="content-block">
 					
 					<div class="row current-order">
@@ -91,7 +91,7 @@
 							</div>
 						</div>
 						<div class="col-50">
-							<a href="#" class="button button-fill complete-order">72,60 <i class="fa fa-eur"></i></a>
+							<a href="#" class="button button-fill complete-order" disabled="true"> 0 <i class="fa fa-eur"></i></a>
 						</div>
 					</div>
 

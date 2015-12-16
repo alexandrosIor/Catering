@@ -42,9 +42,13 @@ class Orders extends MY_Controller {
 
 			$post = $this->input->post();
 
+
 			if (! $post['order_record_id'])
 			{
-				$post['order_record_id'] = $this->order_model->save_and_get_record_id();
+				$user = $this->view_data['logged_in_user'];
+				$order = new $this->order_model(['user_record_id' => $user->record_id]);
+				
+				$post['order_record_id'] = $order->save_and_get_record_id();
 			}
 
 			$order_product =  new $this->order_product_model($post);

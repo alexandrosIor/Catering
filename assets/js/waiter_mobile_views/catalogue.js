@@ -54,6 +54,7 @@ $('.add-product').each(function(){
 			success: function(response) {		
 				$(product).find('i').removeClass('loader').addClass('fa-check');
 				$('.products-list').data('order_record_id', response);
+				console.log(response);
 				close_swipe($('.product'));
 			},
 			error: function() {
