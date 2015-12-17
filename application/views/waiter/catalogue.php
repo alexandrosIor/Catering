@@ -10,7 +10,7 @@
 	<div class="toolbar tabbar">
 		<div class="toolbar-inner">
 			<a href="#catalogue-tab" class="tab-link active"><i class="fa fa-list fa-lg"></i><span class="tabbar-label">Καταλογος</span></a>
-			<a href="#order-tab" class="tab-link"><i class="fa fa-edit fa-lg"></i><span class="tabbar-label">Παραγγελια</span></a>
+			<a href="#order-tab" class="tab-link order-tab-link" disabled="true"><i class="fa fa-edit fa-lg"></i><span class="tabbar-label">Παραγγελια</span></a>
 		</div>
 	</div>
 
@@ -72,41 +72,8 @@
 				</div>
 			</div>
 			<div id="order-tab" class="tab">
-				<div class="content-block">
-					
-					<div class="row current-order">
-						<div class="col-50">
-							<div class="list-block">
-								<ul>
-									<li>
-										<div class="item-content">
-											<div class="item-inner">
-												<div class="item-input">
-													<input type="text" placeholder="Επιλέξτε τραπέζι" readonly id="picker-device">
-												</div>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-50">
-							<a href="#" class="button button-fill complete-order" disabled="true"> 0 <i class="fa fa-eur"></i></a>
-						</div>
-					</div>
-
-					<div class="list-block accordion-list">
-						<form>
-							<ul class="order-product">
-								
-							</ul>
-						</form>
-					</div>
-
-				</div>
+				<div class="content-block" id="order-products"></div>
 			</div>
 		</div>
 	</div>
-
-
 </div>

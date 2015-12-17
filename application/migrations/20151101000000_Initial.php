@@ -218,7 +218,15 @@ class Migration_Initial extends CI_Migration {
 			'shift_record_id' => array(
 				'type' => 'INT',
 				'null' => TRUE,
-			)
+			),
+			'start_date' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE
+			),			
+			'end_date' => array(
+				'type' => 'DATETIME',
+				'null' => TRUE
+			),
 		));
 
 		$this->dbforge->add_key('record_id',  TRUE);

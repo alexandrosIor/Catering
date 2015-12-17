@@ -13,7 +13,7 @@ class Order_model extends MY_Model
 		// Call the Model constructor
 		parent::__construct($properties);
 	}
-
+	
 }
 
 /* End of file Order_model.php */
