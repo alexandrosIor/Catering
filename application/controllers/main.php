@@ -1,5 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 class Main extends CI_Controller
 {
 
@@ -35,3 +38,4 @@ class Main extends CI_Controller
 
 /* End of file main.php */
 /* Location: ./application/controllers/main.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/

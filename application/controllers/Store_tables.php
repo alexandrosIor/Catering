@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Store_tables extends MY_Controller {
@@ -158,3 +161,4 @@ class Store_tables extends MY_Controller {
 
 /* End of file Store_tables.php */
 /* Location: ./application/controllers/Store_tables.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/

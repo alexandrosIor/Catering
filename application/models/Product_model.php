@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 class Product_model extends MY_Model
 {
 	protected $table_name = 'products';
@@ -36,3 +39,4 @@ class Product_model extends MY_Model
 
 /* End of file Product_model.php */
 /* Location: ./application/models/Product_model.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/

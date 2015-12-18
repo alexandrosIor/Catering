@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 class Shift_model extends MY_Model
 {
 	protected $table_name = 'shifts';
@@ -80,3 +83,4 @@ class Shift_model extends MY_Model
 
 /* End of file Shift_model.php */
 /* Location: ./application/models/Shift_model.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/

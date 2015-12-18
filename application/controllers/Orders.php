@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Orders extends MY_Controller {
@@ -16,7 +19,7 @@ class Orders extends MY_Controller {
 
 	/**
 	 * This method loads catalogue view to create a new order
-	 *
+	 * @param table_record_id integer
 	 * @return waiter catalogue view , with available product categories
 	 */
 	public function new_order($table_record_id = NULL)
@@ -93,7 +96,6 @@ class Orders extends MY_Controller {
 
 	/**
 	 * This method removes a product from current order
-	 *
 	 */
 	public function ajax_delete_order_product()
 	{
@@ -111,7 +113,6 @@ class Orders extends MY_Controller {
 
 	/**
 	 * This method saves the selected table in current order
-	 *
 	 */
 	public function ajax_save_order_table()
 	{
@@ -132,7 +133,6 @@ class Orders extends MY_Controller {
 
 	/**
 	 * This method updates order product quantity
-	 *
 	 */
 	public function ajax_update_order_product_quantity()
 	{
@@ -153,3 +153,4 @@ class Orders extends MY_Controller {
 
 /* End of file Orders.php */
 /* Location: ./application/controllers/Orders.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/

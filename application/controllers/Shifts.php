@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Shifts extends MY_Controller {
@@ -68,3 +71,4 @@ class Shifts extends MY_Controller {
 
 /* End of file Shifts.php */
 /* Location: ./application/controllers/Shifts.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/

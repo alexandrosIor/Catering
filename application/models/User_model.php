@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 class User_model extends MY_Model
 {
 	protected $table_name = 'users';
@@ -25,3 +28,4 @@ class User_model extends MY_Model
 
 /* End of file User_model.php */
 /* Location: ./application/models/User_model.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/

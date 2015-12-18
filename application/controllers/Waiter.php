@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Waiter extends MY_Controller {
@@ -18,3 +21,4 @@ class Waiter extends MY_Controller {
 
 /* End of file Waiter.php */
 /* Location: ./application/controllers/Waiter.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/

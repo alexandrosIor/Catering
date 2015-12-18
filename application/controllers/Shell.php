@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Shell extends CI_Controller {
@@ -46,3 +49,4 @@ class Shell extends CI_Controller {
 
 /* End of file Shell.php */
 /* Location: ./application/controllers/Shell.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/

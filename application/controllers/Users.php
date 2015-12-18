@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users extends MY_Controller {
@@ -159,3 +162,4 @@ class Users extends MY_Controller {
 
 /* End of file Users.php */
 /* Location: ./application/controllers/Users.php */
+/* Author: Alexandros Iordanidis website: alexiordanidis.com email: contact@alexiordanidis.com*/
