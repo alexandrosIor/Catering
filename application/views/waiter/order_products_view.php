@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div class="swipeout-actions-left">
-					<a href="#" class="action1 bg-gray">
+					<a href="#" class="action1 bg-gray update-product">
 						<i class="fa fa-minus"></i>
 						<div class="product-quantity"><?=$product->quantity?></div>
 						<i class="fa fa-plus"></i>

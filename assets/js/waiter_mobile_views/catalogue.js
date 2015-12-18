@@ -9,20 +9,8 @@ $$('.add-comment').each(function(){
 	});
 });
 
-/* increase product quantity event*/
-$('.fa-minus').each(function(){
-	$(this).on('touchend', function(){
-		quantity_change($(this).next(), '-');
-	})
-});
-
-/* decrease product quantity event*/
-$('.fa-plus').each(function(){
-	$(this).on('touchend', function(){
-		quantity_change($(this).prev(), '+');
-	})
-	
-});
+/* Update product quantity events */
+update_product_quantity_events();
 
 /* Append product description to popover element */
 $('.description').each(function(){
@@ -69,6 +57,9 @@ $$('#order-tab').on('show', function () {
 	/* complete order button event */
 	complete_order();
 
+	/* Update product quantity events */
+	update_product_quantity_events();
+
 });
 
 /* Add product to current order */
@@ -101,6 +92,26 @@ $('.add-product').each(function(){
 		});
 	});
 });
+
+/* Update product quantity events */
+function update_product_quantity_events()
+{
+	/* increase product quantity event*/
+	$('.fa-minus').each(function(){
+		$(this).unbind();
+		$(this).on('touchend', function(){
+			quantity_change($(this).next(), '-');
+		})
+	});
+
+	/* decrease product quantity event*/
+	$('.fa-plus').each(function(){
+		$(this).unbind();
+		$(this).on('touchend', function(){
+			quantity_change($(this).prev(), '+');
+		})
+	});
+}
 
 /* Complete order modal */
 function complete_order()
@@ -147,18 +158,41 @@ function complete_order()
 /* Product quantity change */
 function quantity_change(element, action)
 {
-	var current_val = parseInt(element.text(), 10);
+	var current_quantity = parseInt(element.text(), 10);
+	var order_product_record_id = element.parent().parent().find('.action3').data('product_record_id');
+	var order_total_price = parseFloat($('.order-total-price').text(), 10);
+	var order_product_price = parseFloat(element.parent().parent().parent().find('.product-price').text(), 10);
+
 	if (action == '+')
 	{
-		current_val++;
+		current_quantity++;
 	}
 	else
 	{
-		if (current_val > 1) current_val--;
+		current_quantity--;
 	}
 
-	element.text(current_val);
-	element.parent().siblings('.add-product').data('quantity', current_val);
+	if (element.parent().hasClass('update-product') && current_quantity > 0)
+	{
+		$.ajax({
+			type: 'POST',
+			url: '/orders/ajax_update_order_product_quantity',
+			data: {'order_product_record_id': order_product_record_id, 'quantity': current_quantity},
+			async: false,
+			success: function() {		
+				element.text(current_quantity);
+				$('.order-total-price').text(order_total_price - order_product_price);
+			},
+			error: function() {
+				alert('failure');
+			}
+		});
+	}
+	else
+	{
+		if (current_quantity > 0) element.text(current_quantity);
+		element.parent().siblings('.add-product').data('quantity', current_quantity);
+	}
 }
 
 /* Get tables list */
@@ -211,6 +245,7 @@ function delete_product(order_product)
 {	
 	var order_total_price = parseFloat($('.order-total-price').text(), 10);
 	var order_product_price = parseFloat(order_product.find('.product-price').text(), 10);
+	var order_product_quantity = parseInt(order_product.find('.product-quantity').text(), 10)
 
 	$.ajax({
 		type: 'POST',
@@ -219,7 +254,7 @@ function delete_product(order_product)
 		async: false,
 		success: function(response) {		
 			order_product.remove();
-			$('.order-total-price').text(order_total_price - order_product_price);
+			$('.order-total-price').text(order_total_price - (order_product_quantity * order_product_price));
 		},
 		error: function() {
 			alert('failure');

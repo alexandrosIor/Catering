@@ -80,7 +80,7 @@ class Orders extends MY_Controller {
 				foreach ($order_products as &$order_product)
 				{
 					$order_product->product_info();
-					$order_total_price = $order_total_price + $order_product->product_info->price;
+					$order_total_price = $order_total_price + ($order_product->product_info->price * $order_product->quantity);
 				}
 
 				$this->view_data['order_total_price'] = $order_total_price;
@@ -127,6 +127,25 @@ class Orders extends MY_Controller {
 			$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
 			$order->table_record_id = $order_table->record_id;
 			$order->save();
+		}
+	}
+
+	/**
+	 * This method updates order product quantity
+	 *
+	 */
+	public function ajax_update_order_product_quantity()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('order_product_model');
+
+			$post = $this->input->post();
+
+			$order_product = $this->order_product_model->get_record(['record_id' => $post['order_product_record_id']]);
+			$order_product->quantity = $post['quantity'];
+
+			$order_product->save();
 		}
 	}
 	
