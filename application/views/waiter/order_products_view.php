@@ -6,7 +6,7 @@
 					<div class="item-content">
 						<div class="item-inner">
 							<div class="item-input">
-								<input type="text" placeholder="Επιλέξτε τραπέζι" readonly id="table-picker">
+								<input type="text" placeholder="Επιλέξτε τραπέζι" readonly id="table-picker" value="<?=isset($table->caption) ? $table->caption : ''?>">
 							</div>
 						</div>
 					</div>
@@ -35,18 +35,22 @@
 							<a href="#" data-popover=".my-popover" class="link open-popover"><i class="fa fa-info-circle fa-lg"></i></a>
 							<span class="hidden"><?=$product->product_info->description?></span>
 						</div>
+	<?php }
+	if ($product->comments){?>
+						<div class="right comments"><i class="fa fa-comment"></i></div>
 	<?php }?>
 						<div class="right product-price"><?=$product->product_info->price?> €</div>
 					</div>
 				</div>
-				<div class="swipeout-actions-left">
-					<a href="#" class="action1 bg-gray update-product">
+				<div class="swipeout-actions-left update-product">
+					<a href="#" class="action1 bg-gray">
 						<i class="fa fa-minus"></i>
 						<div class="product-quantity"><?=$product->quantity?></div>
 						<i class="fa fa-plus"></i>
 					</a>	
 					<a href="#" class="action2 bg-orange">
 						<div href="#" class="add-comment">Σχόλια</div>
+						<span class="hidden"><?=$product->comments?></span>
 					</a>
 					<a href="#" class="action3 bg-red remove-product" data-product_record_id="<?=$product->record_id?>" data-comments="" data-quantity="1" data-order_record_id="">
 						<i class="fa fa-times fa-lg"></i>

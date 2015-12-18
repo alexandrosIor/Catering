@@ -7,7 +7,7 @@ class Order_model extends MY_Model
 {
 	protected $table_name = 'orders';
 
-	public $table_record_id;
+	public $store_table_record_id;
 	public $user_record_id;
 	public $shift_record_id;
 
@@ -15,6 +15,13 @@ class Order_model extends MY_Model
 	{
 		// Call the Model constructor
 		parent::__construct($properties);
+	}
+
+	public function store_table_info()
+	{
+		$this->load->model('store_table_model');
+
+		$this->store_table_info = $this->store_table_model->get_record(['record_id' => $this->store_table_record_id]);
 	}
 	
 }

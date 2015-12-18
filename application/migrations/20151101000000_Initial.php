@@ -211,7 +211,7 @@ class Migration_Initial extends CI_Migration {
 				'type' => 'INT',
 				'null' => TRUE,
 			),				
-			'table_record_id' => array(
+			'store_table_record_id' => array(
 				'type' => 'INT',
 				'null' => TRUE,
 			),				

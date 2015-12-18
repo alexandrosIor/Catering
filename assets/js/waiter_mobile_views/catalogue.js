@@ -1,24 +1,11 @@
-/* Add product comment modal */
-$$('.add-comment').each(function(){
-	var comments = $(this).parent().siblings('.add-product');
-
-	$(this).on('touchend', function () {
-		myApp.prompt('', 'Σχόλια', function(value){
-			$(comments).data('comments', value);
-		});
-	});
-});
+/* Add comment on product modal */
+add_comment_element_event();
 
 /* Update product quantity events */
 update_product_quantity_events();
 
-/* Append product description to popover element */
-$('.description').each(function(){
-	$(this).on('touchend', function(){
-		$('.my-popover .content-block').children().remove();
-		$('.my-popover .content-block').append($(this).find('span').clone().removeClass('hidden'));
-	});
-});
+/* Show product description in a popover */
+show_product_description_event();
 
 /* Load order products in order details tab */
 $$('#order-tab').on('show', function () {
@@ -51,14 +38,21 @@ $$('#order-tab').on('show', function () {
 
 		});
 	});
-	/* select table picker event */
+
+	/* Select table picker event */
 	select_table('#table-picker', order_record_id);
 
-	/* complete order button event */
+	/* Complete order button event */
 	complete_order();
 
 	/* Update product quantity events */
 	update_product_quantity_events();
+
+	/* Show product description in a popover */
+	show_product_description_event();
+
+	/* Add comment on product modal */
+	add_comment_element_event();
 
 });
 
@@ -93,11 +87,66 @@ $('.add-product').each(function(){
 	});
 });
 
+/* Add comment on product modal */
+function add_comment_element_event()
+{	
+	$('.add-comment').each(function(){
+		var order_product = $(this).parent().siblings('.action3');
+		var product_comments = $(this).next();
+		var order_product_record_id = $(this).parent().next().data('product_record_id');
+		var element = $(this);
+
+		/* Unbind previous event */
+		element.unbind();
+
+		element.on('touchend', function () {
+			myApp.prompt('', 'Σχόλια', function(value){
+				order_product.data('comments', value);
+
+				if (element.parent().parent().hasClass('update-product'))
+				{
+					$.ajax({
+						type: 'POST',
+						url: '/orders/ajax_update_order_product',
+						data: {'order_product_record_id': order_product_record_id, 'comments': value},
+						async: false,
+						success: function() {		
+							product_comments.text(value);
+						},
+						error: function() {
+							alert('failure');
+						}
+					});
+				}
+			});
+
+			$('.modal-text-input').val(product_comments.text());
+		});
+	});
+}
+
+/* Show product description in a popover */
+function show_product_description_event()
+{
+	/* Append product description to popover element */
+	$('.description').each(function(){
+
+		/* Unbind previous event */
+		$(this).unbind();
+		$(this).on('touchend', function(){
+			$('.my-popover .content-block').children().remove();
+			$('.my-popover .content-block').append($(this).find('span').clone().removeClass('hidden'));
+		});
+	});
+}
+
 /* Update product quantity events */
 function update_product_quantity_events()
 {
 	/* increase product quantity event*/
 	$('.fa-minus').each(function(){
+
+		/* Unbind previous event */
 		$(this).unbind();
 		$(this).on('touchend', function(){
 			quantity_change($(this).next(), '-');
@@ -106,6 +155,8 @@ function update_product_quantity_events()
 
 	/* decrease product quantity event*/
 	$('.fa-plus').each(function(){
+
+		/* Unbind previous event */
 		$(this).unbind();
 		$(this).on('touchend', function(){
 			quantity_change($(this).prev(), '+');
@@ -166,22 +217,23 @@ function quantity_change(element, action)
 	if (action == '+')
 	{
 		current_quantity++;
+		$('.order-total-price').text(order_total_price + order_product_price);
 	}
 	else
 	{
 		current_quantity--;
+		$('.order-total-price').text(order_total_price - order_product_price);
 	}
 
-	if (element.parent().hasClass('update-product') && current_quantity > 0)
+	if (element.parent().parent().hasClass('update-product') && current_quantity > 0)
 	{
 		$.ajax({
 			type: 'POST',
-			url: '/orders/ajax_update_order_product_quantity',
+			url: '/orders/ajax_update_order_product',
 			data: {'order_product_record_id': order_product_record_id, 'quantity': current_quantity},
 			async: false,
 			success: function() {		
 				element.text(current_quantity);
-				$('.order-total-price').text(order_total_price - order_product_price);
 			},
 			error: function() {
 				alert('failure');
@@ -275,6 +327,7 @@ function select_table(picker, order_record_id)
 				values: get_tables(),
 				onChange: function (){
 					order_table_caption = picker.cols[0].value;
+					/* Unbind previous event */
 					$('.close-picker').unbind();
 					$('.close-picker').on('touchend', function(){
 						save_order_table(order_table_caption, order_record_id);

@@ -72,12 +72,16 @@ class Orders extends MY_Controller {
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
 		{
 			$this->load->model('order_product_model');
+			$this->load->model('order_model');
 
 			$post = $this->input->post();
 
 			$order_total_price = 0;
 			if ($post['order_record_id'])
 			{
+				$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
+				$order->store_table_info();
+
 				$order_products = $this->order_product_model->get_records(['order_record_id' => $post['order_record_id']]);
 
 				foreach ($order_products as &$order_product)
@@ -86,6 +90,7 @@ class Orders extends MY_Controller {
 					$order_total_price = $order_total_price + ($order_product->product_info->price * $order_product->quantity);
 				}
 
+				$this->view_data['table'] = $order->store_table_info;
 				$this->view_data['order_total_price'] = $order_total_price;
 				$this->view_data['order_products'] = $order_products;
 			}
@@ -126,15 +131,15 @@ class Orders extends MY_Controller {
 			$order_table = $this->store_table_model->get_record(['caption' => $post['order_table_caption']]);
 
 			$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
-			$order->table_record_id = $order_table->record_id;
+			$order->store_table_record_id = $order_table->record_id;
 			$order->save();
 		}
 	}
 
 	/**
-	 * This method updates order product quantity
+	 * This method updates order product info
 	 */
-	public function ajax_update_order_product_quantity()
+	public function ajax_update_order_product()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
 		{
@@ -143,7 +148,10 @@ class Orders extends MY_Controller {
 			$post = $this->input->post();
 
 			$order_product = $this->order_product_model->get_record(['record_id' => $post['order_product_record_id']]);
-			$order_product->quantity = $post['quantity'];
+
+			unset($post['order_product_record_id']);
+
+			$order_product->set_properties($post);
 
 			$order_product->save();
 		}
