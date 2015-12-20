@@ -80,4 +80,21 @@ class MY_Controller extends CI_Controller {
 		}
 	}
 
+	public function allow_access($roles = [])
+	{
+		$allow_access = FALSE;
+		foreach ($roles as $role) 
+		{
+			if ($this->logged_in_user->role == $role)
+			{
+				$allow_access = TRUE;
+			}
+		}
+
+		if (!$allow_access)
+		{
+			redirect('/login', 'location');
+		}
+	}
+
 }

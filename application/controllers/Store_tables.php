@@ -10,6 +10,7 @@ class Store_tables extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->allow_access(['admin']);
 	}
 
 	public function index()

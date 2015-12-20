@@ -10,6 +10,7 @@ class Orders extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->allow_access(['waiter']);
 	}
 
 	public function index()

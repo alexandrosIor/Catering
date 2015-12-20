@@ -7,6 +7,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Shifts extends MY_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->allow_access(['admin']);
+	}
+	
 	public function index()
 	{
 		/* datatables plugin */
