@@ -71,7 +71,7 @@ $('.add-product').each(function(){
 
 		$.ajax({
 			type: 'POST',
-			url: '/orders/ajax_add_product_for_order',
+			url: '/waiter_new_order/ajax_add_product_for_order',
 			data: product_data,
 			async: false,
 			success: function(response) {		
@@ -107,7 +107,7 @@ function add_comment_element_event()
 				{
 					$.ajax({
 						type: 'POST',
-						url: '/orders/ajax_update_order_product',
+						url: '/waiter_new_order/ajax_update_order_product',
 						data: {'order_product_record_id': order_product_record_id, 'comments': value},
 						async: false,
 						success: function() {		
@@ -211,7 +211,7 @@ function complete_order(order_record_id, payment_status, message)
 {
 	$.ajax({
 		type: 'POST',
-		url: '/orders/ajax_complete_order',
+		url: '/waiter_new_order/ajax_complete_order',
 		data: {'order_record_id': order_record_id, 'payment_status': payment_status},
 		async: false,
 		success: function() {
@@ -251,7 +251,7 @@ function quantity_change(element, action)
 	{
 		$.ajax({
 			type: 'POST',
-			url: '/orders/ajax_update_order_product',
+			url: '/waiter_new_order/ajax_update_order_product',
 			data: {'order_product_record_id': order_product_record_id, 'quantity': current_quantity},
 			async: false,
 			success: function() {		
@@ -275,7 +275,7 @@ function get_tables()
 	var tables;
 	$.ajax({
 		type: 'POST',
-		url: '/store_tables/ajax_get_tables_for_waiter',
+		url: '/waiter_new_order/ajax_get_tables_for_waiter',
 		async: false,
 		success: function(response) {		
 			tables = JSON.parse(response);
@@ -302,7 +302,7 @@ function order_products(order_record_id)
 {
 	$.ajax({
 		type: 'POST',
-		url: '/orders/ajax_order_products',
+		url: '/waiter_new_order/ajax_order_products',
 		data: {'order_record_id' : order_record_id},
 		async: false,
 		success: function(response) {		
@@ -323,7 +323,7 @@ function delete_product(order_product)
 
 	$.ajax({
 		type: 'POST',
-		url: '/orders/ajax_delete_order_product',
+		url: '/waiter_new_order/ajax_delete_order_product',
 		data: {'order_product_record_id' : order_product.data('order_product_record_id')},
 		async: false,
 		success: function(response) {		
@@ -365,7 +365,7 @@ function save_order_table(order_table_caption, order_record_id)
 {
 	$.ajax({
 		type: 'POST',
-		url: '/orders/ajax_save_order_table',
+		url: '/waiter_new_order/ajax_save_order_table',
 		data: {'order_table_caption' : order_table_caption, 'order_record_id' : order_record_id},
 		async: false,
 		success: function(response) {		

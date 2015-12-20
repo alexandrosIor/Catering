@@ -105,7 +105,7 @@
 							<div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
 							</div>
 						</div>
-						<a href="/orders/new_order" class="floating-button"><i class="icon icon-plus"></i></a>
+						<a href="/Waiter_new_order" class="floating-button"><i class="icon icon-plus"></i></a>
 						<div class="page-content">
 							<h2>Dashboard</h2>
 						</div>

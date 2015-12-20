@@ -5,7 +5,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Orders extends MY_Controller {
+class Waiter_new_order extends MY_Controller {
 
 	public function __construct()
 	{
@@ -13,17 +13,12 @@ class Orders extends MY_Controller {
 		$this->allow_access(['waiter']);
 	}
 
-	public function index()
-	{
-		
-	}
-
 	/**
 	 * This method loads catalogue view to create a new order
 	 * @param table_record_id integer
 	 * @return waiter catalogue view , with available product categories
 	 */
-	public function new_order($table_record_id = NULL)
+	public function index($table_record_id = NULL)
 	{
 		$this->load->model('product_category_model');
 
@@ -176,6 +171,29 @@ class Orders extends MY_Controller {
 
 			$order->save();
 		}
+	}
+
+	/**
+	 * This method fetches store tables from database
+	 *
+	 * @return an a json object containing tables captions
+	 */
+	public function ajax_get_tables_for_waiter()
+	{
+		$this->load->model('store_table_model');
+
+		$tables = $this->store_table_model->get_records();
+		$data = array();
+
+		foreach ($tables as $table)
+		{
+			array_push($data, $table->caption);
+		}
+		
+		$obj = (object) array();
+		$obj = array_values($data);
+
+		echo json_encode($obj);
 	}
 	
 }
