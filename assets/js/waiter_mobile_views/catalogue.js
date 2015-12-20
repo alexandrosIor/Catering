@@ -42,8 +42,8 @@ $$('#order-tab').on('show', function () {
 	/* Select table picker event */
 	select_table('#table-picker', order_record_id);
 
-	/* Complete order button event */
-	complete_order();
+	/* Confirm order button event */
+	confirm_order();
 
 	/* Update product quantity events */
 	update_product_quantity_events();
@@ -164,19 +164,21 @@ function update_product_quantity_events()
 	});
 }
 
-/* Complete order modal */
-function complete_order()
+/* Confirm order modal */
+function confirm_order()
 {
-	$('.complete-order').on('click', function () {
-		var complete_order_btn = $(this);
+	$('.confirm-order').on('click', function () {
+		var confirm_order_btn = $(this);
+		var order_record_id = $('.products-list').data('order_record_id');
+
 		myApp.modal({
 			title:  'Εξόφληση',
-			text: '<div>Σύνολο: <span class="total-cost">' + complete_order_btn.text() + '<i class="fa fa-eur"></i></span></div>',
+			text: '<div>Σύνολο: <span class="total-cost">' + confirm_order_btn.text() + '<i class="fa fa-eur"></i></span></div>',
 			buttons: [
 			{
 				text: 'αργοτερα',
 				onClick: function() {
-					custom_notification('Επιλέξατε εξόφληση αργότερα','κλεισιμο');
+					complete_order(order_record_id, 'pending', 'Επιλέξατε εξόφληση αργότερα');
 				}
 			},
 			{
@@ -192,9 +194,7 @@ function complete_order()
 						{
 							text: 'εξοφληση',
 							onClick: function() {
-								custom_notification('Η παραγγελία εξοφλήθη','κλεισιμο');
-								//εδω function η οποια θα κανει ολοκληρωση παραγγελιας ωστε αυτην να εμφανιζεται στο καταστημα
-								complete_order_btn.attr('disabled', true);
+								complete_order(order_record_id, 'paid', 'Η παραγγελία εξοφλήθη');
 							}
 						},
 						]
@@ -203,6 +203,28 @@ function complete_order()
 			}
 			]
 		})
+	});
+}
+
+/* Complete order */
+function complete_order(order_record_id, payment_status, message)
+{
+	$.ajax({
+		type: 'POST',
+		url: '/orders/ajax_complete_order',
+		data: {'order_record_id': order_record_id, 'payment_status': payment_status},
+		async: false,
+		success: function() {
+			$('#order-products').children().remove();
+			$('.products-list').data('order_record_id', '');
+			$('.order-tab-link').attr('disabled', true).next('.tab-link-highlight').css('transform', 'translate3d(0%, 0px, 0px');
+			$('#catalogue-tab').addClass('active');
+			$('#order-tab').removeClass('active');
+			custom_notification(message, 'κλεισιμο');
+		},
+		error: function() {
+			alert('failure');
+		}
 	});
 }
 
@@ -347,7 +369,7 @@ function save_order_table(order_table_caption, order_record_id)
 		data: {'order_table_caption' : order_table_caption, 'order_record_id' : order_record_id},
 		async: false,
 		success: function(response) {		
-			$('.complete-order').removeAttr('disabled');
+			$('.confirm-order').removeAttr('disabled');
 		},
 		error: function() {
 			alert('failure');

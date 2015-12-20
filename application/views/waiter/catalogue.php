@@ -2,14 +2,14 @@
 <div data-page="catalogue" class="page tabbar-labels-fixed">
 	<div class="navbar">
 		<div class="navbar-inner">
-			<div class="left"><a href="index-2.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+			<div class="left"><a href="#" class="back link icon-only"><i class="icon icon-back"></i></a></div>
 			<div class="center">Νέα πραγγελία</div>
 			<div class="right"><a href="#" class="link open-panel icon-only"><i class="icon icon-bars"></i></a></div>
 		</div>
 	</div>
 	<div class="toolbar tabbar">
 		<div class="toolbar-inner">
-			<a href="#catalogue-tab" class="tab-link active"><i class="fa fa-list fa-lg"></i><span class="tabbar-label">Καταλογος</span></a>
+			<a href="#catalogue-tab" class="tab-link catalogue-tab-link active"><i class="fa fa-list fa-lg"></i><span class="tabbar-label">Καταλογος</span></a>
 			<a href="#order-tab" class="tab-link order-tab-link" disabled="true"><i class="fa fa-edit fa-lg"></i><span class="tabbar-label">Παραγγελια</span></a>
 		</div>
 	</div>

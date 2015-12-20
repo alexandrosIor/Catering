@@ -155,6 +155,26 @@ class Orders extends MY_Controller {
 
 			$order_product->save();
 		}
+	}	
+
+	/**
+	 * This method completes order by setting start date and payment status
+	 */
+	public function ajax_complete_order()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('order_model');
+
+			$post = $this->input->post();
+
+			$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
+
+			$datetime_now = new DateTime('NOW', new DateTimeZone('UTC'));
+			$order->set_properties(['start_date' => $datetime_now->format('Y-m-d H:i:s'), 'payment_status' => $post['payment_status']]);
+
+			$order->save();
+		}
 	}
 	
 }

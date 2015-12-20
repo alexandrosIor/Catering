@@ -226,6 +226,11 @@ class Migration_Initial extends CI_Migration {
 			'end_date' => array(
 				'type' => 'DATETIME',
 				'null' => TRUE
+			),			
+			'payment_status' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 255,
+				'null' => TRUE
 			),
 		));
 

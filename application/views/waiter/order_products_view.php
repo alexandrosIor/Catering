@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<div class="col-50">
-		<a href="#" class="button button-fill complete-order" disabled="true"><span class="order-total-price"><?=$order_total_price?></span> <i class="fa fa-eur"></i></a>
+		<a href="#" class="button button-fill confirm-order" disabled="true"><span class="order-total-price"><?=$order_total_price?></span> <i class="fa fa-eur"></i></a>
 	</div>
 </div>
 

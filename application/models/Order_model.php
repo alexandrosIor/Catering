@@ -10,6 +10,9 @@ class Order_model extends MY_Model
 	public $store_table_record_id;
 	public $user_record_id;
 	public $shift_record_id;
+	public $start_date;
+	public $end_date;
+	public $payment_status;
 
 	function __construct($properties = [])
 	{
