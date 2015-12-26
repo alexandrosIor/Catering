@@ -64,7 +64,7 @@ class MY_Controller extends CI_Controller {
 			{
 				$this->view_data['menu'][] = array('icon' => 'fa fa-home', 'name' => 'Dashboard', 'link' => '/store');
 				
-				$this->view_data['menu'][] = array('icon' => 'fa fa-pencil-square-o', 'name' => 'Παραγγελίες', 'link' => '#');
+				$this->view_data['menu'][] = array('icon' => 'fa fa-pencil-square-o', 'name' => 'Παραγγελίες', 'link' => '/orders');
 
 				if ($user->role == 'admin')
 				{

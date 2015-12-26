@@ -47,6 +47,6 @@
 			
 			save_user($('.user-form'));
 		}
-	});
+	});	
 
 </script>

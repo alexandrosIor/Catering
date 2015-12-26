@@ -12,16 +12,16 @@ $(document).ready(function() {
 });
 
 /* save new user */
-function save_user(element)
+function save_user(form)
 {
 	$.ajax({
 		type: 'POST',
 		url: '/users/ajax_save_user',
 		async: false,
-		data: element.serialize(),
+		data: form.serialize(),
 		success: function(data) {		
 			$('#myModal').modal('hide');
-			element[0].reset();
+			form[0].reset();
 			location.reload();
 		},
 		error: function() {

@@ -25,6 +25,20 @@ class Order_model extends MY_Model
 		$this->load->model('store_table_model');
 
 		$this->store_table_info = $this->store_table_model->get_record(['record_id' => $this->store_table_record_id]);
+	}	
+
+	public function order_products()
+	{
+		$this->load->model('order_product_model');
+
+		$this->order_products = $this->order_product_model->get_records(['order_record_id' => $this->record_id]);
+	}	
+
+	public function user_info()
+	{
+		$this->load->model('user_model');
+
+		$this->user_info = $this->user_model->get_record(['record_id' => $this->user_record_id]);
 	}
 	
 }

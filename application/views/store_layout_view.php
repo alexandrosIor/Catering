@@ -197,6 +197,7 @@
 		<script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
 		<script src="/assets/js/modern.min.js"></script>
 		<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+		<script src="/assets/plugins/plugin-countid/countid.js"></script>
 		<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<?=$this->layout_lib->print_additional_js()?>
 

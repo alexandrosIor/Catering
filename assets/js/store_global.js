@@ -1,3 +1,7 @@
+$('#myModal').on('hidden.bs.modal', function () {
+    $(this).data('bs.modal', null);
+});
+
 /* check for empty inputs */
 function form_empty(form)
 {
