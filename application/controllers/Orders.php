@@ -13,6 +13,10 @@ class Orders extends MY_Controller {
 		$this->allow_access(['admin', 'store']);
 	}
 
+	/**
+	 * This method load the index page of orders where a the user can see all current orders
+	 *
+	 */
 	public function index()
 	{
 		$this->load->model('user_model');
@@ -21,8 +25,8 @@ class Orders extends MY_Controller {
 
 		$this->layout_lib->add_additional_js('/assets/js/views/orders.js');
 
-		$orders = $this->order_model->get_records(['end_date' => NULL]);
-		usort($orders,function($a,$b){return $a->start_date > $b->start_date;});
+		$orders = $this->order_model->get_records(['start_date IS NOT' => NULL, 'end_date' => NULL]);
+		usort($orders,function($a,$b){return $a->record_id < $b->record_id;});
 
 		$datetime_now = new DateTime('NOW', new DateTimeZone('UTC'));
 		
@@ -54,10 +58,53 @@ class Orders extends MY_Controller {
 		$this->layout_lib->load('store_layout_view', 'store/orders/orders_view', $this->view_data);
 	}
 
+	/**
+	 * This method launches a modal with all order details
+	 *
+	 */
 	public function order_modal_form($order_record_id = NULL)
 	{
+		$this->load->model('order_product_model');
+
+		$order_products = $this->order_product_model->get_all_records(['order_record_id' => $order_record_id]);
+		$order_products_categorized = [];
+		foreach ($order_products as $key => $order_product)
+		{
+			$order_product->product_info();
+			$order_products_categorized[$order_product->product_info->category_name()][] = $order_product;
+		}
+
 		$this->view_data['modal_title'] = '#' . $order_record_id;
+		$this->view_data['order_products'] = $order_products;
+		$this->view_data['order_products_categorized'] = $order_products_categorized;
+
 		$this->layout_lib->load('store/orders/order_modal_form', NULL, $this->view_data);
+	}
+
+	/**
+	 * This method changes the status of an order_product by adding and removing a deteled_at date
+	 *
+	 */
+	public function ajax_change_order_product_status()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$post = $this->input->post();
+
+			$this->load->model('order_product_model');
+
+			$order_product = $this->order_product_model->get_record(['record_id' => $post['order_product_record_id']]);
+
+			if ($order_product->deleted_at)
+			{
+				$order_product->un_delete();
+			}
+			else
+			{
+				$order_product->soft_delete();
+			}
+
+		}
 	}
 	
 }

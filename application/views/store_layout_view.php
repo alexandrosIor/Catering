@@ -3,7 +3,7 @@
 	<head>
 		
 		<!-- Title -->
-		<title>Catering | Store layout</title>
+		<title>Catering | Store name</title>
 		
 		<meta content="width=device-width, initial-scale=1" name="viewport"/>
 		<meta charset="UTF-8">
@@ -194,6 +194,7 @@
 		<script src="/assets/plugins/3d-bold-navigation/js/main.js"></script>
 		<script src="/assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
 		<script src="/assets/plugins/switchery/switchery.min.js"></script>
+		<script src="/assets/plugins/jquery.PrintArea/jquery.PrintArea.js"></script>
 		<script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
 		<script src="/assets/js/modern.min.js"></script>
 		<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
