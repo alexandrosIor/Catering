@@ -34,11 +34,6 @@
 	font-size: 120%;
 }
 
-.nav-tabs .active a{
-	background-color: #22BAA0 !important;
-	color: #fff !important;
-}
-
 .order-details>thead>tr>th {
 	padding: 5px !important;
 }

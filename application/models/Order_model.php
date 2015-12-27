@@ -31,7 +31,7 @@ class Order_model extends MY_Model
 	{
 		$this->load->model('order_product_model');
 
-		$this->order_products = $this->order_product_model->get_records(['order_record_id' => $this->record_id]);
+		$this->order_products = $this->order_product_model->get_all_records(['order_record_id' => $this->record_id]);
 	}	
 
 	public function user_info()
