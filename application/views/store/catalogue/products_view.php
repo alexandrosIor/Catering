@@ -1,7 +1,6 @@
-
 <div class="panel panel-white">
 	<div class="panel-body">
-		<a class="btn btn-success m-b-sm" href="/catalogue/product_modal_form" data-toggle="modal" data-target="#myModal">Νέο προϊόν <i class="fa fa-plus"></i></a>
+		<a class="btn btn-success btn-addon m-b-sm" href="/catalogue/product_modal_form" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>Νέο προϊόν</a>
 		<div class="table-responsive">
 			<table id="products" class="display table">
 				<thead>
