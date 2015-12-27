@@ -57,7 +57,7 @@
 							<ul class="nav navbar-nav navbar-right">
 <?php if ($logged_in_user->role == 'store'){?>								
 								<li>
-									<a href="/shifts/close_shift" class="close-shift waves-effect waves-button waves-classic">
+									<a href="/logout/close_shift" class="close-shift waves-effect waves-button waves-classic">
 										<span><i class="fa fa-history m-r-xs fa-lg"></i>Κλείσιμο βάρδιας</span>
 									</a>
 								</li>
@@ -200,6 +200,10 @@
 		<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 		<script src="/assets/plugins/plugin-countid/countid.js"></script>
 		<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Το websocket κανάλι του χρήστη -->
+		<script> var user_channel = '<?=$logged_in_user->record_id?>'</script>
+
 		<?=$this->layout_lib->print_additional_js()?>
 
 	</body>

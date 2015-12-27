@@ -8,6 +8,7 @@ class Shift_model extends MY_Model
 	protected $table_name = 'shifts';
 
 	public $user_record_id;
+	public $role;
 	public $start_date;
 	public $end_date;
 	public $turnover_delivered;
@@ -25,7 +26,7 @@ class Shift_model extends MY_Model
 		$datatime_now = new DateTime('NOW', new DateTimeZone('UTC'));
 		$this->start_date = $datatime_now->format('Y-m-d H:i:s');
 
-		return $this->insert(['user_record_id' => $this->user_record_id, 'start_date' => $this->start_date]);
+		$this->save();
 	}
 
 	public function get_current_open_shift()

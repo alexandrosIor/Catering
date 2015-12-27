@@ -52,7 +52,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="/shifts/close_shift" class="item-link item-content external">
+										<a href="/logout/close_shift" class="item-link item-content external">
 											<div class="item-inner">
 												<div class="item-title">Κλείσιμο βάρδιας</div>
 												<div class="item-after"><i class="fa fa-history fa-lg"></i></div>
@@ -124,6 +124,8 @@
 
 		<script type="text/javascript" src="/assets/plugins/framework7/dist/js/framework7.min.js"></script>
 		<script src="/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+		<!-- Το websocket κανάλι του επιλεγμένου καταστήματος -->
+		<script> var user_channel = '<?=$logged_in_user->record_id?>'</script>
 		<script type="text/javascript" src="assets/js/mobile_global.js"></script>
 
 	</body>

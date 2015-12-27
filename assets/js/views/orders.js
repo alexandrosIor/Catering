@@ -6,20 +6,9 @@ $(document).ready(function() {
 	    return this;
 	}
 
+	/* Set the timer on all orders */
 	$('.order-timer').each(function(){
-
-		var date = new Date().addSeconds(-$(this).text()) / 1000;
-
-		$(this).countid({
-			clock: true,
-			dateTime: date,
-			dateTplRemaining: "%H:%M:%S",
-			dateTplElapsed: "%H:%M:%S",
-			complete: function( el ){
-				el.animate({ 'font-size': '50px'})
-			}
-		});
-
+		set_timer($(this));
 	});
 
 })
@@ -42,9 +31,26 @@ function change_order_product_status(order_product_record_id)
 }
 
 /* Programatically change switchery status */
-function setSwitchery(switchElement, checkedBool) {
+function setSwitchery(switchElement, checkedBool)
+{
 	if((checkedBool && !switchElement.isChecked()) || (!checkedBool && switchElement.isChecked())) {
 		switchElement.setPosition(true);
 		//switchElement.handleOnchange(true);
 	}
+}
+
+/* Set the timer at order panels */
+function set_timer(timer)
+{
+	var date = new Date().addSeconds(-$(timer).text()) / 1000;
+
+	$(timer).countid({
+		clock: true,
+		dateTime: date,
+		dateTplRemaining: "%H:%M:%S",
+		dateTplElapsed: "%H:%M:%S",
+		complete: function( el ){
+			
+		}
+	});
 }

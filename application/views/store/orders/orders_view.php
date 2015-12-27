@@ -10,7 +10,7 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active fade in" id="grid">
  					<div class="row">
-						<div class="sortable">
+						<div class="orders">
 <?php foreach ($orders as $order){?>
 								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 									<div class="panel panel-purple">

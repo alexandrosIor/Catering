@@ -163,6 +163,11 @@ class Migration_Initial extends CI_Migration {
 				'type' => 'INT',
 				'null' => TRUE,
 			),			
+			'role' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 255,
+				'null' => TRUE,
+			),		
 			'start_date' => array(
 				'type' => 'DATETIME',
 				'null' => TRUE,

@@ -2,8 +2,9 @@
 
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+require 'application/vendor/autoload.php';
 
-class Websocket_dashboard_application implements  MessageComponentInterface {
+class Websocket_application implements  MessageComponentInterface {
 
 	protected $clients;
 
@@ -39,5 +40,5 @@ class Websocket_dashboard_application implements  MessageComponentInterface {
 	}
 }
 
-/* End of file Websocket_dashboard_application.php */
-/* Location: ./application/libraries/Websocket_dashboard_application.php */
+/* End of file Websocket_application.php */
+/* Location: ./application/libraries/Websocket_application.php */

@@ -23,8 +23,7 @@ class Authenticate_lib {
 			{
 				$this->ci->load->model('shift_model');
 				
-				$shift = new $this->ci->shift_model;
-				$shift->user_record_id = $user->record_id;
+				$shift = new $this->ci->shift_model(['user_record_id' => $user->record_id, 'role' => $user->role]);
 
 				($user->role == 'waiter') ? $location = '/waiter' : $location = '/store';
 				

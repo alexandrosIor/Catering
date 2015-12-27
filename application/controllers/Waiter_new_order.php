@@ -160,7 +160,12 @@ class Waiter_new_order extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
 		{
-			$this->load->model('order_model');
+			$this->load->model('order_model'); 
+			$this->load->model('shift_model');
+
+			$store_shift = $this->shift_model->get_record(['role' => 'store']);
+
+			$this->load->library('websocket_messages_lib', ['user_record_id' => $store_shift->user_record_id]);
 
 			$post = $this->input->post();
 
@@ -170,6 +175,8 @@ class Waiter_new_order extends MY_Controller {
 			$order->set_properties(['start_date' => $datetime_now->format('Y-m-d H:i:s'), 'payment_status' => $post['payment_status']]);
 
 			$order->save();
+			
+			$this->websocket_messages_lib->waiter_send_new_order($order);
 		}
 	}
 

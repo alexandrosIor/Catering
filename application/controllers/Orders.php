@@ -23,6 +23,7 @@ class Orders extends MY_Controller {
 		$this->load->model('order_model');
 		$this->load->helper('my_helper');
 
+		$this->layout_lib->add_additional_js('/assets/js/socket.js');
 		$this->layout_lib->add_additional_js('/assets/js/views/orders.js');
 
 		$orders = $this->order_model->get_records(['start_date IS NOT' => NULL, 'end_date' => NULL]);
@@ -106,7 +107,42 @@ class Orders extends MY_Controller {
 
 		}
 	}
-	
+
+	/**
+	 * This creates the needed data structure for an order and then loads the data to a specific view 
+	 *
+	 */
+	public function ajax_create_new_order_panel()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('order_model');
+			$this->load->helper('my_helper');
+			
+			$post = $this->input->post();
+
+			$order = new $this->order_model($post);
+			$datetime_now = new DateTime('NOW', new DateTimeZone('UTC'));
+
+			$order->store_table_info();
+			$order->user_info();
+			$order->order_products();
+			$order->total_price = 0;
+			$order->elapsed_time = 0;
+
+			/* Calculate order total price */
+			foreach ($order->order_products as $order_product)
+			{
+				$order_product->product_info();
+				$order->total_price = $order->total_price + ($order_product->product_info->price * $order_product->quantity);
+			}
+
+			$this->view_data['order'] = $order;
+
+			$this->layout_lib->load('store/orders/order_panel_view', NULL, $this->view_data);
+		}
+	}
+
 }
 
 /* End of file Orders.php */
