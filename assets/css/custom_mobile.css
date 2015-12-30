@@ -123,6 +123,9 @@ input.modal-text-input {
     word-break: break-word;
 }
 
+#order-products .product {
+	margin-left: 0px;
+}
 /* Custom Loader START*/
 .loader {
 	margin: 60px auto;

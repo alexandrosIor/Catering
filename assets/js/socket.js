@@ -17,9 +17,9 @@ conn.onmessage = function (e) {
 				async: false,
 				data: message_container.message.message_data,
 				success: function(data) {		
-					$('div.orders').prepend(data);
-					$('.orders div:first').hide().fadeToggle(700);
-					set_timer($('div.orders .order-timer:first'));
+					$('div.orders').append(data);
+					$('.orders div:last').hide().fadeToggle(700);
+					set_timer($('div.orders .order-timer:last'));
 				},
 				error: function() {
 					alert('failure');

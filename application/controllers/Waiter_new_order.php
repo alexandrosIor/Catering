@@ -29,6 +29,7 @@ class Waiter_new_order extends MY_Controller {
 
 	/**
 	 * This method insert a product to order_products table and creates a new order
+	 * if product already exist in current order then just update the quantity
 	 *
 	 * @return order_record_id
 	 */
@@ -50,7 +51,16 @@ class Waiter_new_order extends MY_Controller {
 				$post['order_record_id'] = $order->save_and_get_record_id();
 			}
 
-			$order_product =  new $this->order_product_model($post);
+			$order_product = $this->order_product_model->get_record(['product_record_id' => $post['product_record_id'],'order_record_id' => $post['order_record_id']]);
+			
+			if ($order_product)
+			{
+				$order_product->quantity += $post['quantity'];
+			}
+			else
+			{
+				$order_product =  new $this->order_product_model($post);
+			}
 
 			$order_product->save();
 
@@ -163,9 +173,16 @@ class Waiter_new_order extends MY_Controller {
 			$this->load->model('order_model'); 
 			$this->load->model('shift_model');
 
-			$store_shift = $this->shift_model->get_record(['role' => 'store']);
+			$store_shift = $this->shift_model->get_record(['role' => 'store', 'end_date' => NULL]);
 
-			$this->load->library('websocket_messages_lib', ['user_record_id' => $store_shift->user_record_id]);
+			if ($store_shift)
+			{
+				$this->load->library('websocket_messages_lib', ['user_record_id' => $store_shift->user_record_id]);
+			}
+			else
+			{
+				$this->load->library('websocket_messages_lib', ['user_record_id' => 1]);
+			}
 
 			$post = $this->input->post();
 
@@ -175,8 +192,14 @@ class Waiter_new_order extends MY_Controller {
 			$order->set_properties(['start_date' => $datetime_now->format('Y-m-d H:i:s'), 'payment_status' => $post['payment_status']]);
 
 			$order->save();
-			
-			$this->websocket_messages_lib->waiter_send_new_order($order);
+			try
+			{
+				$this->websocket_messages_lib->waiter_send_new_order($order);
+			}
+			catch(Exception $e)
+			{
+				//TODO: προς το παρον ignore...
+			}
 		}
 	}
 

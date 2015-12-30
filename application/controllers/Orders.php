@@ -27,7 +27,7 @@ class Orders extends MY_Controller {
 		$this->layout_lib->add_additional_js('/assets/js/views/orders.js');
 
 		$orders = $this->order_model->get_records(['start_date IS NOT' => NULL, 'end_date' => NULL]);
-		usort($orders,function($a,$b){return $a->record_id < $b->record_id;});
+		usort($orders,function($a,$b){return $a->record_id > $b->record_id;});
 
 		$datetime_now = new DateTime('NOW', new DateTimeZone('UTC'));
 		
