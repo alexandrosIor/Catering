@@ -34,7 +34,6 @@ class Websocket_messages_lib {
 
 		if (!$connection) $connection = $this->instance_connection;
 		$connection->send($websocket_message->get_formated_message());
-
 	}
 
 }
