@@ -185,7 +185,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 		<!-- Javascripts -->
 		<script src="/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
 		<script src="/assets/plugins/pace-master/pace.min.js"></script>

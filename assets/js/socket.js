@@ -20,6 +20,7 @@ conn.onmessage = function (e) {
 					$('div.orders').append(data);
 					$('.orders div:last').hide().fadeToggle(700);
 					set_timer($('div.orders .order-timer:last'));
+					notification_sound();
 				},
 				error: function() {
 					alert('failure');
