@@ -18,7 +18,7 @@ class Websocket_messages_lib {
 		}
 	}
 
-	function waiter_send_new_order($data, $connection = NULL)
+	function waiter_send_new_order_to_store($data, $connection = NULL)
 	{
 		$this->ci->load->library('websocket_message_lib');
 		$websocket_message = new Websocket_message_lib(

@@ -2,8 +2,8 @@ $(document).ready(function() {
 
 	/* set timer on each order */
 	Date.prototype.addSeconds= function(h){
-	    this.setSeconds(this.getSeconds()+h);
-	    return this;
+		this.setSeconds(this.getSeconds()+h);
+		return this;
 	}
 
 	/* Set the timer on all orders */

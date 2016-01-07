@@ -1,8 +1,9 @@
+/* Empty modal content on close */
 $('#myModal').on('hidden.bs.modal', function () {
 	$(this).data('bs.modal', null);
 });
 
-/* check for empty inputs */
+/* Check for empty inputs */
 function form_empty(form)
 {
 	var error = false;
@@ -32,12 +33,13 @@ function form_empty(form)
 	return error;
 }
 
-/* check for correct email format */
+/* Check for correct email format */
 function is_valid_email(email) {
 	var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
 	return pattern.test(email);
 };
 
+/* notification sound for new orders */
 function notification_sound()
 {
 	var notification = new Audio('assets/sounds/notification.mp3');

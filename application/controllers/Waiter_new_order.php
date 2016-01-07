@@ -87,10 +87,9 @@ class Waiter_new_order extends MY_Controller {
 			{
 				$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
 				$order->store_table_info();
+				$order->order_products();
 
-				$order_products = $this->order_product_model->get_records(['order_record_id' => $post['order_record_id']]);
-
-				foreach ($order_products as &$order_product)
+				foreach ($order->order_products as &$order_product)
 				{
 					$order_product->product_info();
 					$order_total_price = $order_total_price + ($order_product->product_info->price * $order_product->quantity);
@@ -98,7 +97,7 @@ class Waiter_new_order extends MY_Controller {
 
 				$this->view_data['table'] = $order->store_table_info;
 				$this->view_data['order_total_price'] = $order_total_price;
-				$this->view_data['order_products'] = $order_products;
+				$this->view_data['order_products'] = $order->order_products;
 			}
 
 			$this->layout_lib->load('waiter/order_products_view',NULL , $this->view_data);
@@ -194,7 +193,7 @@ class Waiter_new_order extends MY_Controller {
 			$order->save();
 			try
 			{
-				$this->websocket_messages_lib->waiter_send_new_order($order);
+				$this->websocket_messages_lib->waiter_send_new_order_to_store($order);
 			}
 			catch(Exception $e)
 			{

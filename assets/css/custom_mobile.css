@@ -126,6 +126,30 @@ input.modal-text-input {
 #order-products .product {
 	margin-left: 0px;
 }
+
+.completed-product-mark {
+	padding: 0px;
+	color: #22BAA0;
+}
+
+.chip {
+	margin: 0 5px 10px 0;
+	padding: 0 10px;
+}
+
+.chip .table-caption {
+	font-size: 120%;
+	font-weight: 600;
+	color: #464545;
+}
+
+.chip .chip-label+.chip-delete {
+	margin-left: 0px;
+}
+
+.incomplete-order {
+	margin-bottom: 10px;
+}
 /* Custom Loader START*/
 .loader {
 	margin: 60px auto;

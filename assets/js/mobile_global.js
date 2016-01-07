@@ -29,3 +29,9 @@ function custom_notification(message, btn_text) {
 		}
 	});
 }
+
+function notification_sound()
+{
+	var notification = new Audio('assets/sounds/notification.mp3');
+	notification.play();
+}

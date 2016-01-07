@@ -19,7 +19,7 @@ class Orders extends MY_Controller {
 	 */
 	public function index()
 	{
-		$this->load->model('user_model');
+		//$this->load->model('user_model');
 		$this->load->model('order_model');
 		$this->load->helper('my_helper');
 

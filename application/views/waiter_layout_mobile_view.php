@@ -41,7 +41,7 @@
 												<div class="item-title">Αναζήτηση</div>
 												<div class="item-after"><i class="fa fa-search fa-lg"></i></div>
 											</div>
-								  		</a>
+										</a>
 									</li>
 									<li>
 										<a href="#" class="item-link item-content">
@@ -97,7 +97,8 @@
 
 		<div class="views">
 			<div class="view view-main">
-				<div class="pages navbar-fixed">
+
+				 <div class="pages navbar-fixed">
 					<div data-page="index" class="page">
 						<div class="navbar">
 							<div class="navbar-inner">
@@ -105,14 +106,28 @@
 							<div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
 							</div>
 						</div>
+
+						<div class="toolbar tabbar">
+							<div class="toolbar-inner">
+								<a href="#incomplete-orders" class="tab-link active"><i class="fa fa-hourglass-half fa-lg"></i><span class="tabbar-label">Προς υλοποιηση</span></a>
+								<a href="#unpayed-orders" class="tab-link "><i class="fa fa-money fa-lg"></i><span class="tabbar-label">Προς πληρωμη</span></a>
+							</div>
+						</div>
+
 						<a href="/Waiter_new_order" class="floating-button"><i class="icon icon-plus"></i></a>
-						<div class="page-content">
-							<h2>Dashboard</h2>
+						<div class="page-content"> 
+
+							<div class="tabs">
+								<div id="incomplete-orders" class="tab active"></div>
+
+								<div id="unpayed-orders" class="tab"></div>
+							</div>
+
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> 
 
 		<!-- popover modal -->
 		<div class="popover my-popover">
@@ -122,11 +137,20 @@
 			</div>
 		</div>
 
+		<!-- Popup modal -->
+		<div class="popup my-popup"></div>
+
 		<script type="text/javascript" src="/assets/plugins/framework7/dist/js/framework7.min.js"></script>
 		<script src="/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+		<script src="/assets/plugins/plugin-countid/countid.js"></script>
 		<!-- Το websocket κανάλι του επιλεγμένου καταστήματος -->
 		<script> var user_channel = '<?=$logged_in_user->record_id?>'</script>
 		<script type="text/javascript" src="assets/js/mobile_global.js"></script>
+		<?=$this->layout_lib->print_additional_js()?>
+		
+		<script>
+
+		</script>
 
 	</body>
 </html>
