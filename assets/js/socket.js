@@ -28,6 +28,15 @@ conn.onmessage = function (e) {
 			});
 		}
 	}
+
+	if (message_container.sender === 'store' && message_container.recipient === 'waiter')
+	{
+		if (message_container.message.message_type == 'store_order_update')
+		{	
+			custom_notification(message_container.message.message_data.message, '<i class="fa fa-times fa-lg"></i>');
+			notification_sound();
+		}
+	}
 }
 
 conn.onclose = function (e)

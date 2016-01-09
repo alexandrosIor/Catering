@@ -36,6 +36,24 @@ class Websocket_messages_lib {
 		$connection->send($websocket_message->get_formated_message());
 	}
 
+	function store_update_order($data, $connection = NULL)
+	{
+		$this->ci->load->library('websocket_message_lib');
+		$websocket_message = new Websocket_message_lib(
+			array(
+				'sender' => 'store',
+				'recipient' => 'waiter',
+				'message' => array(
+					'message_type' => 'store_order_update',
+					'message_data' => $data
+				)
+			)
+		);
+
+		if (!$connection) $connection = $this->instance_connection;
+		$connection->send($websocket_message->get_formated_message());
+	}
+
 }
 
 /* End of file Websocket_messages_lib.php */

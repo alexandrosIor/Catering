@@ -666,7 +666,7 @@ class Migration_Initial extends CI_Migration {
 			),			
 			array(
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
-				'name' => 'ΚΑΡΑΣΙ ΛΕΥΚΟ ΞΗΡΟ',
+				'name' => 'ΚΡΑΣΙ ΛΕΥΚΟ ΞΗΡΟ',
 				'short_description' => '50ml',
 				'description' => '',
 				'category_record_id' => '11',

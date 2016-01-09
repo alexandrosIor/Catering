@@ -2,6 +2,13 @@ body {
 	color: #34425A;
 }
 
+.color-success {
+	color: #22BAA0;
+}
+
+.color-danger {
+	color: #B30000;
+}
 .navbar, .subnavbar, .toolbar {
 	background: #34425A;
 }
@@ -150,6 +157,11 @@ input.modal-text-input {
 .incomplete-order {
 	margin-bottom: 10px;
 }
+
+.notification-item .item-title {
+	font-size: 12px;
+}
+
 /* Custom Loader START*/
 .loader {
 	margin: 60px auto;

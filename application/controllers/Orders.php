@@ -90,21 +90,30 @@ class Orders extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
 		{
+			$this->load->model('order_product_model');
+			$this->load->model('order_model');
+			
 			$post = $this->input->post();
 
-			$this->load->model('order_product_model');
-
 			$order_product = $this->order_product_model->get_record(['record_id' => $post['order_product_record_id']]);
+			$order_product->product_info();
+			$order = $this->order_model->get_record(['record_id' => $order_product->order_record_id]);
+			$order->store_table_info();
+
+			$this->load->library('websocket_messages_lib', ['user_record_id' => $order->user_record_id]);
 
 			if ($order_product->deleted_at)
 			{
 				$order_product->un_delete();
+				$order_product->message = '<i class="fa fa-times color-danger"></i> ' . $order->store_table_info->caption . ' | ' . $order_product->product_info->name;
 			}
 			else
 			{
 				$order_product->soft_delete();
+				$order_product->message = '<i class="fa fa-check color-success"></i> ' . $order->store_table_info->caption . ' | ' . $order_product->product_info->name;
 			}
 
+			$this->websocket_messages_lib->store_update_order($order_product);
 		}
 	}
 
