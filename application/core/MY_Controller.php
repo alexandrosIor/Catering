@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**

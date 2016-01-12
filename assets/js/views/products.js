@@ -71,7 +71,7 @@ function change_status(element)
 	});
 }
 
-/* permanently delete product */
+/* Permanently delete product */
 function delete_product(element)
 {
 	var product_record_id = element.parent().siblings(":first").text();

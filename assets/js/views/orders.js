@@ -11,6 +11,31 @@ $(document).ready(function() {
 		set_timer($(this));
 	});
 
+	/* Datatables initialize*/
+	var unpaid_orders_table = $('#unpaid-orders table').DataTable({
+		'responsive': true,
+		'ajax': '/orders/datatable_unpaid_orders_data',
+		'initComplete': function(settings, json) {
+
+			/* Reload datatable on tabs swap so there are always updated */
+			$("a[href='#unpaid-orders']").on('shown.bs.tab', function(){
+				unpaid_orders_table.ajax.reload();
+			});	
+		}
+	});
+
+	var completed_orders_table = $('#completed-orders table').DataTable({
+		'responsive': true,
+		'ajax': '/orders/datatable_completed_orders_data',
+		'initComplete': function(settings, json) {
+
+			/* Reload datatable on tabs swap so there are always updated */
+			$("a[href='#completed-orders']").on('shown.bs.tab', function(){
+				completed_orders_table.ajax.reload();
+			});	
+		}
+	});
+
 })
 
 /* Set order product status completed */ 

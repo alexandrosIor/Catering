@@ -40,6 +40,19 @@ class Order_model extends MY_Model
 
 		$this->user_info = $this->user_model->get_record(['record_id' => $this->user_record_id]);
 	}
+
+	public function calculate_total_cost()
+	{
+		$this->order_products();
+		$this->total_price = 0;
+		foreach ($this->order_products as $order_product)
+		{
+			$order_product->product_info();
+			$this->total_price = $this->total_price + ($order_product->product_info->price * $order_product->quantity);
+		}
+
+		return $this->total_price;
+	}
 	
 }
 

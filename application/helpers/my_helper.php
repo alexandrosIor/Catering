@@ -30,7 +30,7 @@ function seconds_to_time($seconds)
 function seconds_to_human($seconds)
 {
 	$units2 = array(
-		array('plural'=>'ευδομάδες', 'noon'=>'ευδομάδα', 'divisor'=>7*24*3600),
+		array('plural'=>'εβδομάδες', 'noon'=>'εβδομάδα', 'divisor'=>7*24*3600),
 		array('plural'=>'ημέρες', 'noon'=>'ημέρα', 'divisor'=>24*3600),
 		array('plural'=>'ώρες', 'noon'=>'ώρα', 'divisor'=>3600),
 		array('plural'=>'λεπτά', 'noon'=>'λεπτό', 'divisor'=>60),

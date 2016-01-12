@@ -3,12 +3,13 @@
 		<div role="tabpanel">
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs nav-justified" role="tablist">
-				<li role="presentation" class="active"><a href="#grid" role="tab" data-toggle="tab"><i class="fa fa-hourglass-half m-r-xs"></i>Τρέχουσες</a></li>
-				<li role="presentation"><a href="#list" role="tab" data-toggle="tab"><i class="fa fa-check m-r-xs fa-lg"></i>Ολοκληρωμένες</a></li>
+				<li role="presentation" class="active"><a href="#incomplete-orders" role="tab" data-toggle="tab"><i class="fa fa-hourglass-half m-r-xs"></i>Τρέχουσες</a></li>
+				<li role="presentation"><a href="#unpaid-orders" role="tab" data-toggle="tab"><i class="fa fa-money m-r-xs fa-lg"></i>Απλήρωτες</a></li>
+				<li role="presentation"><a href="#completed-orders" role="tab" data-toggle="tab"><i class="fa fa-check-circle-o m-r-xs fa-lg"></i>Ολοκληρωμένες</a></li>
 			</ul>
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active fade in" id="grid">
+				<div role="tabpanel" class="tab-pane active fade in" id="incomplete-orders">
  					<div class="row">
 						<div class="orders">
 <?php foreach ($orders as $order){?>
@@ -36,8 +37,67 @@
 						</div><!-- Sortable -->
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane fade" id="list">
-					<p>DataTable here</p>
+				<div role="tabpanel" class="tab-pane fade" id="unpaid-orders">
+					<div class="table-responsive">
+						<table class="display table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Τραπέζι</th>
+									<th>Σερβιτόρος</th>
+									<th>Ώρα έναρξης</th>
+									<th>Ώρα ολοκλήρωσης</th>
+									<th>Χρόνος ολοκλήρωσης</th>
+									<th>Συνολικό ποσό</th>
+									<th>Ενέργειες</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>ID</th>
+									<th>Τραπέζι</th>
+									<th>Σερβιτόρος</th>
+									<th>Ώρα έναρξης</th>
+									<th>Ώρα ολοκλήρωσης</th>
+									<th>Χρόνος ολοκλήρωσης</th>
+									<th>Συνολικό ποσό</th>
+									<th>Ενέργειες</th>
+								</tr>
+							</tfoot>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="completed-orders">
+					<div class="table-responsive">
+						<table class="display table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Τραπέζι</th>
+									<th>Σερβιτόρος</th>
+									<th>Ώρα έναρξης</th>
+									<th>Ώρα ολοκλήρωσης</th>
+									<th>Χρόνος ολοκλήρωσης</th>
+									<th>Συνολικό ποσό</th>
+									<th>Ενέργειες</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>ID</th>
+									<th>Τραπέζι</th>
+									<th>Σερβιτόρος</th>
+									<th>Ώρα έναρξης</th>
+									<th>Ώρα ολοκλήρωσης</th>
+									<th>Χρόνος ολοκλήρωσης</th>
+									<th>Συνολικό ποσό</th>
+									<th>Ενέργειες</th>
+								</tr>
+							</tfoot>
+							<tbody></tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

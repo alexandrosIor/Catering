@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @package	Catering
+ * @author	Alexandros Iordanidis
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -188,16 +191,24 @@ class MY_Model extends CI_Model {
 
 	/**
 	 * This function returns local timezone from UTC that database works *
-	 * @return string datetime formated 'Y-m-d H:i:s'
+	 *
+	 * @return string datetime formated by default as 'Y-m-d H:i:s' or as a format given by the caller
 	 */
-	public function time_zone_greece($datetime = NULL)
+	public function time_zone_greece($datetime = NULL, $format = NULL)
 	{
 		if ($datetime)
 		{
 			$local_date = new DateTime($datetime, new DateTimeZone('UTC'));
 			$local_date = $local_date->setTimezone(new DateTimeZone('Europe/Athens'));
 			
-			return  $local_date->format('Y-m-d H:i:s');		
+			if ($format)
+			{
+				return  $local_date->format($format);
+			}
+			else
+			{
+				return  $local_date->format('Y-m-d H:i:s');	
+			}	
 		}
 	}
 	

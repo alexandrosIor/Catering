@@ -23,6 +23,11 @@ class Orders extends MY_Controller {
 		$this->load->model('order_model');
 		$this->load->helper('my_helper');
 
+		/* datatables plugin */
+		$this->layout_lib->add_additional_css('/assets/plugins/datatables/css/jquery.datatables.min.css');
+		$this->layout_lib->add_additional_css('/assets/plugins/datatables/css/jquery.datatables_themeroller.css');
+		$this->layout_lib->add_additional_js('/assets/plugins/datatables/js/jquery.datatables.min.js');
+
 		$this->layout_lib->add_additional_js('/assets/js/socket.js');
 		$this->layout_lib->add_additional_js('/assets/js/views/orders.js');
 
@@ -36,14 +41,7 @@ class Orders extends MY_Controller {
 			$order->store_table_info();
 			$order->user_info();
 			$order->order_products();
-			$order->total_price = 0;
-
-			/* Calculate order total price */
-			foreach ($order->order_products as $order_product)
-			{
-				$order_product->product_info();
-				$order->total_price = $order->total_price + ($order_product->product_info->price * $order_product->quantity);
-			}
+			$order->calculate_total_cost();
 			
 			/* Calculate elapsed time from order start date */
 			$order_start_date = new DateTime($order->start_date, new DateTimeZone('UTC'));
@@ -136,21 +134,96 @@ class Orders extends MY_Controller {
 			$order->store_table_info();
 			$order->user_info();
 			$order->order_products();
-			$order->total_price = 0;
+			$order->calculate_total_cost();
 			$order->elapsed_time = 0;
-
-			/* Calculate order total price */
-			foreach ($order->order_products as $order_product)
-			{
-				$order_product->product_info();
-				$order->total_price = $order->total_price + ($order_product->product_info->price * $order_product->quantity);
-			}
 
 			$this->view_data['order'] = $order;
 
 			$this->layout_lib->load('store/orders/order_panel_view', NULL, $this->view_data);
 		}
 	}
+
+	/**
+	 * This method fetches and prepairs the unpaid orders data
+	 * The data is to be shown in datatable
+	 *
+	 * @return json encoded object of arrays
+	 */
+	public function datatable_unpaid_orders_data()
+	{
+		$this->load->model('order_model');
+		$this->load->helper('my_helper');
+
+		$data = array();
+
+		$orders = $this->order_model->get_all_records(['end_date IS NOT' => NULL, 'payment_status' => 'pending']);
+
+		foreach ($orders as $order)
+		{
+			$order->store_table_info();
+			$order->user_info();
+
+			$diff = get_seconds_diff_from_dates($order->start_date, $order->end_date);
+
+			array_push($data, [
+				0 => $order->record_id,
+				1 => $order->store_table_info->caption,
+				2 => $order->user_info->lastname . ' ' .$order->user_info->firstname,
+				3 => $order->time_zone_greece($order->start_date, 'H:i:s'),
+				4 => $order->time_zone_greece($order->end_date, 'H:i:s'),
+				5 => seconds_to_time($diff),
+				6 => $order->calculate_total_cost(),
+				7 => '<div class="btn btn-success complete-order">εξόφληση</div>',
+			]);
+		}
+
+		/* Create an object of arrays */
+		$obj = (object) array();
+		$obj->data = array_values($data);
+
+		echo json_encode($obj);
+	}
+
+	/**
+	 * This method fetches and prepairs the data for the completed orders
+	 * The data is to be shown in datatable
+	 *
+	 * @return json encoded object of arrays
+	 */
+	public function datatable_completed_orders_data()
+	{
+		$this->load->model('order_model');
+		$this->load->helper('my_helper');
+
+		$data = array();
+
+		$orders = $this->order_model->get_all_records(['end_date IS NOT' => NULL, 'payment_status' => 'paid']);
+
+		foreach ($orders as $order)
+		{
+			$order->store_table_info();
+			$order->user_info();
+
+			$diff = get_seconds_diff_from_dates($order->start_date, $order->end_date);
+
+			array_push($data, [
+				0 => $order->record_id,
+				1 => $order->store_table_info->caption,
+				2 => $order->user_info->lastname . ' ' .$order->user_info->firstname,
+				3 => $order->time_zone_greece($order->start_date, 'H:i:s'),
+				4 => $order->time_zone_greece($order->end_date, 'H:i:s'),
+				5 => seconds_to_time($diff),
+				6 => $order->calculate_total_cost(),
+				7 => '<div class="btn btn-success print-preview">επανεκτύπωση</div>',
+			]);
+		}
+
+		/* Create an object of arrays */
+		$obj = (object) array();
+		$obj->data = array_values($data);
+
+		echo json_encode($obj);
+	}	
 
 }
 
