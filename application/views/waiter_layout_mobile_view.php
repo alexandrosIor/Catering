@@ -110,7 +110,7 @@
 						<div class="toolbar tabbar">
 							<div class="toolbar-inner">
 								<a href="#incomplete-orders" class="tab-link active"><i class="fa fa-hourglass-half fa-lg"></i><span class="tabbar-label">Προς υλοποιηση</span></a>
-								<a href="#unpayed-orders" class="tab-link "><i class="fa fa-money fa-lg"></i><span class="tabbar-label">Προς πληρωμη</span></a>
+								<a href="#unpaid-orders" class="tab-link "><i class="fa fa-money fa-lg"></i><span class="tabbar-label">Προς πληρωμη</span></a>
 							</div>
 						</div>
 
@@ -119,8 +119,7 @@
 
 							<div class="tabs">
 								<div id="incomplete-orders" class="tab active"></div>
-
-								<div id="unpayed-orders" class="tab"></div>
+								<div id="unpaid-orders" class="tab"></div>
 							</div>
 
 						</div>

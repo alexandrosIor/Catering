@@ -176,10 +176,12 @@ class Waiter_new_order extends MY_Controller {
 
 			if ($store_shift)
 			{
+				/* Send the message to the open store shift */
 				$this->load->library('websocket_messages_lib', ['user_record_id' => $store_shift->user_record_id]);
 			}
 			else
 			{
+				/* If there is no open store shift then send the message on admin socket channel*/
 				$this->load->library('websocket_messages_lib', ['user_record_id' => 1]);
 			}
 

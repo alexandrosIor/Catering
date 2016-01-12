@@ -1,16 +1,15 @@
 <div class="navbar">
 	<div class="navbar-inner">
-		<div class="center my-popup-title"><i class="fa fa-th-large fa-fw"></i><?=$table->caption?></div>
+		<div class="center my-popup-title"><i class="fa fa-th-large fa-fw"></i><?=$order->store_table_info->caption?></div>
 		<div class="right"><a href="#" class="link close-popup"><i class="fa fa-times"></i></a></div>
 	</div>
 </div>
 <div class="content-block">
 	<div class="row incomplete-order">
 		<div class="col-100">
-			<a href="#" class="button button-fill confirm-order">ΕΞΟΦΛΗΣΗ <span class="order-total-price"><?=$order_total_price?></span> <i class="fa fa-eur"></i></a>
+			<a href="#" class="button button-fill confirm-order">ΕΞΟΦΛΗΣΗ <span class="order-total-price"><?=$order->total_price?></span> <i class="fa fa-eur"></i></a>
 		</div>
 	</div>
-
 	<div id="order-products">
 		<div class="list-block">
 			<ul class="products-list">

@@ -53,6 +53,22 @@ class Order_model extends MY_Model
 
 		return $this->total_price;
 	}
+
+	public function all_order_products_completed()
+	{
+		$this->order_products();
+		$served = TRUE;
+
+		foreach ($this->order_products as $order_product)
+		{
+			if (!$order_product->deleted_at)
+			{
+				$served = FALSE;
+			}
+		}
+
+		return $served;
+	}
 	
 }
 

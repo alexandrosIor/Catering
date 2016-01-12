@@ -111,6 +111,11 @@ class Orders extends MY_Controller {
 				$order_product->message = '<i class="fa fa-check color-success"></i> ' . $order->store_table_info->caption . ' | ' . $order_product->product_info->name;
 			}
 
+			if ($order->all_order_products_completed())
+			{
+				$order_product->order_completed = TRUE;
+			}
+
 			$this->websocket_messages_lib->store_update_order($order_product);
 		}
 	}

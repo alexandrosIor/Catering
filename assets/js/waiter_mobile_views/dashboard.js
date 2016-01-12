@@ -12,25 +12,53 @@ $(function(){
 /* Initialize element events */
 function init()
 {
-	load_waiter_orders($('#incomplete-orders'));
+	load_incomplete_waiter_orders($('#incomplete-orders'));
+	set_timer($('.order-timer'));
+	incomplete_order_details($('.incomplete-order'));
+
+	$('#unpaid-orders').on('show', function () {
+		load_unpaid_waiter_orders($('#unpaid-orders'));
+		set_timer($('.order-timer'));
+		incomplete_order_details($('.incomplete-order'));
+	});
 
 	$('.chip-delete').on('click', function (e) {
 		e.preventDefault();
 		var chip = $(this).parents('.chip');
-		myApp.confirm('Do you want to delete this tiny demo Chip?', function () {
+		myApp.confirm('Η παραγγελία θα αφαιρεθεί από την λίστα!', function () {
 			chip.remove();
+			order_served(chip.data('order_record_id'))
 		});
-	});
+	});	
+}
 
-	set_timer($('.order-timer'));
-
-	$('.incomplete-order').each(function(){
+/* Open a popup with order products details */
+function incomplete_order_details(incomplete_orders)
+{
+	incomplete_orders.each(function(){
 
 		var order_record_id = $(this).data('order_record_id');
 
 		$(this).children().first().on('click', function(){
 			order_products_popup(order_record_id);
 		});
+	});
+}
+
+/* Set the order as served */
+function order_served(order_record_id)
+{
+	$.ajax({
+		type: 'POST',
+		url: '/waiter/ajax_order_served',
+		data: {'order_record_id': order_record_id},
+		async: false,
+		success: function(data) {		
+			console.log('done');
+		},
+		error: function() {
+			alert('failure');
+		}
 	});
 }
 
@@ -58,13 +86,31 @@ function set_timer(timer)
 }
 
 /* Load all incomplete waiter orders */
-function load_waiter_orders(container)
+function load_incomplete_waiter_orders(container)
 {
 	$(container).children().remove();
 
 	$.ajax({
 		type: 'POST',
-		url: '/waiter/ajax_load_orders',
+		url: '/waiter/ajax_load_incomplete_orders',
+		async: false,
+		success: function(data) {		
+			$(container).append(data);
+		},
+		error: function() {
+			alert('failure');
+		}
+	});
+}
+
+/* Load all unpaid waiter orders */
+function load_unpaid_waiter_orders(container)
+{
+	$(container).children().remove();
+
+	$.ajax({
+		type: 'POST',
+		url: '/waiter/ajax_load_unpaid_orders',
 		async: false,
 		success: function(data) {		
 			$(container).append(data);

@@ -27,6 +27,11 @@ conn.onmessage = function (e) {
 				}
 			});
 		}
+
+		if (message_container.message.message_type == 'waiter_order_served')
+		{
+			$('.order-panel[data-order_record_id="' + message_container.message.message_data.record_id + '"]').parent().fadeToggle();
+		}
 	}
 
 	if (message_container.sender === 'store' && message_container.recipient === 'waiter')
@@ -34,6 +39,21 @@ conn.onmessage = function (e) {
 		if (message_container.message.message_type == 'store_order_update')
 		{	
 			custom_notification(message_container.message.message_data.message, '<i class="fa fa-times fa-lg"></i>');
+
+			order_chip = $('.incomplete-order[data-order_record_id="' + message_container.message.message_data.order_record_id + '"] .chip-delete');
+
+			if (message_container.message.message_data.order_completed)
+			{
+				order_chip.removeClass('hidden');
+			}
+			else
+			{
+				if (order_chip.hasClass('hidden') === false)
+				{
+					order_chip.addClass('hidden');
+				}
+			}
+
 			notification_sound();
 		}
 	}

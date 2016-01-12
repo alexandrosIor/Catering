@@ -1,5 +1,5 @@
 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-	<div class="panel panel-purple">
+	<div class="panel panel-purple order-panel" data-order_record_id="<?=$order->record_id?>">
 		<div class="panel-heading">
 			<h3 class="panel-title">
 				<span><i class="fa fa-th-large fa-lg m-r-xs"></i><span class="text-md"><?=$order->store_table_info->caption?></span></span>

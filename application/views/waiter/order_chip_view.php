@@ -11,7 +11,9 @@
 			<span class="table-caption"><?=$order->store_table_info->caption?></span>
 			<i class="fa fa-clock-o fa-fw"></i><span class="order-timer"><?=$order->elapsed_time?></span>
 		</div>
-		<a href="#" class="chip-delete"></a>
+<?php if(!$order->end_date){?>
+		<a href="#" class="chip-delete <?=($order->all_order_products_completed()) ? '' : 'hidden' ?>"><i class="fa fa-arrow-circle-right fa-lg"></i></a>
+<?php }?>
 	</div>
 <?php }?>
 </div>

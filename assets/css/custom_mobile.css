@@ -162,6 +162,10 @@ input.modal-text-input {
 	font-size: 12px;
 }
 
+.chip .chip-delete {
+	background-image: none;
+}
+
 /* Custom Loader START*/
 .loader {
 	margin: 60px auto;
