@@ -30,8 +30,9 @@ function custom_notification(message, btn_text) {
 	});
 }
 
-function notification_sound()
+/* notification sound for new orders */
+function notification_sound(sound)
 {
-	var notification = new Audio('assets/sounds/notification.mp3');
+	var notification = new Audio('assets/sounds/'+sound+'.mp3');
 	notification.play();
 }

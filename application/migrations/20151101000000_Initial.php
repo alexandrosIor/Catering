@@ -652,7 +652,7 @@ class Migration_Initial extends CI_Migration {
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
 				'name' => 'ΜΑΛΑΜΑΤΙΝΑ',
 				'short_description' => '500ml',
-				'description' => '',
+				'description' => 'Ρετσινα Μαλαματινα',
 				'category_record_id' => '10',
 				'price' => '3'
 			),			

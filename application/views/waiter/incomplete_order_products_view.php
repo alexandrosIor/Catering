@@ -42,7 +42,7 @@
 							<i class="fa fa-minus"></i>
 							<div class="product-quantity"><?=$product->quantity?></div>
 							<i class="fa fa-plus"></i>
-						</a>	
+						</a>    
 						<a href="#" class="action2 bg-orange">
 							<div href="#" class="add-comment">Σχόλια</div>
 							<span class="hidden"><?=$product->comments?></span>
@@ -50,6 +50,9 @@
 						<a href="#" class="action3 bg-red remove-product" data-product_record_id="<?=$product->record_id?>" data-comments="" data-quantity="1" data-order_record_id="">
 							<i class="fa fa-times fa-lg"></i>
 						</a>
+					</div>
+					<div class="swipeout-actions-right">
+						<a href="#" class="bg-green serve-product" data-product_record_id="<?=$product->record_id?>"><i class="fa fa-check fa-lg"></i></a>
 					</div>
 	<?php }?>
 				</li>

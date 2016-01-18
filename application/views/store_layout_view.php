@@ -16,11 +16,12 @@
 		<link href="/assets/plugins/waves/waves.min.css" rel="stylesheet" type="text/css"/>	
 		<link href="/assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css"/>
 			
-		<!-- Theme Styles -->
+		<!-- Theme Styles / Plugins-->
 		<link href="/assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
+		<link href="/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css"/>
 
 		<link href="/assets/css/modern.min.css" rel="stylesheet" type="text/css"/>
 		<link href="/assets/css/themes/green.css" class="theme-color" rel="stylesheet" type="text/css"/>
@@ -196,6 +197,7 @@
 		<script src="/assets/plugins/switchery/switchery.min.js"></script>
 		<script src="/assets/plugins/jquery.PrintArea/jquery.PrintArea.js"></script>
 		<script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
+		<script src="/assets/plugins/toastr/toastr.min.js"></script>
 		<script src="/assets/js/modern.min.js"></script>
 		<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 		<script src="/assets/plugins/plugin-countid/countid.js"></script>
@@ -203,6 +205,7 @@
 
 		<!-- Το websocket κανάλι του χρήστη -->
 		<script> var user_channel = '<?=$logged_in_user->record_id?>'</script>
+		<script src="/assets/js/socket.js"></script>
 
 		<?=$this->layout_lib->print_additional_js()?>
 

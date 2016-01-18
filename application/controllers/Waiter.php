@@ -87,17 +87,27 @@ class Waiter extends MY_Controller {
 			
 			foreach ($orders as $key => $order)
 			{
-				$order->store_table_info();
-				$order->user_info = $user;
-				$order->order_products();
 				$order->calculate_total_cost();
-				
-				/* Calculate elapsed time from order start date */
-				$order_start_date = new DateTime($order->start_date, new DateTimeZone('UTC'));
-				$diff = $order_start_date->diff($datetime_now);
-				$elapsed_days = $diff->format('%a');
-				$elapsed_hours = ($elapsed_days * 24) + $diff->format('%H');
-				$order->elapsed_time = time_to_seconds($diff->format($elapsed_hours . ':%I:%S'));
+				if ($order->total_price)
+				{
+					$order->store_table_info();
+					$order->user_info = $user;
+					$order->order_products();
+
+					/* Calculate elapsed time from order start date */
+					$order_start_date = new DateTime($order->start_date, new DateTimeZone('UTC'));
+					$diff = $order_start_date->diff($datetime_now);
+					$elapsed_days = $diff->format('%a');
+					$elapsed_hours = ($elapsed_days * 24) + $diff->format('%H');
+					$order->elapsed_time = time_to_seconds($diff->format($elapsed_hours . ':%I:%S'));
+				}
+				else
+				{
+					$order->payment_status = 'deleted';
+					unset($order->total_price, $order->order_products);
+					$order->save();
+					unset($orders[$key]);
+				}
 			}
 
 			$this->view_data['orders'] = $orders;
@@ -164,6 +174,62 @@ class Waiter extends MY_Controller {
 			try
 			{
 				$this->websocket_messages_lib->waiter_order_served($order);
+			}
+			catch(Exception $e)
+			{
+				//TODO: προς το παρον ignore...
+			}
+		}
+	}
+
+	/**
+	 * This method changes product status to served or unserved
+	 *
+	 */
+	public function ajax_order_product_status()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('order_product_model');
+			$this->load->model('order_model');
+			$this->load->model('shift_model');
+
+			$store_shift = $this->shift_model->get_record(['role' => 'store', 'end_date' => NULL]);
+
+			if ($store_shift)
+			{
+				/* Send the message to the open store shift */
+				$this->load->library('websocket_messages_lib', ['user_record_id' => $store_shift->user_record_id]);
+			}
+			else
+			{
+				/* If there is no open store shift then send the message on admin socket channel*/
+				$this->load->library('websocket_messages_lib', ['user_record_id' => 1]);
+			}
+
+			$post = $this->input->post();
+
+			$order_product = $this->order_product_model->get_record(['record_id' => $post['order_product_record_id']]);
+			$order_product->product_info();
+
+			if ($post['status'] == 'served')
+			{
+				$order_product->soft_delete();
+			}
+			if ($post['status'] == 'unserved')
+			{
+				$order_product->un_delete();
+			}
+
+			$order = $this->order_model->get_record(['record_id' => $order_product->order_record_id]);
+			$order->user_info();
+			$order->store_table_info();
+
+			$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . '</strong>Διόρθωση παραγγελίας</strong><br/>Προς υλοποίηση προϊόν: ' . $order_product->product_info->name . '<br/>Από: ' . $order->user_info->lastname . ' '  . $order->user_info->firstname;
+
+			try
+			{
+				$this->websocket_messages_lib->waiter_order_updated($order);
 			}
 			catch(Exception $e)
 			{

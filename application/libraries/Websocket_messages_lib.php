@@ -70,6 +70,24 @@ class Websocket_messages_lib {
 
 		if (!$connection) $connection = $this->instance_connection;
 		$connection->send($websocket_message->get_formated_message());
+	}	
+
+	function waiter_order_updated($data, $connection = NULL)
+	{
+		$this->ci->load->library('websocket_message_lib');
+		$websocket_message = new Websocket_message_lib(
+			array(
+				'sender' => 'waiter',
+				'recipient' => 'store',
+				'message' => array(
+					'message_type' => 'waiter_order_updated',
+					'message_data' => $data
+				)
+			)
+		);
+
+		if (!$connection) $connection = $this->instance_connection;
+		$connection->send($websocket_message->get_formated_message());
 	}
 
 }

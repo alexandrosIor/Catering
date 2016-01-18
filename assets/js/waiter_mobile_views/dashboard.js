@@ -2,8 +2,9 @@ $(function(){
 
 	init();
 
-	/* Load waiter orders on page back */
+	/* Load waiter orders on page back , reinitialize all events*/
 	myApp.onPageBack('catalogue', function (){
+		$('body').find('*').off();
 		init();
 	});
 
@@ -163,7 +164,7 @@ function order_product_events_init()
 				{
 					text: 'Αφαιρεση',
 					onClick: function() {
-						delete_product(order_product);
+						delete_order_product(order_product);
 					}
 				}
 				]
@@ -180,6 +181,66 @@ function order_product_events_init()
 
 	/* Add comment on product modal */
 	add_comment_element_event();
+
+	/* Set product status served */
+	serve_product_event();
+}
+
+/* Set product status served before */
+function serve_product_event()
+{
+	$('.serve-product').each(function(){
+		var product = $(this);
+		var order_product_record_id = product.data('product_record_id');
+
+		product.on('click', function(){
+			$.ajax({
+				type: 'POST',
+				url: '/waiter/ajax_order_product_status',
+				data: {'order_product_record_id' : order_product_record_id, 'status' : 'served'},
+				async: false,
+				success: function() {		
+					product.parent().parent().find('.item-title').prepend('<i class="fa fa-check completed-product-mark"></i>');
+					close_swipe(product.parent().parent());
+					product.removeClass('bg-green').addClass('bg-red');
+					product.find('i').removeClass('fa-check').addClass('fa-undo');
+
+					product.on('click', function(){
+						product.unbind();
+						unserve_product_event(product);
+					});
+				},
+				error: function() {
+					alert('failure');
+				}
+			});
+		});
+	});
+}
+
+/* Set product status as unserved , only available as undo action after setting a product served */
+function unserve_product_event(product)
+{
+	var order_product_record_id = product.data('product_record_id');
+
+	$.ajax({
+		type: 'POST',
+		url: '/waiter/ajax_order_product_status',
+		data: {'order_product_record_id' : order_product_record_id, 'status' : 'unserved'},
+		async: false,
+		success: function() {		
+			product.parent().parent().find('.fa-check').remove();
+			close_swipe(product.parent().parent());
+			product.removeClass('bg-red').addClass('bg-green');
+			product.find('i').removeClass('fa-undo').addClass('fa-check');
+
+			product.unbind();
+			serve_product_event();
+		},
+		error: function() {
+			alert('failure');
+		}
+	});
 }
 
 /* Update product quantity events */
@@ -248,8 +309,8 @@ function quantity_change(element, action)
 }
 
 /* Remove product from current order */
-function delete_product(order_product)
-{	
+function delete_order_product(order_product)
+{
 	var order_total_price = parseFloat($('.order-total-price').text(), 10);
 	var order_product_price = parseFloat(order_product.find('.product-price').text(), 10);
 	var order_product_quantity = parseInt(order_product.find('.product-quantity').text(), 10)
@@ -261,7 +322,13 @@ function delete_product(order_product)
 		async: false,
 		success: function(response) {		
 			order_product.remove();
-			$('.order-total-price').text(order_total_price - (order_product_quantity * order_product_price));
+			order_total_price = order_total_price - (order_product_quantity * order_product_price);
+			$('.order-total-price').text(order_total_price);
+
+			if (order_total_price === 0)
+			{
+				init();
+			}
 		},
 		error: function() {
 			alert('failure');
@@ -320,4 +387,12 @@ function show_product_description_event()
 			$('.my-popover .content-block').append($(this).find('span').clone().removeClass('hidden'));
 		});
 	});
+}
+
+function close_swipe(element)
+{
+	element.removeClass('swipeout-opened');
+	element.find('.swipeout-content').removeAttr('style');
+	element.find('.swipeout-action-left').removeClass('swipeout-actions-opened');
+	element.find('a').removeAttr('style');
 }

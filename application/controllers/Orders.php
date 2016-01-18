@@ -28,7 +28,6 @@ class Orders extends MY_Controller {
 		$this->layout_lib->add_additional_css('/assets/plugins/datatables/css/jquery.datatables_themeroller.css');
 		$this->layout_lib->add_additional_js('/assets/plugins/datatables/js/jquery.datatables.min.js');
 
-		$this->layout_lib->add_additional_js('/assets/js/socket.js');
 		$this->layout_lib->add_additional_js('/assets/js/views/orders.js');
 
 		$orders = $this->order_model->get_records(['start_date IS NOT' => NULL, 'end_date' => NULL]);

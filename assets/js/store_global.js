@@ -40,8 +40,31 @@ function is_valid_email(email) {
 };
 
 /* notification sound for new orders */
-function notification_sound()
+function notification_sound(sound)
 {
-	var notification = new Audio('assets/sounds/notification.mp3');
+	var notification = new Audio('assets/sounds/'+sound+'.mp3');
 	notification.play();
+}
+
+/* toastr notification messages */
+function toastr_notification(type, title, message)
+{
+	Command: toastr[type](message, title);
+
+	toastr.options = {
+  		"closeButton": true,
+  		"debug": false,
+  		"newestOnTop": true,
+  		"progressBar": false,
+  		"positionClass": "toast-top-right",
+  		"preventDuplicates": true,
+  		"showDuration": "300",
+  		"hideDuration": "0",
+  		"timeOut": "0",
+  		"extendedTimeOut": "0",
+  		"showEasing": "swing",
+  		"hideEasing": "linear",
+  		"showMethod": "fadeIn",
+  		"hideMethod": "fadeOut"
+	}
 }

@@ -112,12 +112,57 @@ class Waiter_new_order extends MY_Controller {
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
 		{
 			$this->load->model('order_product_model');
+			$this->load->model('order_model');
+			$this->load->model('shift_model');
+
+			$store_shift = $this->shift_model->get_record(['role' => 'store', 'end_date' => NULL]);
+
+			if ($store_shift)
+			{
+				/* Send the message to the open store shift */
+				$this->load->library('websocket_messages_lib', ['user_record_id' => $store_shift->user_record_id]);
+			}
+			else
+			{
+				/* If there is no open store shift then send the message on admin socket channel*/
+				$this->load->library('websocket_messages_lib', ['user_record_id' => 1]);
+			}
 
 			$post = $this->input->post();
 
-			$order_product = new $this->order_product_model(['record_id' => $post['order_product_record_id']]);
-
+			$order_product = $this->order_product_model->get_record(['record_id' => $post['order_product_record_id']]);
+			$order_product->product_info();
+			$order = $this->order_model->get_record(['record_id' => $order_product->order_record_id]);
+			$order->store_table_info();
+			$order->user_info();
+			$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Αφαιρέθηκε το προϊόν: ' . $order_product->product_info->name . '<br/> Από: ' . $order->user_info->lastname . ' ' . $order->user_info->firstname;
 			$order_product->delete();
+
+			if ($order->start_date)
+			{
+				try
+				{
+					$this->websocket_messages_lib->waiter_order_updated($order);
+
+					if ($order->all_order_products_completed())
+					{
+						$datetime_now = new DateTime('NOW', new DateTimeZone('UTC'));
+						$order->end_date = $datetime_now->format('Y-m-d H:i:s');
+						$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Η παραγγελία ολοκληρώθηκε';
+
+						$this->websocket_messages_lib->waiter_order_served($order);
+						$this->websocket_messages_lib->waiter_order_updated($order);
+
+						unset($order->message, $order->order_products, $order->store_table_info, $order->user_info);
+
+						$order->save();
+					}
+				}
+				catch(Exception $e)
+				{
+					//TODO: προς το παρον ignore...
+				}
+			}
 		}
 	}
 
@@ -149,13 +194,50 @@ class Waiter_new_order extends MY_Controller {
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
 		{
 			$this->load->model('order_product_model');
+			$this->load->model('order_model');
+			$this->load->model('shift_model');
+
+			$store_shift = $this->shift_model->get_record(['role' => 'store', 'end_date' => NULL]);
+
+			if ($store_shift)
+			{
+				/* Send the message to the open store shift */
+				$this->load->library('websocket_messages_lib', ['user_record_id' => $store_shift->user_record_id]);
+			}
+			else
+			{
+				/* If there is no open store shift then send the message on admin socket channel*/
+				$this->load->library('websocket_messages_lib', ['user_record_id' => 1]);
+			}
 
 			$post = $this->input->post();
 
 			$order_product = $this->order_product_model->get_record(['record_id' => $post['order_product_record_id']]);
+			$order = $this->order_model->get_record(['record_id' => $order_product->order_record_id]);
+			$order->store_table_info();
+			$order->user_info();
 
-			unset($post['order_product_record_id']);
+			if ($post['quantity'])
+			{
+				$order_product->product_info();
+				$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Προϊόν: ' . $order_product->product_info->name . '<br/> <strong>Ενημερώθηκε η ποσότητα</strong> <br/> Παλιά ποσότητα: ' . $order_product->quantity . '<br/> Νέα ποσότητα: ' . $post['quantity'];
+			}
+			if ($post['comments'])
+			{
+				$order_product->product_info();
+				$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Προϊόν: ' . $order_product->product_info->name . '<br/> <strong>Ενημερώθηκαν τα σχόλια: </strong> <br/>' . $post['comments'];
+			}
 
+			try
+			{
+				$this->websocket_messages_lib->waiter_order_updated($order);
+			}
+			catch(Exception $e)
+			{
+				//TODO: προς το παρον ignore...
+			}
+
+			unset($post['order_product_record_id'], $order_product->product_info);
 			$order_product->set_properties($post);
 
 			$order_product->save();
@@ -193,8 +275,12 @@ class Waiter_new_order extends MY_Controller {
 			$order->set_properties(['start_date' => $datetime_now->format('Y-m-d H:i:s'), 'payment_status' => $post['payment_status']]);
 
 			$order->save();
+
 			try
 			{
+				$order->store_table_info();
+				$order->user_info();
+				$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>Από: ' . $order->user_info->lastname . ' ' . $order->user_info->firstname;
 				$this->websocket_messages_lib->waiter_send_new_order_to_store($order);
 			}
 			catch(Exception $e)
