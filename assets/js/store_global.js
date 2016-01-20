@@ -39,14 +39,14 @@ function is_valid_email(email) {
 	return pattern.test(email);
 };
 
-/* notification sound for new orders */
+/* Notification sound for new orders */
 function notification_sound(sound)
 {
 	var notification = new Audio('assets/sounds/'+sound+'.mp3');
 	notification.play();
 }
 
-/* toastr notification messages */
+/* Toastr notification messages */
 function toastr_notification(type, title, message)
 {
 	Command: toastr[type](message, title);
@@ -68,3 +68,62 @@ function toastr_notification(type, title, message)
   		"hideMethod": "fadeOut"
 	}
 }
+
+/* Close shift alert popup */
+$('.store_close-shift').on('click', function(){
+	swal({   
+		title: "Κλείσιμο βάρδιας",   
+		text: "Εισάγετε το συνολικό ποσό του ταμείου σας:",   
+		type: "input",   
+		showCancelButton: true,   
+		closeOnConfirm: false,   
+		animation: "slide-from-top",   
+		inputPlaceholder: "Σύνολο",
+		confirmButtonText: "Καταχώρηση",   
+		cancelButtonText: "Ακύρωση",
+		}, 
+		function(inputValue){   
+			if (inputValue === false) return false;      
+			if (inputValue === "") {     
+				swal.showInputError("Παρακαλώ εισάγετε το ποσό του ταμείου σας!");     
+				return false  
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: '/logout/close_shift',
+				async: false,
+				data: {'turnover_delivered' : inputValue},
+				dataType: 'json',
+				success: function(data) {		
+					swal({   
+						title: "Η βάρδια έκλεισε!",   
+						text: 'Το ταμείο σας: ' + data.turnover_delivered + '<br/>Σύνολο ταμείου: ' + data.turnover_calculated + '<br/>Διαφορα ταμείου: ' + data.turnover_diff,   
+						type: "success",
+						html: true, 
+						showCancelButton: false,     
+						confirmButtonText: "Κλείσιμο",   
+						closeOnConfirm: false 
+						}, 
+						function(){
+							window.location = '/logout'; 
+						}
+					);
+				},
+				error: function() {
+					alert('failure');
+				}
+			});
+
+		}
+	);
+});
+
+/* Input mask to prevent from inserting invalid characters */
+$('.sweet-alert input').mask('0ZZZ.ZZ',{
+	translation: {
+		'Z': {
+			pattern: /[0-9]/, optional: true
+		}
+	}
+});

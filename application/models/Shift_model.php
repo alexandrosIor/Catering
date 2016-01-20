@@ -60,11 +60,27 @@ class Shift_model extends MY_Model
 		return $user->$property;
 	}
 
-	public function total_orders()
+	public function shift_orders()
 	{
 		$this->load->model('order_model');
 
-		return count($this->order_model->get_records(['shift_record_id' => $this->record_id]));
+		$this->orders = $this->order_model->get_records(['shift_record_id' => $this->record_id]);
+
+		return $this->orders;
+	}
+
+	public function calculate_turnover()
+	{
+		$this->load->model('order_model');
+
+		$orders = $this->order_model->get_records(['shift_record_id' => $this->record_id]);
+
+		foreach ($orders as $key => $order)
+		{
+			$this->turnover_calculated += $order->calculate_total_cost();
+		}
+
+		return $this->turnover_calculated;
 	}
 
 	public function close_shift()
@@ -72,11 +88,20 @@ class Shift_model extends MY_Model
 		$datatime_now = new DateTime('NOW', new DateTimeZone('UTC'));
 		$this->end_date = $datatime_now->format('Y-m-d H:i:s');
 
-		/*if ($this->turnover_delivered > 0)
+		if ($this->turnover_delivered > 0)
 		{
 			$this->turnover_diff = bcsub($this->turnover_delivered, $this->turnover_calculated, 2);
-		}*/
-
+		}
+		else
+		{
+			$this->turnover_diff = 0;
+		}
+		
+		if (!$this->turnover_calculated)
+		{
+			$this->turnover_calculated = 0;
+		}
+		
 		$this->save();
 	}
 

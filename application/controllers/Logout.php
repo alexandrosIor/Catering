@@ -16,19 +16,22 @@ class Logout extends MY_Controller {
 
 	public function close_shift()
 	{
-		$this->load->model('shift_model');
-		$this->load->library('authenticate_lib');
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('shift_model');
 
-		$shift = new $this->shift_model(['user_record_id' => $this->logged_in_user->record_id]);
+			$post = $this->input->post();
 
-		$shift->get_current_open_shift();
-		
-		//αφου περαστουν ολα τα απαραιτητα data θα γινει το κλεισιμο (data: turnover delivered, turnover calculated)
-		$shift->close_shift();
+			$shift = new $this->shift_model(['user_record_id' => $this->logged_in_user->record_id]);
+			$shift->get_current_open_shift();
+			$shift->calculate_turnover();
+			$shift->turnover_delivered = floatval(str_replace(',', '.', $post['turnover_delivered']));
+			$shift->close_shift();
 
-		$this->authenticate_lib->logout();
+			echo json_encode($shift);
+		}
 	}
-
+	
 }
 
 /* End of file Logout.php */

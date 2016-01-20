@@ -20,10 +20,31 @@ class Waiter extends MY_Controller {
 	public function index()
 	{
 		$this->load->model('order_model');
+		$this->load->model('shift_model');
 		$this->load->helper('my_helper');
 
 		$this->layout_lib->add_additional_js('/assets/js/socket.js');
 		$this->layout_lib->add_additional_js('/assets/js/waiter_mobile_views/dashboard.js');
+
+		$user = $this->view_data['logged_in_user'];
+
+		$shift = $this->shift_model->get_record(['user_record_id' => $user->record_id, 'end_date' => NULL]);
+		$shift->shift_orders();
+
+		$datatime_now = new DateTime('NOW', new DateTimeZone('UTC'));
+
+		$this->view_data['total_orders'] = count($shift->orders);
+		$this->view_data['unpaid_orders'] = 0;
+		$this->view_data['start_date'] = substr($shift->start_date, 11);
+		$this->view_data['time_worked'] = get_seconds_diff_from_dates($shift->start_date, $datatime_now->format('Y-m-d H:i:s'));
+
+		foreach ($shift->orders as $key => $order)
+		{
+			if ($order->payment_status == 'unpaid' OR $order->payment_status == 'pending')
+			{
+				$this->view_data['unpaid_orders']++; 
+			}
+		}
 
 		$this->load->view('waiter_layout_mobile_view', $this->view_data);
 	}
@@ -235,6 +256,42 @@ class Waiter extends MY_Controller {
 			{
 				//TODO: προς το παρον ignore...
 			}
+		}
+	}
+
+	/**
+	 * This method fetches and calculates waiters shift info
+	 *
+	 * @return json object containing shift information
+	 */
+	public function ajax_shift_info()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('order_model');
+			$this->load->model('shift_model');
+			$this->load->helper('my_helper');
+
+			$user = $this->view_data['logged_in_user'];
+
+			$shift = $this->shift_model->get_record(['user_record_id' => $user->record_id, 'end_date' => NULL]);
+			$shift->shift_orders();
+
+			$datatime_now = new DateTime('NOW', new DateTimeZone('UTC'));
+
+			$info['total_orders'] = count($shift->orders);
+			$info['unpaid_orders'] = 0;
+			$info['time_worked'] = get_seconds_diff_from_dates($shift->start_date, $datatime_now->format('Y-m-d H:i:s'));
+
+			foreach ($shift->orders as $key => $order)
+			{
+				if ($order->payment_status == 'unpaid' OR $order->payment_status == 'pending')
+				{
+					$info['unpaid_orders']++; 
+				}
+			}
+
+			echo json_encode($info);
 		}
 	}
 	

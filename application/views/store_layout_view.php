@@ -58,7 +58,7 @@
 							<ul class="nav navbar-nav navbar-right">
 <?php if ($logged_in_user->role == 'store'){?>								
 								<li>
-									<a href="/logout/close_shift" class="close-shift waves-effect waves-button waves-classic">
+									<a href="#" class="store_close-shift waves-effect waves-button waves-classic">
 										<span><i class="fa fa-history m-r-xs fa-lg"></i>Κλείσιμο βάρδιας</span>
 									</a>
 								</li>
@@ -197,6 +197,7 @@
 		<script src="/assets/plugins/switchery/switchery.min.js"></script>
 		<script src="/assets/plugins/jquery.PrintArea/jquery.PrintArea.js"></script>
 		<script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
+		<script src="/assets/plugins/jquery-maskedinput/jquery.maskedinput.js"></script>
 		<script src="/assets/plugins/toastr/toastr.min.js"></script>
 		<script src="/assets/js/modern.min.js"></script>
 		<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>

@@ -37,6 +37,7 @@ class Waiter_new_order extends MY_Controller {
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
 		{
+			$this->load->model('shift_model');
 			$this->load->model('order_model');
 			$this->load->model('order_product_model');
 
@@ -46,7 +47,8 @@ class Waiter_new_order extends MY_Controller {
 			if (! $post['order_record_id'])
 			{
 				$user = $this->view_data['logged_in_user'];
-				$order = new $this->order_model(['user_record_id' => $user->record_id]);
+				$shift = $this->shift_model->get_record(['user_record_id' => $user->record_id, 'end_date' => NULL]);
+				$order = new $this->order_model(['user_record_id' => $user->record_id, 'shift_record_id' => $shift->record_id]);
 				
 				$post['order_record_id'] = $order->save_and_get_record_id();
 			}

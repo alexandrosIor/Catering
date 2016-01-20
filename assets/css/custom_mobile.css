@@ -125,7 +125,7 @@ body {
 }
 
 input.modal-text-input {
-	height: 110px;
+	height: 80px;
     word-wrap: break-word;
     word-break: break-word;
 }

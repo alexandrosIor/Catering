@@ -30,7 +30,6 @@ class Shifts extends MY_Controller {
 
 	public function datatable_shifts_data()
 	{
-
 		$this->load->model('shift_model');
 
 		$data = array();
@@ -45,9 +44,9 @@ class Shifts extends MY_Controller {
 				2 => $shift->time_zone_greece($shift->end_date),
 				3 => $shift->user('name'),
 				4 => $shift->user('role'),
-				5 => $shift->total_orders(),
+				5 => count($shift->shift_orders()),
 				6 => $shift->turnover_delivered,
-				7 => $shift->turnover_calculated,
+				7 => $shift->calculate_turnover(),
 				8 => $shift->turnover_diff,
 				9 => '<i class="fa fa-edit fa-2x fa-fw shift-details"></i>',
 			]);
