@@ -233,20 +233,21 @@ class Waiter extends MY_Controller {
 			$order_product = $this->order_product_model->get_record(['record_id' => $post['order_product_record_id']]);
 			$order_product->product_info();
 
-			if ($post['status'] == 'served')
-			{
-				$order_product->soft_delete();
-			}
-			if ($post['status'] == 'unserved')
-			{
-				$order_product->un_delete();
-			}
-
 			$order = $this->order_model->get_record(['record_id' => $order_product->order_record_id]);
 			$order->user_info();
 			$order->store_table_info();
 
-			$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . '</strong>Διόρθωση παραγγελίας</strong><br/>Προς υλοποίηση προϊόν: ' . $order_product->product_info->name . '<br/>Από: ' . $order->user_info->lastname . ' '  . $order->user_info->firstname;
+			if ($post['status'] == 'served')
+			{
+				$order_product->soft_delete();
+				$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Σερβιρίστηκε το προϊόν: ' . $order_product->product_info->name . '<br/>Από: ' . $order->user_info->lastname . ' '  . $order->user_info->firstname;
+
+			}
+			if ($post['status'] == 'unserved')
+			{
+				$order_product->un_delete();
+				$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Προς υλοποίηση προϊόν: ' . $order_product->product_info->name . '<br/>Από: ' . $order->user_info->lastname . ' '  . $order->user_info->firstname;
+			}
 
 			try
 			{
@@ -256,6 +257,18 @@ class Waiter extends MY_Controller {
 			{
 				//TODO: προς το παρον ignore...
 			}
+
+			$order_completed = TRUE;
+			$order->order_products();
+			foreach ($order->order_products as $product)
+			{
+				if (is_null($product->deleted_at))
+				{
+					$order_completed = 2;
+				}
+			}
+			
+			echo $order_completed;
 		}
 	}
 

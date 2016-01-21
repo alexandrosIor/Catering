@@ -1,6 +1,6 @@
 <div class="content-block">
 <?php foreach ($orders as $order){?>
-	<div class="chip incomplete-order" data-order_record_id="<?=$order->record_id?>">
+	<div class="chip incomplete-order" data-order_record_id="<?=$order->record_id?>" data-order_table_caption="<?=$order->store_table_info->caption?>">
 <?php if($order->end_date){?>
 		<div class="chip-media bg-teal"><i class="fa fa-money"></i></div>
 <?php }

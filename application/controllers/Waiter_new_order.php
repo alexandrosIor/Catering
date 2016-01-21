@@ -219,26 +219,29 @@ class Waiter_new_order extends MY_Controller {
 			$order->store_table_info();
 			$order->user_info();
 
-			if ($post['quantity'])
+			if ($order->start_date)
 			{
-				$order_product->product_info();
-				$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Προϊόν: ' . $order_product->product_info->name . '<br/> <strong>Ενημερώθηκε η ποσότητα</strong> <br/> Παλιά ποσότητα: ' . $order_product->quantity . '<br/> Νέα ποσότητα: ' . $post['quantity'];
-			}
-			if ($post['comments'])
-			{
-				$order_product->product_info();
-				$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Προϊόν: ' . $order_product->product_info->name . '<br/> <strong>Ενημερώθηκαν τα σχόλια: </strong> <br/>' . $post['comments'];
-			}
+				if ($post['quantity'])
+				{
+					$order_product->product_info();
+					$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Προϊόν: ' . $order_product->product_info->name . '<br/> <strong>Ενημερώθηκε η ποσότητα</strong> <br/> Παλιά ποσότητα: ' . $order_product->quantity . '<br/> Νέα ποσότητα: ' . $post['quantity'];
+				}
+				if ($post['comments'])
+				{
+					$order_product->product_info();
+					$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>' . 'Προϊόν: ' . $order_product->product_info->name . '<br/> <strong>Ενημερώθηκαν τα σχόλια: </strong> <br/>' . $post['comments'];
+				}
 
-			try
-			{
-				$this->websocket_messages_lib->waiter_order_updated($order);
+				try
+				{
+					$this->websocket_messages_lib->waiter_order_updated($order);
+				}
+				catch(Exception $e)
+				{
+					//TODO: προς το παρον ignore...
+				}
 			}
-			catch(Exception $e)
-			{
-				//TODO: προς το παρον ignore...
-			}
-
+			
 			unset($post['order_product_record_id'], $order_product->product_info);
 			$order_product->set_properties($post);
 

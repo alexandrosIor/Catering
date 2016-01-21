@@ -192,6 +192,7 @@ function serve_product_event()
 	$('.serve-product').each(function(){
 		var product = $(this);
 		var order_product_record_id = product.data('product_record_id');
+		var table_caption = $('.my-popup-title').text();
 
 		product.on('click', function(){
 			$.ajax({
@@ -199,16 +200,21 @@ function serve_product_event()
 				url: '/waiter/ajax_order_product_status',
 				data: {'order_product_record_id' : order_product_record_id, 'status' : 'served'},
 				async: false,
-				success: function() {		
+				success: function(data) {		
 					product.parent().parent().find('.item-title').prepend('<i class="fa fa-check completed-product-mark"></i>');
 					close_swipe(product.parent().parent());
 					product.removeClass('bg-green').addClass('bg-red');
 					product.find('i').removeClass('fa-check').addClass('fa-undo');
 
+					product.unbind();
 					product.on('click', function(){
-						product.unbind();
 						unserve_product_event(product);
 					});
+
+					if (data)
+					{
+						$('.incomplete-order[data-order_table_caption="'+table_caption+'"] .chip-delete').removeClass('hidden');
+					}
 				},
 				error: function() {
 					alert('failure');
@@ -222,6 +228,7 @@ function serve_product_event()
 function unserve_product_event(product)
 {
 	var order_product_record_id = product.data('product_record_id');
+	var table_caption = $('.my-popup-title').text();
 
 	$.ajax({
 		type: 'POST',
@@ -236,6 +243,11 @@ function unserve_product_event(product)
 
 			product.unbind();
 			serve_product_event();
+
+			if (!$('.incomplete-order[data-order_table_caption="'+table_caption+'"] .chip-delete').hasClass('hidden'))
+			{
+				$('.incomplete-order[data-order_table_caption="'+table_caption+'"] .chip-delete').addClass('hidden');
+			}
 		},
 		error: function() {
 			alert('failure');
