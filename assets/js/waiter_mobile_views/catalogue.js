@@ -176,29 +176,12 @@ function confirm_order()
 			text: '<div>Σύνολο: <span class="total-cost">' + confirm_order_btn.text() + '<i class="fa fa-eur"></i></span></div>',
 			buttons: [
 			{
-				text: 'αργοτερα',
-				onClick: function() {
-					complete_order(order_record_id, 'pending', 'Επιλέξατε εξόφληση αργότερα');
-				}
+				text: 'Ακυρωση',
 			},
 			{
-				text: 'εξοφληση',
+				text: 'Ολοκληρωση',
 				onClick: function() {
-					myApp.modal({
-						title:  'Επιβεβαίωση εξόφλησης',
-						buttons: [
-						{
-							text: 'ακυρωση',
-							onClick: function() {}
-						},
-						{
-							text: 'εξοφληση',
-							onClick: function() {
-								complete_order(order_record_id, 'paid', 'Η παραγγελία εξοφλήθη');
-							}
-						},
-						]
-					})
+					complete_order(order_record_id, 'Η παραγγελία ολοκληρώθηκε');
 				}
 			}
 			]
@@ -207,12 +190,12 @@ function confirm_order()
 }
 
 /* Complete order */
-function complete_order(order_record_id, payment_status, message)
+function complete_order(order_record_id, message)
 {
 	$.ajax({
 		type: 'POST',
 		url: '/waiter_new_order/ajax_complete_order',
-		data: {'order_record_id': order_record_id, 'payment_status': payment_status},
+		data: {'order_record_id': order_record_id},
 		async: false,
 		success: function() {
 			$('#order-products').children().remove();
@@ -235,16 +218,23 @@ function quantity_change(element, action)
 	var order_product_record_id = element.parent().parent().find('.action3').data('product_record_id');
 	var order_total_price = parseFloat($('.order-total-price').text(), 10);
 	var order_product_price = parseFloat(element.parent().parent().parent().find('.product-price').text(), 10);
+	var new_price = 0;
 
 	if (action == '+')
 	{
+
 		current_quantity++;
-		$('.order-total-price').text(order_total_price + order_product_price);
+		new_price = order_total_price + order_product_price;
+		$('.order-total-price').text(new_price.toFixed(2));
 	}
 	else
 	{
-		current_quantity--;
-		$('.order-total-price').text(order_total_price - order_product_price);
+		if (current_quantity > 1)
+		{
+			current_quantity--;
+			new_price = order_total_price - order_product_price;
+			$('.order-total-price').text(new_price.toFixed(2));
+		}
 	}
 
 	if (element.parent().parent().hasClass('update-product') && current_quantity > 0)

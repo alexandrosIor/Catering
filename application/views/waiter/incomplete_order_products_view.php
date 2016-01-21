@@ -7,7 +7,14 @@
 <div class="content-block">
 	<div class="row incomplete-order">
 		<div class="col-100">
-			<a href="#" class="button button-fill confirm-order">ΕΞΟΦΛΗΣΗ <span class="order-total-price"><?=$order->total_price?></span> <i class="fa fa-eur"></i></a>
+<?php if ($order->end_date){?>
+			<a href="#" class="button button-fill order-payment <?=($order->payment_status == 'paid') ? 'disabled' : ''?>"> 
+				ΕΞΟΦΛΗΣΗ : <span class="order-total-price"><?=$order->total_price?></span> <i class="fa fa-eur"></i>
+			</a>
+<?php }else{?>
+			<span class="total-price-label">Σύνολικό ποσό:</span> 
+			<span class="order-total-price"><?=$order->total_price?></span> <i class="fa fa-eur"></i>
+<?php }?>
 		</div>
 	</div>
 	<div id="order-products">

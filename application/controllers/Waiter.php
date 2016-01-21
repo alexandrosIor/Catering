@@ -306,6 +306,23 @@ class Waiter extends MY_Controller {
 
 			echo json_encode($info);
 		}
+	}	
+
+	/**
+	 * This method updates order payment status to paid
+	 *
+	 */
+	public function ajax_order_payment()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('order_model');
+
+			$post = $this->input->post();
+
+			$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
+			$order->order_paid();
+		}
 	}
 	
 }

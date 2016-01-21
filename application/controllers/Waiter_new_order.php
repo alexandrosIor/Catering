@@ -277,8 +277,7 @@ class Waiter_new_order extends MY_Controller {
 			$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
 
 			$datetime_now = new DateTime('NOW', new DateTimeZone('UTC'));
-			$order->set_properties(['start_date' => $datetime_now->format('Y-m-d H:i:s'), 'payment_status' => $post['payment_status']]);
-
+			$order->set_properties(['start_date' => $datetime_now->format('Y-m-d H:i:s'), 'payment_status' => 'pending']);
 			$order->save();
 
 			try

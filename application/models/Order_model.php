@@ -69,6 +69,20 @@ class Order_model extends MY_Model
 
 		return $served;
 	}
+
+	public function order_paid()
+	{
+		$this->payment_status = 'paid';
+		
+		$this->save();
+	}	
+
+	public function order_unpaid()
+	{
+		$this->payment_status = 'pending';
+		
+		$this->save();
+	}
 	
 }
 

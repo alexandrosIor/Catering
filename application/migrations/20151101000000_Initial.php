@@ -233,9 +233,9 @@ class Migration_Initial extends CI_Migration {
 				'null' => TRUE
 			),			
 			'payment_status' => array(
-				'type' => 'VARCHAR',
-				'constraint' => 255,
-				'null' => TRUE
+				'type' => 'ENUM("paid","pending")',
+				'default' => 'pending',
+				'null' => TRUE,
 			),
 		));
 

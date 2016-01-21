@@ -46,6 +46,41 @@ function incomplete_order_details(incomplete_orders)
 	});
 }
 
+/* */
+function order_payment(order_record_id, total_price)
+{
+	var table_caption = $('.my-popup-title').text();
+	modal = myApp.modal({
+				title: 'Εξώφληση παραγγελίας',
+				text: 'Συνολικό ποσό: ' + total_price,
+				buttons: [
+				{
+					text: 'Ακύρωση'
+				},
+				{
+					text: 'Εξώφληση',
+					bold: true,
+					onClick: function () {
+						$.ajax({
+							type: 'POST',
+							url: '/waiter/ajax_order_payment',
+							data: {'order_record_id': order_record_id},
+							async: false,
+							success: function(data) {
+								myApp.alert('Η παραγγελία εξοφλήθη!');	
+								$('.incomplete-order[data-order_table_caption="'+table_caption+'"]').remove();
+							},
+							error: function() {
+								alert('failure');
+							}
+						});
+					}
+				},
+				]
+			});
+}
+
+
 /* Set the order as served */
 function order_served(order_record_id)
 {
@@ -55,7 +90,7 @@ function order_served(order_record_id)
 		data: {'order_record_id': order_record_id},
 		async: false,
 		success: function(data) {		
-			console.log('done');
+
 		},
 		error: function() {
 			alert('failure');
@@ -134,7 +169,10 @@ function order_products_popup(order_record_id)
 			myApp.popup($('.my-popup'));
 			$('.my-popup').children().remove();
 			$('.my-popup').append(data);
-
+			$('.order-payment').on('click', function(){
+				order_payment(order_record_id, $(this).next().text());
+				$(this).attr('disabled', true);
+			});
 			order_product_events_init();
 		},
 		error: function() {
@@ -286,16 +324,22 @@ function quantity_change(element, action)
 	var order_product_record_id = element.parent().parent().find('.action3').data('product_record_id');
 	var order_total_price = parseFloat($('.order-total-price').text(), 10);
 	var order_product_price = parseFloat(element.parent().parent().parent().find('.product-price').text(), 10);
+	var new_price = 0;
 
 	if (action == '+')
 	{
 		current_quantity++;
-		$('.order-total-price').text(order_total_price + order_product_price);
+		new_price = order_total_price + order_product_price;
+		$('.order-total-price').text(new_price.toFixed(2));
 	}
 	else
 	{
-		current_quantity--;
-		$('.order-total-price').text(order_total_price - order_product_price);
+		if (current_quantity > 1)
+		{
+			current_quantity--;
+			new_price = order_total_price - order_product_price;
+			$('.order-total-price').text(new_price.toFixed(2));
+		}
 	}
 
 	if (element.parent().parent().hasClass('update-product') && current_quantity > 0)
