@@ -72,17 +72,19 @@ function toastr_notification(type, title, message)
 /* Close shift alert popup */
 $('.store_close-shift').on('click', function(){
 	swal({   
-		title: "Κλείσιμο βάρδιας",   
-		text: "Εισάγετε το συνολικό ποσό του ταμείου σας:",   
-		type: "input",   
+		title: '<span class="close-shift-alert">Κλείσιμο βάρδιας</span>',   
+		text: 'Εισάγετε το συνολικό ποσό του ταμείου σας:',   
+		type: 'input',
+		html: true,  
 		showCancelButton: true,   
 		closeOnConfirm: false,   
-		animation: "slide-from-top",   
-		inputPlaceholder: "Σύνολο",
-		confirmButtonText: "Καταχώρηση",   
-		cancelButtonText: "Ακύρωση",
+		animation: 'slide-from-top',   
+		inputPlaceholder: 'Σύνολο',
+		confirmButtonText: 'Καταχώρηση',   
+		cancelButtonText: 'Ακύρωση',
 		}, 
-		function(inputValue){   
+		function(inputValue){ 
+
 			if (inputValue === false) return false;      
 			if (inputValue === "") {     
 				swal.showInputError("Παρακαλώ εισάγετε το ποσό του ταμείου σας!");     

@@ -69,6 +69,12 @@ conn.onmessage = function (e) {
 
 			notification_sound('notification');
 		}
+
+		if (message_container.message.message_type == 'store_notify_waiter')
+		{
+			custom_notification(message_container.message.message_data.message + ' ' + message_container.message.message_data.notification_sender, '<i class="fa fa-bell fa-lg"></i>');
+			notification_sound('notification');
+		}
 	}
 }
 
