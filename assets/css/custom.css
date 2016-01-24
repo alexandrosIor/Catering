@@ -38,7 +38,7 @@
 	padding: 5px !important;
 }
 
-.active-shifts .info-box-stats {
+.active-shifts .info-box-stats, .shift-details .info-box-stats {
 	width: 100%;
 }
 

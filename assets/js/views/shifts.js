@@ -15,8 +15,6 @@ $(document).ready(function() {
 		}
 	});
 
- 	//add_search_fields(table);
-
 });
 
 /* apply search fields on data Table */

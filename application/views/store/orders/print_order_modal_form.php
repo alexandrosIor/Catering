@@ -7,7 +7,7 @@
 		<ul class="list-unstyled">
 			<li>Σερβιτόρος: <?=$order->user_info->lastname . ' ' . $order->user_info->firstname?></li>
 			<li>Τραπέζι: <?=$order->store_table_info->caption?></li>
-			<li>Ωρα παραγγελίας: <?=substr($order->start_date, 10)?></li>
+			<li>Ωρα παραγγελίας: <?=$order->time_zone_greece($order->start_date, 'H:i:s')?></li>
 		</ul>
 		<table class="table">
 			<thead>

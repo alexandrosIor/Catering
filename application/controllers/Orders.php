@@ -176,7 +176,7 @@ class Orders extends MY_Controller {
 				3 => $order->time_zone_greece($order->start_date, 'H:i:s'),
 				4 => $order->time_zone_greece($order->end_date, 'H:i:s'),
 				5 => seconds_to_time($diff),
-				6 => $order->calculate_total_cost(),
+				6 => $order->calculate_total_cost() . ' €',
 				7 => '<a href="/orders/print_order_modal_form/' . $order->record_id . '" class="view-order btn btn-success btn-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-print fa-fw fa-lg"></i>Εκτύπωση</a>',
 			]);
 		}
@@ -254,7 +254,7 @@ class Orders extends MY_Controller {
 
 		$this->layout_lib->load('store/orders/print_order_modal_form', NULL, $this->view_data);
 	}
-	
+
 }
 
 /* End of file Orders.php */
