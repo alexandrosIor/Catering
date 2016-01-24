@@ -177,7 +177,7 @@ class Orders extends MY_Controller {
 				4 => $order->time_zone_greece($order->end_date, 'H:i:s'),
 				5 => seconds_to_time($diff),
 				6 => $order->calculate_total_cost(),
-				7 => '<div class="btn btn-success complete-order">εξόφληση</div>',
+				7 => '<a href="/orders/print_order_modal_form/' . $order->record_id . '" class="view-order btn btn-success btn-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-print fa-fw fa-lg"></i>Εκτύπωση</a>',
 			]);
 		}
 
@@ -218,7 +218,7 @@ class Orders extends MY_Controller {
 				4 => $order->time_zone_greece($order->end_date, 'H:i:s'),
 				5 => seconds_to_time($diff),
 				6 => $order->calculate_total_cost(),
-				7 => '<div class="btn btn-success print-preview">επανεκτύπωση</div>',
+				7 => '<a href="/orders/print_order_modal_form/' . $order->record_id . '" class="view-order btn btn-success btn-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-print fa-fw fa-lg"></i>Εκτύπωση</a>',
 			]);
 		}
 
@@ -229,6 +229,32 @@ class Orders extends MY_Controller {
 		echo json_encode($obj);
 	}	
 
+	/**
+	 * This method fetches an order and adds all data in a table for printing
+	 *
+	 */
+	public function print_order_modal_form($order_record_id = NULL)
+	{
+		$this->load->model('order_model');
+
+		$order = $this->order_model->get_record(['record_id' => $order_record_id]);
+
+		$order->order_products();
+		$order->store_table_info();
+		$order->user_info();
+		$order->calculate_total_cost();
+
+		foreach ($order->order_products as &$product)
+		{
+			$product->product_info();
+		}
+
+		$this->view_data['order'] = $order;
+		$this->view_data['modal_title'] = 'Εκτύπωση παραγγελίας';
+
+		$this->layout_lib->load('store/orders/print_order_modal_form', NULL, $this->view_data);
+	}
+	
 }
 
 /* End of file Orders.php */
