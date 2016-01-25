@@ -234,6 +234,7 @@ class Waiter_new_order extends MY_Controller {
 
 				try
 				{
+					$order->calculate_total_cost();
 					$this->websocket_messages_lib->waiter_order_updated($order);
 				}
 				catch(Exception $e)
@@ -276,21 +277,56 @@ class Waiter_new_order extends MY_Controller {
 
 			$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
 
-			$datetime_now = new DateTime('NOW', new DateTimeZone('UTC'));
-			$order->set_properties(['start_date' => $datetime_now->format('Y-m-d H:i:s'), 'payment_status' => 'pending']);
-			$order->save();
+			$open_order = $this->order_model->get_record(['store_table_record_id' => $order->store_table_record_id, 'payment_status' => 'pending']);
 
-			try
+			if($open_order)
 			{
-				$order->store_table_info();
-				$order->user_info();
-				$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>Από: ' . $order->user_info->lastname . ' ' . $order->user_info->firstname;
-				$this->websocket_messages_lib->waiter_send_new_order_to_store($order);
+				$order->order_products();
+
+				foreach ($order->order_products as $key => $product)
+				{
+					$product->order_record_id = $open_order->record_id;
+					$product->save();	
+				}
+
+				if ($open_order->end_date)
+				{
+					$open_order->end_date = NULL;
+				}
+				$open_order->save();
+
+				try
+				{
+					$open_order->store_table_info();
+					$open_order->user_info();
+					$open_order->calculate_total_cost();
+					$open_order->message = 'Tραπεζι: ' . $open_order->store_table_info->caption . '<br/>Προστέθηκαν προϊόντα<br/>Από: ' . $open_order->user_info->lastname . ' ' . $order->user_info->firstname;
+					$this->websocket_messages_lib->waiter_order_updated($open_order);
+				}
+				catch(Exception $e)
+				{
+					//TODO: προς το παρον ignore...
+				}
+				$order->delete();
 			}
-			catch(Exception $e)
+			else
 			{
-				//TODO: προς το παρον ignore...
-			}
+				$datetime_now = new DateTime('NOW', new DateTimeZone('UTC'));
+				$order->set_properties(['start_date' => $datetime_now->format('Y-m-d H:i:s'), 'payment_status' => 'pending']);
+				$order->save();
+
+				try
+				{
+					$order->store_table_info();
+					$order->user_info();
+					$order->message = 'Τραπέζι: ' . $order->store_table_info->caption . '<br/>Από: ' . $order->user_info->lastname . ' ' . $order->user_info->firstname;
+					$this->websocket_messages_lib->waiter_send_new_order_to_store($order);
+				}
+				catch(Exception $e)
+				{
+					//TODO: προς το παρον ignore...
+				}
+			}	
 		}
 	}
 

@@ -131,7 +131,6 @@ class Orders extends MY_Controller {
 			$this->load->helper('my_helper');
 			
 			$post = $this->input->post();
-
 			$order = new $this->order_model($post);
 			$datetime_now = new DateTime('NOW', new DateTimeZone('UTC'));
 

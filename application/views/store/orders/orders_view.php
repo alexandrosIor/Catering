@@ -27,7 +27,7 @@
 										</div>
 										<div class="panel-body order-summary">
 											<div class="waiter-name pull-left"><i class="fa fa-user fa-fw"></i><?=$order->user_info->lastname . ' ' .  $order->user_info->firstname?></div>
-											<div class="order-total-cost pull-right"><?=$order->total_price?><i class="fa fa-eur fa-fw"></i></div>
+											<div class="order-total-cost pull-right"><?=$order->total_price?> €</i></div>
 											
 										</div>
 										<a href="/orders/order_modal_form/<?=$order->record_id?>" class="view-order btn btn-success btn-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-search fa-lg fa-fw"></i>προβολή</a>

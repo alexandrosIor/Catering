@@ -27,7 +27,7 @@ conn.onmessage = function (e) {
 					console.log(err);
 				}		
 					notification_sound('notification');
-					toastr_notification('success', 'Νέα παραγγελίας', message_container.message.message_data.message);
+					toastr_notification('success', 'Νέα παραγγελία', message_container.message.message_data.message);
 				},
 				error: function() {
 					alert('failure');
@@ -38,12 +38,43 @@ conn.onmessage = function (e) {
 		if (message_container.message.message_type == 'waiter_order_served')
 		{
 			$('.order-panel[data-order_record_id="' + message_container.message.message_data.record_id + '"]').parent().fadeToggle();
+			$('.order-panel[data-order_record_id="' + message_container.message.message_data.record_id + '"]').remove();
 		}		
 
 		if (message_container.message.message_type == 'waiter_order_updated')
 		{
 			notification_sound('notification-2');
 			toastr_notification('info', 'Ενημέρωση παραγγελίας', message_container.message.message_data.message);
+
+			if( $('.order-panel[data-order_record_id="' + message_container.message.message_data.record_id + '"]').length == 0)
+			{
+				$.ajax({
+					type: 'POST',
+					url: '/orders/ajax_create_new_order_panel',
+					async: false,
+					data: message_container.message.message_data,
+					success: function(data) {
+					try 
+					{
+						$('div.orders').append(data);
+						$('.orders div:last').hide().fadeToggle(700);
+						set_timer($('div.orders .order-timer:last'));
+					}
+					catch(err) {
+						console.log(err);
+					}		
+						notification_sound('notification');
+						toastr_notification('success', 'Νέα παραγγελία', message_container.message.message_data.message);
+					},
+					error: function() {
+						alert('failure');
+					}
+				});
+			}
+			else
+			{
+				$('.order-panel[data-order_record_id="' + message_container.message.message_data.record_id + '"] .order-total-cost').html(message_container.message.message_data.total_price + ' €');
+			}
 		}
 	}
 
