@@ -13,8 +13,10 @@
 					ΕΞΟΦΛΗΣΗ : <span class="order-total-price"><?=$order->total_price?></span> <i class="fa fa-eur"></i>
 				</a>
 			</div>
-			<div class="pull-right">
-				<i class="fa fa-exchange fa-2x"></i>
+			<div class="pull-right transfer-order" data-order_record_id="<?=$order->record_id?>">
+				<a href="#" data-popover=".my-popover" class="link open-popover">
+					<i class="fa fa-exchange fa-2x"></i>
+				</a>
 			</div>
 <?php }else{?>
 			<span class="total-price-label">Σύνολικό ποσό:</span> 
