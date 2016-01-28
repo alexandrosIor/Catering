@@ -338,10 +338,18 @@ class Migration_Initial extends CI_Migration {
 			),
 			array(
 				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
-				'email' => 'waiter@catering.gr',
-				'firstname' => 'waiter',
-				'lastname' => 'waiter',
-				'password' => 'waiter',
+				'email' => 'alex@catering.gr',
+				'firstname' => 'Αλέξανδρος',
+				'lastname' => 'Ιορδανίδης',
+				'password' => 'catering',
+				'role' => 'waiter',
+			),			
+			array(
+				'insert_at' => $datatime_now->format('Y-m-d H:i:s'),
+				'email' => 'john@catering.gr',
+				'firstname' => 'John',
+				'lastname' => 'Doe',
+				'password' => 'catering',
 				'role' => 'waiter',
 			),
 			array(
