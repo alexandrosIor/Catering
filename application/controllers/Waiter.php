@@ -23,8 +23,8 @@ class Waiter extends MY_Controller {
 		$this->load->model('shift_model');
 		$this->load->helper('my_helper');
 
-		$this->layout_lib->add_additional_js('/assets/js/socket.js');
 		$this->layout_lib->add_additional_js('/assets/js/waiter_mobile_views/dashboard.js');
+		$this->layout_lib->add_additional_js('/assets/js/socket.js');
 
 		$user = $this->view_data['logged_in_user'];
 
@@ -322,6 +322,68 @@ class Waiter extends MY_Controller {
 
 			$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
 			$order->order_paid();
+		}
+	}	
+
+	/**
+	 * This method fetches all waiter with active shift
+	 * @return html content
+	 */
+	public function ajax_active_waiters()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('shift_model');
+			$this->load->model('user_model');
+
+			$logged_in_user = $this->view_data['logged_in_user'];
+			$waiter_shifts = $this->shift_model->get_records(['end_date' => NULL, 'role' => 'waiter']);
+			$waiters = array();
+
+			foreach ($waiter_shifts as $key => $shift)
+			{
+				$waiter = $this->user_model->get_record(['record_id' => $shift->user_record_id]);
+				if($waiter->record_id != $logged_in_user->record_id)
+				{
+					array_push($waiters, $waiter);
+				}
+			}
+
+			$this->view_data['active_waiters'] = $waiters;
+
+			$this->layout_lib->load('waiter/active_waiters_view', NULL, $this->view_data);
+		}
+	}	
+
+	/**
+	 * This method tranfers the given order from one waiter to another 
+	 * 
+	 */
+	public function ajax_transfer_order()
+	{
+		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
+		{
+			$this->load->model('order_model');
+
+			$post = $this->input->post();
+			$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
+			$order->user_info();
+			$waiter_old = $order->user_info->lastname . ' ' . $order->user_info->firstname;
+			unset($order->user_info);
+			$order->user_record_id = $post['user_record_id'];
+			$order->save();
+
+			$this->load->library('websocket_messages_lib', ['user_record_id' => $order->user_record_id]);
+			try
+			{
+				$order->store_table_info();
+				$order->message = 'Ο χρήστης '. $waiter_old . '<br/>σας μετέφερε την παραγγελία<br/>για το  τραπεζι: ' . $order->store_table_info->caption;
+				$this->websocket_messages_lib->waiter_transfer_order($order);
+			}
+			catch(Exception $e)
+			{
+				//TODO: προς το παρον ignore...
+			}
 		}
 	}
 	

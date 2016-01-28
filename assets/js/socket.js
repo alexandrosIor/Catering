@@ -107,11 +107,25 @@ conn.onmessage = function (e) {
 			notification_sound('notification');
 		}
 	}
+	if (message_container.sender === 'waiter' && message_container.recipient === 'waiter')
+	{
+		if (message_container.message.message_type == 'waiter_transfer_order')
+		{
+			custom_notification(message_container.message.message_data.message, '<i class="fa fa-check fa-lg"></i>');
+			load_incomplete_waiter_orders($('#incomplete-orders'));
+			$('body').find('*').off();
+			init();
+		}		
+		if (message_container.message.message_type == 'waiter_order_updated_to_waiter')
+		{
+			custom_notification(message_container.message.message_data.message, '<i class="fa fa-check fa-lg"></i>');
+		}
+	}
 }
 
 conn.onclose = function (e)
 {
-	// το εκανα comment γιατι στον firefox αν ανοιξεις socket δεν μπορεις να κανεις navigate αλου γιατι ερχετε πρωτα εδω
+	// το εκανα comment γιατι στον firefox αν ανοιξεις socket δεν μπορεις να κανεις navigate αλλου γιατι ερχετε πρωτα εδω
 	//location.reload();
 	console.log('Connection to websocket closed');
 }

@@ -222,6 +222,9 @@ function order_product_events_init()
 
 	/* Set product status served */
 	serve_product_event();
+
+	/* Get waiter with active shift */
+	active_waiter();
 }
 
 /* Set product status served before */
@@ -442,6 +445,69 @@ function show_product_description_event()
 			$('.my-popover .content-block').children().remove();
 			$('.my-popover .content-block').append($(this).find('span').clone().removeClass('hidden'));
 		});
+	});
+}
+
+/* Show product description in a popover */
+function active_waiter()
+{
+	/* Unbind previous event */
+	$('.transfer-order').unbind();
+	$('.transfer-order').on('touchend', function(){
+
+		var order_record_id = $(this).data('order_record_id');
+
+		$.ajax({
+			type: 'POST',
+			url: '/waiter/ajax_active_waiters',
+			async: false,
+			success: function(data){		
+				$('.my-popover .content-block').children().remove();
+				$('.my-popover .content-block').append(data);
+
+				$('.transfer').each(function(){
+					$(this).on('click', function(){
+						transfer_order(order_record_id, $(this).data('user_record_id'));
+					});
+				});
+			},
+			error: function() {
+				alert('failure');
+			}
+		});
+
+	});
+}
+
+/* Transfer the given order to the given waiter */
+function transfer_order(order_record_id, user_record_id)
+{
+	modal = myApp.modal({
+		title: 'Μεταφορά παραγγελίας!',
+		buttons: [
+		{
+			text: 'Ακυρωση'
+		},
+		{
+			text: 'Μεταφορα',
+			onClick: function () {
+				$.ajax({
+					type: 'POST',
+					url: '/waiter/ajax_transfer_order',
+					data: {'order_record_id' : order_record_id, 'user_record_id' : user_record_id},
+					async: false,
+					success: function(data){		
+						$('.incomplete-order[data-order_record_id="' + order_record_id + '"]').remove();
+						$('.modal-overlay').removeClass('modal-overlay-visible');
+						$('.my-popover').css('display', 'none');
+					},
+					error: function() {
+						alert('failure');
+					}
+				});
+			}
+		},
+		]
 	});
 }
 

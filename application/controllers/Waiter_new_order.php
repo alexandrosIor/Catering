@@ -297,10 +297,22 @@ class Waiter_new_order extends MY_Controller {
 
 				try
 				{
+					$waiter = $this->view_data['logged_in_user'];
 					$open_order->store_table_info();
 					$open_order->user_info();
 					$open_order->calculate_total_cost();
-					$open_order->message = 'Tραπεζι: ' . $open_order->store_table_info->caption . '<br/>Προστέθηκαν προϊόντα<br/>Από: ' . $open_order->user_info->lastname . ' ' . $order->user_info->firstname;
+					
+					if ($open_order->user_record_id != $waiter->record_id)
+					{
+						$second_websocket_channel = new Websocket_messages_lib(['user_record_id' => $open_order->user_record_id]);
+
+						$open_order->message = 'Ο χρήστης ' . $waiter->lastname . ' ' . $waiter->firstname . '<br/>πρόσθεσε προϊόντα<br/>στο τραπέζι: ' . $open_order->store_table_info->caption;
+						
+						$second_websocket_channel->waiter_order_updated_to_waiter($open_order);
+					}
+					
+					$open_order->message = 'Tραπεζι: ' . $open_order->store_table_info->caption . '<br/>Προστέθηκαν προϊόντα<br/>Από: ' . $open_order->user_info->lastname . ' ' . $open_order->user_info->firstname;
+					
 					$this->websocket_messages_lib->waiter_order_updated($open_order);
 				}
 				catch(Exception $e)
@@ -341,7 +353,7 @@ class Waiter_new_order extends MY_Controller {
 
 		$tables = $this->store_table_model->get_records();
 		$data = array();
-
+		
 		foreach ($tables as $table)
 		{
 			array_push($data, $table->caption);

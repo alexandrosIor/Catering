@@ -64,10 +64,10 @@ function waiter_close_shift()
 				afterText: '<input type="text" class="turnover-delivered modal-text-input"/>',
 				buttons: [
 				{
-					text: 'Ακύρωση'
+					text: 'Ακυρωση'
 				},
 				{
-					text: 'Καταχώρηση',
+					text: 'Καταχωρηση',
 					bold: true,
 					onClick: function () {
 						var turnover_delivered = $('.modal-text-input').val();
@@ -86,7 +86,7 @@ function waiter_close_shift()
 										text: 'Το ταμείο σας: ' + data.turnover_delivered + '</br>Σύνολο ταμείου: ' + data.turnover_calculated + ' <br/>Διαφορα ταμείου: ' + data.turnover_diff,
 										buttons: [
 										{
-											text: 'Κλείσιμο',
+											text: 'Κλεισιμο',
 											onClick: function () {
 												window.location = '/logout';
 											}
