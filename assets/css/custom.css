@@ -12,6 +12,10 @@
 	opacity: 0.5;
 }
 
+td .delete-user, td .delete-product, td .delete-product-category {
+	cursor: pointer;
+}
+
 #product {
 	width: 100%; cellspacing: 0;
 }
@@ -22,10 +26,6 @@
 
 .sweet-alert button {
 	border-radius: 0px;
-}
-
-.delete-product-category {
-	cursor: pointer;
 }
 
 .page-footer a:hover {
