@@ -49,7 +49,7 @@
 									<a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
 								</li>
 								<li>
-									<a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-diamond"></i></a>
+									<a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-plus"></i></a>
 								</li>
 								<li>		
 									<a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
@@ -137,7 +137,7 @@
 				<li data-menu="profile">
 					<a href="javsacript:void(0);">
 						<span>
-							<i class="glyphicon glyphicon-user"></i>
+							<i class="glyphicon glyphicon-plus"></i>
 						</span>
 						<p>Profile</p>
 					</a>
