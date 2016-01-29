@@ -39,7 +39,10 @@
 									</div>
 									<button type="submit" class="btn btn-success btn-block">Σύνδεση</button>
 								</form>
-								<p class="text-center m-t-xs text-sm">2015 &copy; icd.teicm.gr | Iordanidis Alexandros</p>
+								<p class="text-center m-t-xs text-sm login-links">
+									<a href="http://icd.teicm.gr">2016 &copy; icd.teicm.gr</a> | 
+									<a href="http://alexiordanidis.com">Iordanidis Alexandros</a>
+								</p>
 							</div>
 						</div>
 					</div><!-- Row -->
