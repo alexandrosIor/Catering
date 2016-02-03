@@ -68,6 +68,44 @@ td .delete-user, td .delete-product, td .delete-product-category {
 	opacity: 0.7;
 }
 
+.product {
+	padding: 10px 0 10px 0;
+}
+
+.product .description {
+	margin-left: 15px;
+}
+
+.product .quantity-container {
+	margin: 0 10px 0 10px;
+}
+
+.product .quantity{
+	width: 20px;
+	font-size: 120%;
+}
+.product .add-quantity, .product .sub-quantity{
+	padding: 10px;
+	cursor: pointer;
+}
+
+.product .add-product, .product .remove-product {
+	margin: 0 10px 0 10px;
+	width: 100px;
+}
+
+.product .add-comment {
+	margin: 0 10px 0 10px;
+}
+
+.product .btn-addon i {
+	float: right;
+}
+
+.product .btn-rounded.btn-addon.btn-sm i {
+	margin: -7px -15px -7px 0px;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
 	width: 12px;

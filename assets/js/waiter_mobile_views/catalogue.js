@@ -222,7 +222,6 @@ function quantity_change(element, action)
 
 	if (action == '+')
 	{
-
 		current_quantity++;
 		new_price = order_total_price + order_product_price;
 		$('.order-total-price').text(new_price.toFixed(2));

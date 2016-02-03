@@ -49,7 +49,7 @@
 									<a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
 								</li>
 								<li>
-									<a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="fa fa-plus"></i></a>
+									<a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger store-new-order"><i class="fa fa-plus"></i></a>
 								</li>
 								<li>		
 									<a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
@@ -122,59 +122,10 @@
 		<!--left slide page diamond-->
 		<nav class="cd-nav-container" id="cd-nav">
 			<header>
-				<h3>Navigation</h3>
-				<a href="#0" class="cd-close-nav">Close</a>
+				<h3>Νεα παραγγελια</h3>
+				<a href="#0" class="cd-close-nav">Κλείσιμο</a>
 			</header>
-			<ul class="cd-nav list-unstyled">
-				<li class="cd-selected" data-menu="index">
-					<a href="javsacript:void(0);">
-						<span>
-							<i class="glyphicon glyphicon-home"></i>
-						</span>
-						<p>Dashboard</p>
-					</a>
-				</li>
-				<li data-menu="profile">
-					<a href="javsacript:void(0);">
-						<span>
-							<i class="glyphicon glyphicon-plus"></i>
-						</span>
-						<p>Profile</p>
-					</a>
-				</li>
-				<li data-menu="inbox">
-					<a href="javsacript:void(0);">
-						<span>
-							<i class="glyphicon glyphicon-envelope"></i>
-						</span>
-						<p>Mailbox</p>
-					</a>
-				</li>
-				<li data-menu="#">
-					<a href="javsacript:void(0);">
-						<span>
-							<i class="glyphicon glyphicon-tasks"></i>
-						</span>
-						<p>Tasks</p>
-					</a>
-				</li>
-				<li data-menu="#">
-					<a href="javsacript:void(0);">
-						<span>
-							<i class="glyphicon glyphicon-cog"></i>
-						</span>
-						<p>Settings</p>
-					</a>
-				</li>
-				<li data-menu="calendar">
-					<a href="javsacript:void(0);">
-						<span>
-							<i class="glyphicon glyphicon-calendar"></i>
-						</span>
-						<p>Calendar</p>
-					</a>
-				</li>
-			</ul>
+			<div class="panel panel-white catalogue-container"></div>
 		</nav>
 		<div class="cd-overlay"></div>
 

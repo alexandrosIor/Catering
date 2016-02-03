@@ -105,6 +105,12 @@ conn.onmessage = function (e) {
 		{
 			custom_notification(message_container.message.message_data.message + ' ' + message_container.message.message_data.notification_sender, '<i class="fa fa-bell fa-lg"></i>');
 			notification_sound('notification');
+			if (message_container.message.message_data.store_order == 1)
+			{
+				load_incomplete_waiter_orders($('#incomplete-orders'));
+				$('body').find('*').off();
+				init();
+			}
 		}
 	}
 	if (message_container.sender === 'waiter' && message_container.recipient === 'waiter')

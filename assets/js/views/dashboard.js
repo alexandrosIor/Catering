@@ -47,12 +47,12 @@ function notify_user(user_record_id, notification_sender)
 			async: false,
 			data: {'user_record_id' : user_record_id, 'notification_sender' : notification_sender, 'message' : message},
 			success: function(data) {		
-				console.log('sent');
+
 			},
 			error: function() {
 				alert('failure');
 			}
-		});      
+		});
 		swal('Το μήνυμα εστάλη', '', 'success');
 	});
 
