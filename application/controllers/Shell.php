@@ -23,6 +23,10 @@ class Shell extends CI_Controller {
 
 	}
 
+	/**
+	 * This method initialize the socket server
+	 *
+	 */
 	public function socket_server()
 	{
 		if (!is_cli())

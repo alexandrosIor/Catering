@@ -14,6 +14,11 @@ class Logout extends MY_Controller {
 		$this->authenticate_lib->logout();
 	}
 
+	/**
+	 * This method closes an open shift
+	 *
+	 * @return json object
+	 */
 	public function close_shift()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')

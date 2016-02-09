@@ -16,6 +16,7 @@ class Waiter extends MY_Controller {
 	/**
 	 * This method loads waiter mobile layout index page
 	 *
+	 * @return html content
 	 */
 	public function index()
 	{
@@ -52,6 +53,7 @@ class Waiter extends MY_Controller {
 	/**
 	 * This method fetches all order of a specific user
 	 *
+	 * @return html content
 	 */
 	public function ajax_load_incomplete_orders()
 	{
@@ -91,6 +93,7 @@ class Waiter extends MY_Controller {
 	/**
 	 * This method fetches all order of a specific user
 	 *
+	 * @return html content
 	 */
 	public function ajax_load_unpaid_orders()
 	{
@@ -140,6 +143,7 @@ class Waiter extends MY_Controller {
 	/**
 	 * This method fetches a specific order from database
 	 *
+	 * @return html content
 	 */
 	public function ajax_get_order()
 	{
@@ -275,7 +279,7 @@ class Waiter extends MY_Controller {
 	/**
 	 * This method fetches and calculates waiters shift info
 	 *
-	 * @return json object containing shift information
+	 * @return json object
 	 */
 	public function ajax_shift_info()
 	{
@@ -327,6 +331,7 @@ class Waiter extends MY_Controller {
 
 	/**
 	 * This method fetches all waiter with active shift
+	 *
 	 * @return html content
 	 */
 	public function ajax_active_waiters()

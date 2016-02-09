@@ -15,7 +15,7 @@ class Waiter_new_order extends MY_Controller {
 
 	/**
 	 * This method loads catalogue view to create a new order
-	 * @param table_record_id integer
+	 * @param table record id
 	 * @return waiter catalogue view , with available product categories
 	 */
 	public function index($table_record_id = NULL)
@@ -345,7 +345,7 @@ class Waiter_new_order extends MY_Controller {
 	/**
 	 * This method fetches store tables from database
 	 *
-	 * @return an a json object containing tables captions
+	 * @return json object
 	 */
 	public function ajax_get_tables_for_waiter()
 	{

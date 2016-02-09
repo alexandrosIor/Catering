@@ -28,6 +28,11 @@ class Shifts extends MY_Controller {
 		$this->layout_lib->load('store_layout_view', 'store/shifts/shifts_view', $this->view_data);
 	}
 
+	/**
+	 * This method load all shifts data to be used in a datatable
+	 *
+	 * @return json object
+	 */
 	public function datatable_shifts_data()
 	{
 		$this->load->model('shift_model');
@@ -59,6 +64,12 @@ class Shifts extends MY_Controller {
 		echo json_encode($obj);
 	}
 
+	/**
+	 * This method load details view off a shifts
+	 * 
+	 * @param shift record id
+	 * @return html content
+	 */
 	public function shift_details($shift_record_id = NULL)
 	{
 		$this->load->model('shift_model');
@@ -80,6 +91,12 @@ class Shifts extends MY_Controller {
 		$this->layout_lib->load('store_layout_view', 'store/shifts/shift_details_view', $this->view_data);
 	}
 
+	/**
+	 * This method load all detailes of a shift to be used in a datatable
+	 *
+	 * @param shift record id
+	 * @return json object
+	 */
 	public function datatable_shift_details_data($shift_record_id = NULL)
 	{
 		$this->load->model('order_model');

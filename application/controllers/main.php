@@ -3,8 +3,7 @@
  * @package	Catering
  * @author	Alexandros Iordanidis
  */
-class Main extends CI_Controller
-{
+class Main extends CI_Controller {
 
 	public function index()
 	{

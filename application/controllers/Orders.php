@@ -16,6 +16,7 @@ class Orders extends MY_Controller {
 	/**
 	 * This method load the index page of orders where a the user can see all current orders
 	 *
+	 * @return html content
 	 */
 	public function index()
 	{
@@ -59,6 +60,8 @@ class Orders extends MY_Controller {
 	/**
 	 * This method launches a modal with all order details
 	 *
+	 * @param order record id
+	 * @return html content
 	 */
 	public function order_modal_form($order_record_id = NULL)
 	{
@@ -122,6 +125,7 @@ class Orders extends MY_Controller {
 	/**
 	 * This creates the needed data structure for an order and then loads the data to a specific view 
 	 *
+	 * @return html content
 	 */
 	public function ajax_create_new_order_panel()
 	{
@@ -231,6 +235,8 @@ class Orders extends MY_Controller {
 	/**
 	 * This method fetches an order and adds all data in a table for printing
 	 *
+	 * @param order record id
+	 * @return html content
 	 */
 	public function print_order_modal_form($order_record_id = NULL)
 	{

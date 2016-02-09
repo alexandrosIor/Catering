@@ -18,6 +18,11 @@ class Catalogue extends MY_Controller {
 		$this->products();
 	}
 
+	/**
+	 * This method loads product categories page
+	 *
+	 * @return html content
+	 */
 	public function product_categories()
 	{
 		/* x-editable plugin */
@@ -37,6 +42,11 @@ class Catalogue extends MY_Controller {
 		$this->layout_lib->load('store_layout_view', 'store/catalogue/product_categories_view', $this->view_data);
 	}	
 
+	/**
+	 * This method loads products page
+	 *
+	 * @return html content
+	 */
 	public function products()
 	{
 		/* x-editable plugin */
@@ -56,6 +66,11 @@ class Catalogue extends MY_Controller {
 		$this->layout_lib->load('store_layout_view', 'store/catalogue/products_view', $this->view_data);
 	}
 
+	/**
+	 * This method loads the add new product modal form
+	 *
+	 * @return html content
+	 */
 	public function product_modal_form()
 	{
 		$this->load->model('product_category_model');
@@ -66,6 +81,11 @@ class Catalogue extends MY_Controller {
 		$this->layout_lib->load('store/catalogue/product_modal_form', NULL, $this->view_data);
 	}	
 	
+	/**
+	 * This method loads the add new product category modal form
+	 *
+	 * @return html content
+	 */
 	public function product_category_modal_form()
 	{
 		$this->load->model('product_category_model');
@@ -76,6 +96,11 @@ class Catalogue extends MY_Controller {
 		$this->layout_lib->load('store/catalogue/product_category_modal_form', NULL, $this->view_data);
 	}
 
+	/**
+	 * This method saves to database the new created product category
+	 *
+	 * @return html content
+	 */
 	public function ajax_save_product_category()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -98,6 +123,11 @@ class Catalogue extends MY_Controller {
 		}
 	}
 
+	/**
+	 * This method saves to database the new created product
+	 *
+	 * @return html content
+	 */
 	public function ajax_save_product()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -120,6 +150,11 @@ class Catalogue extends MY_Controller {
 		}
 	}
 
+	/**
+	 * This method loads all available product categories from database
+	 *
+	 * @return json object
+	 */
 	public function datatable_product_categories_data()
 	{
 		$this->load->model('product_category_model');
@@ -146,6 +181,11 @@ class Catalogue extends MY_Controller {
 		echo json_encode($obj);
 	}	
 
+	/**
+	 * This method loads all available products from database
+	 *
+	 * @return json object
+	 */
 	public function datatable_products_data()
 	{
 		$this->load->model('product_model');
@@ -174,6 +214,11 @@ class Catalogue extends MY_Controller {
 		echo json_encode($obj);
 	}	
 
+	/**
+	 * This method loads product categories for an editable select element
+	 *
+	 * @return json object
+	 */
 	public function editable_product_categories_data()
 	{
 		$this->load->model('product_category_model');
@@ -194,6 +239,10 @@ class Catalogue extends MY_Controller {
 		echo json_encode($data);
 	}
 
+	/**
+	 * This method updates edited product category
+	 *
+	 */
 	public function update_product_category()
 	{
 		$this->load->model('product_category_model');
@@ -204,6 +253,10 @@ class Catalogue extends MY_Controller {
 		$product_category->save();
 	}	
 
+	/**
+	 * This method updates edited product
+	 *
+	 */
 	public function update_product()
 	{
 		$this->load->model('product_model');
@@ -217,6 +270,10 @@ class Catalogue extends MY_Controller {
 		$product->save();
 	}
 
+	/**
+	 * This method updates the status of either a product or a product category
+	 *
+	 */
 	public function ajax_change_status()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -247,6 +304,10 @@ class Catalogue extends MY_Controller {
 		}
 	}	
 
+	/**
+	 * This method deletes permanently from database the given product category
+	 *
+	 */
 	public function ajax_delete_product_category()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -261,6 +322,10 @@ class Catalogue extends MY_Controller {
 		}
 	}	
 
+	/**
+	 * This method deletes permanently from database the given product
+	 *
+	 */
 	public function ajax_delete_product()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')

@@ -13,6 +13,11 @@ class Store extends MY_Controller {
 		$this->allow_access(['admin', 'store']);
 	}
 
+	/**
+	 * This method loads the index page of the application 
+	 *
+	 * @return html content
+	 */
 	public function index()
 	{
 		$this->load->model('user_model');
@@ -64,6 +69,10 @@ class Store extends MY_Controller {
 		$this->layout_lib->load('store_layout_view', 'store/dashboard', $this->view_data);
 	}
 
+	/**
+	 * This method sends notification messages to users through websocket
+	 *
+	 */
 	public function ajax_send_notification()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')

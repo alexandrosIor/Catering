@@ -12,6 +12,11 @@ class Login extends CI_Controller {
 		$this->load->view('login_view');
 	}
 	
+	/**
+	 * This method validates the given user credentials
+	 *
+	 * @return json object
+	 */
 	public function check()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')

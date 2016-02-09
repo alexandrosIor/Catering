@@ -13,6 +13,11 @@ class Store_tables extends MY_Controller {
 		$this->allow_access(['admin']);
 	}
 
+	/**
+	 * This method load store tables page to manage tables units
+	 *
+	 * @return html content
+	 */
 	public function index()
 	{
 		/* x-editable plugin */
@@ -32,6 +37,11 @@ class Store_tables extends MY_Controller {
 		$this->layout_lib->load('store_layout_view', 'store/store_tables/store_tables_view', $this->view_data);
 	}
 
+	/**
+	 * This method load store table data to be used in a datatable
+	 *
+	 * @return json object
+	 */
 	public function datatable_store_tables_data()
 	{
 		$this->load->model('store_table_model');
@@ -59,6 +69,11 @@ class Store_tables extends MY_Controller {
 		echo json_encode($obj);
 	}
 
+	/**
+	 * This method load a modal form to add new store table
+	 *
+	 * @return html content
+	 */
 	public function store_table_modal_form()
 	{
 		$this->load->model('store_table_model');
@@ -68,6 +83,10 @@ class Store_tables extends MY_Controller {
 		$this->layout_lib->load('store/store_tables/store_table_modal_form', NULL, $this->view_data);
 	}
 
+	/**
+	 * This updates store table info
+	 *
+	 */
 	public function update_store_table()
 	{	
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -81,6 +100,10 @@ class Store_tables extends MY_Controller {
 		}
 	}
 
+	/**
+	 * This method changes the status of a store table
+	 *
+	 */
 	public function ajax_change_status()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -104,6 +127,10 @@ class Store_tables extends MY_Controller {
 		}
 	}
 
+	/**
+	 * This method saves new store table
+	 *
+	 */
 	public function ajax_save_store_table()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -126,6 +153,11 @@ class Store_tables extends MY_Controller {
 		}
 	}
 
+	/**
+	 * This method deleted permanently a store table
+	 *
+	 * @return html content
+	 */
 	public function ajax_delete_store_table()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')

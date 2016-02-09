@@ -13,6 +13,11 @@ class Users extends MY_Controller {
 		$this->allow_access(['admin']);
 	}
 
+	/**
+	 * This method load the user management page
+	 *
+	 * @return html content
+	 */
 	public function index()
 	{
 		/* x-editable plugin */
@@ -32,6 +37,11 @@ class Users extends MY_Controller {
 		$this->layout_lib->load('store_layout_view', 'store/users/users_view', $this->view_data);
 	}	
 
+	/**
+	 * This method loads all users data to be used in a datatable
+	 *
+	 * @return json object
+	 */
 	public function datatable_users_data()
 	{
 		$this->load->model('user_model');
@@ -60,6 +70,11 @@ class Users extends MY_Controller {
 		echo json_encode($obj);
 	}	
 
+	/**
+	 * This method load a form to add new users
+	 *
+	 * @return html content
+	 */
 	public function user_modal_form()
 	{
 		$this->load->model('user_model');
@@ -70,6 +85,11 @@ class Users extends MY_Controller {
 		$this->layout_lib->load('store/users/user_modal_form', NULL, $this->view_data);
 	}
 
+	/**
+	 * This method load the available user roles for a select element
+	 *
+	 * @return json object
+	 */
 	public function editable_user_roles_data()
 	{
 		$this->load->model('user_model');
@@ -89,6 +109,10 @@ class Users extends MY_Controller {
 		echo json_encode($data);
 	}
 
+	/**
+	 * This method updates user info
+	 *
+	 */
 	public function update_user()
 	{	
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -102,6 +126,10 @@ class Users extends MY_Controller {
 		}
 	}
 
+	/**
+	 * This method changes the status of a user
+	 *
+	 */
 	public function ajax_change_status()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -123,6 +151,10 @@ class Users extends MY_Controller {
 		}
 	}
 
+	/**
+	 * This method saves a new user
+	 *
+	 */
 	public function ajax_save_user()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
@@ -145,6 +177,10 @@ class Users extends MY_Controller {
 		}
 	}
 
+	/**
+	 * This method deleted permanently a user
+	 *
+	 */
 	public function ajax_delete_user()
 	{
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
