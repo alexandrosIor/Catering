@@ -14,7 +14,7 @@ $$('#order-tab').on('show', function () {
 
 	/* Remove products that have been added for order*/
 	$('.remove-product').each(function(){
-		$(this).on('touchend', function(){
+		$(this).on('click', function(){
 
 			var order_product = $(this).parent().parent();
 
@@ -59,7 +59,7 @@ $$('#order-tab').on('show', function () {
 /* Add product to current order */
 $('.add-product').each(function(){
 	var product = $(this);
-	$(product).on('touchend', function(){
+	$(product).on('click', function(){
 		$(product).find('i').removeClass('fa-check').addClass('loader');
 
 		var product_data = {
@@ -99,7 +99,7 @@ function add_comment_element_event()
 		/* Unbind previous event */
 		element.unbind();
 
-		element.on('touchend', function () {
+		element.on('click', function () {
 			myApp.prompt('', 'Σχόλια', function(value){
 				order_product.data('comments', value);
 
@@ -133,7 +133,7 @@ function show_product_description_event()
 
 		/* Unbind previous event */
 		$(this).unbind();
-		$(this).on('touchend', function(){
+		$(this).on('click', function(){
 			$('.my-popover .content-block').children().remove();
 			$('.my-popover .content-block').append($(this).find('span').clone().removeClass('hidden'));
 		});
@@ -148,7 +148,7 @@ function update_product_quantity_events()
 
 		/* Unbind previous event */
 		$(this).unbind();
-		$(this).on('touchend', function(){
+		$(this).on('click', function(){
 			quantity_change($(this).next(), '-');
 		})
 	});
@@ -158,7 +158,7 @@ function update_product_quantity_events()
 
 		/* Unbind previous event */
 		$(this).unbind();
-		$(this).on('touchend', function(){
+		$(this).on('click', function(){
 			quantity_change($(this).prev(), '+');
 		})
 	});
@@ -340,7 +340,7 @@ function select_table(picker, order_record_id)
 					order_table_caption = picker.cols[0].value;
 					/* Unbind previous event */
 					$('.close-picker').unbind();
-					$('.close-picker').on('touchend', function(){
+					$('.close-picker').on('click', function(){
 						save_order_table(order_table_caption, order_record_id);
 					});
 				}

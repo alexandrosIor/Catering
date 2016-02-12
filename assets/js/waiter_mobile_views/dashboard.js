@@ -69,6 +69,8 @@ function order_payment(order_record_id, total_price)
 							success: function(data) {
 								myApp.alert('Η παραγγελία εξοφλήθη!');	
 								$('.incomplete-order[data-order_table_caption="'+table_caption+'"]').remove();
+								var unpaid_orders = parseInt($('.unpaid-orders').text());
+								$('.unpaid-orders').text(unpaid_orders - 1);
 							},
 							error: function() {
 								alert('failure');
@@ -453,7 +455,7 @@ function active_waiter()
 {
 	/* Unbind previous event */
 	$('.transfer-order').unbind();
-	$('.transfer-order').on('touchend', function(){
+	$('.transfer-order').on('click', function(){
 
 		var order_record_id = $(this).data('order_record_id');
 
@@ -474,6 +476,9 @@ function active_waiter()
 			error: function() {
 				alert('failure');
 			}
+		});
+		$('.modal-overlay').on('click', function(){
+			myApp.closeModal($('.my-popover'));
 		});
 
 	});
@@ -500,6 +505,7 @@ function transfer_order(order_record_id, user_record_id)
 						$('.incomplete-order[data-order_record_id="' + order_record_id + '"]').remove();
 						$('.modal-overlay').removeClass('modal-overlay-visible');
 						$('.my-popover').css('display', 'none');
+						init();
 					},
 					error: function() {
 						alert('failure');

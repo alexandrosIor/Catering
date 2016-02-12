@@ -121,6 +121,11 @@ conn.onmessage = function (e) {
 			load_incomplete_waiter_orders($('#incomplete-orders'));
 			$('body').find('*').off();
 			init();
+
+			var orders = parseInt($('.total-orders').text());
+			var unpaid_orders = parseInt($('.unpaid-orders').text());
+			$('.total-orders').text(orders + +1);
+			$('.unpaid-orders').text(unpaid_orders + +1);
 		}		
 		if (message_container.message.message_type == 'waiter_order_updated_to_waiter')
 		{

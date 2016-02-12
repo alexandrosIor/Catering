@@ -369,13 +369,17 @@ class Waiter extends MY_Controller {
 		if ($this->input->is_ajax_request() AND $this->input->method() == 'post')
 		{
 			$this->load->model('order_model');
+			$this->load->model('shift_model');
 
 			$post = $this->input->post();
 			$order = $this->order_model->get_record(['record_id' => $post['order_record_id']]);
 			$order->user_info();
+			$shift = $this->shift_model->get_record(['user_record_id' => $post['user_record_id'], 'end_date' => NULL]);
+
 			$waiter_old = $order->user_info->lastname . ' ' . $order->user_info->firstname;
 			unset($order->user_info);
 			$order->user_record_id = $post['user_record_id'];
+			$order->shift_record_id = $shift->record_id;
 			$order->save();
 
 			$this->load->library('websocket_messages_lib', ['user_record_id' => $order->user_record_id]);
