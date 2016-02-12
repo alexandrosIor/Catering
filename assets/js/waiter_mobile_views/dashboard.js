@@ -71,6 +71,7 @@ function order_payment(order_record_id, total_price)
 								$('.incomplete-order[data-order_table_caption="'+table_caption+'"]').remove();
 								var unpaid_orders = parseInt($('.unpaid-orders').text());
 								$('.unpaid-orders').text(unpaid_orders - 1);
+								init();
 							},
 							error: function() {
 								alert('failure');
