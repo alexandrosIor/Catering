@@ -117,7 +117,6 @@ class Store_tables extends MY_Controller {
 			
 			if ($post['status'] == 'checked')
 			{
-				$store_table->set_properties(['in_use' => 0]);
 				$store_table->un_delete();
 			}
 			else

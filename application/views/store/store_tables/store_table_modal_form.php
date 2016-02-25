@@ -30,7 +30,6 @@
 	$('.save-store-table').on('click', function(){
 		if (!form_empty($('.store-table-form')))
 		{
-			
 			save_store_table($('.store-table-form'));
 		}
 	});

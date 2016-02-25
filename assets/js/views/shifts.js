@@ -14,7 +14,7 @@ $(document).ready(function() {
 			add_search_fields(table);
 		}
 	});
-
+	table.order([ 2, 'DESC' ]).draw();
 });
 
 /* apply search fields on data Table */

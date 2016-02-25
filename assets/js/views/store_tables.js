@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 });
 
-/* save new user */
+/* Save new store table */
 function save_store_table(element)
 {
 	$.ajax({
@@ -30,7 +30,7 @@ function save_store_table(element)
 	});
 }
 
-/* change store table status enable or disable it without deleting */
+/* Change store table status enable or disable it without deleting */
 function change_status(element)
 {
 	var store_table_record_id = element.parent().parent().siblings(":first").text();
@@ -54,7 +54,7 @@ function change_status(element)
 	});
 }
 
-/* permanently delete user */
+/* Permanently delete user */
 function delete_store_table(element)
 {
 	var store_table_record_id = element.parent().siblings(":first").text();
@@ -101,26 +101,13 @@ function delete_store_table(element)
 	});
 }
 
-/* initialize all needed event */
+/* Initialize all needed event */
 function events()
 {
-	/* editables */
+	/* Editables */
 	$.fn.editable.defaults.mode = 'inline';
 
-	/* update user role data via editable */
-	/*$('a.role').each(function(){
-		var store_table_record_id = $(this).parent().siblings(":first").text();
-		var name = $(this).data('column_name');
-		$(this).editable({
-			url: '/store_tables/update_store_table',
-			pk: store_table_record_id,
-			type: 'select',
-			name: name,
-			source: function() {return get_user_roles();},
-		});
-	});*/
-
-	/* update store table info via editable */
+	/* Update store table info via editable */
 	$('#store-tables td a').each(function(){
 		var store_table_record_id = $(this).parent().siblings(":first").text();
 		var name = $(this).data('column_name');
@@ -132,7 +119,7 @@ function events()
 		});
 	});
 
-	/* status checkbox type switchery */
+	/* Status checkbox, type switchery */
 	var n = Array.prototype.slice.call(document.querySelectorAll(".js-switch"));
 	n.forEach(function(e) {
 		if(!$(e).next().hasClass('switchery'))
@@ -143,21 +130,21 @@ function events()
 		}
 	});
 
-	/* change user status event */
+	/* Change user status event */
 	$('.js-switch').each(function(){
 		$(this).on('change', function(){
 			change_status($(this));
 		});
 	});
 
-	/* user delete event */
+	/* table delete event */
 	$('.delete-store-table').each(function(){
 		$(this).on('click', function(){
 			delete_store_table($(this));
 		});
 	});
 
-	/* to init events and plugins when datatable updates */
+	/* To initialize events and plugins when datatable updates */
 	$(this).on( 'draw.dt', function () {
 		events();
 	} );
