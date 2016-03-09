@@ -29,7 +29,7 @@
 						<div class="col-md-3 center">
 							<div class="login-box">
 								<a href="/login" class="logo-name text-lg text-center">Catering</a>
-								<p class="text-center m-t-md">Παρακλώ συνδεθείτε στον λογαρισμό σας</p>
+								<p class="text-center m-t-md">Παρακαλώ συνδεθείτε στον λογαρισμό σας</p>
 								<form class="m-t-md" id="login_form">
 									<div class="form-group">
 										<input type="email" class="form-control" name="username" placeholder="Email" required>

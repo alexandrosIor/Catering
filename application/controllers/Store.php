@@ -24,7 +24,7 @@ class Store extends MY_Controller {
 		$this->load->model('shift_model');
 		$this->load->helper('my_helper');
 
-		/* products_view custom javascript */
+		/* store_view custom javascript */
 		$this->layout_lib->add_additional_js('/assets/js/views/dashboard.js');
 
 		$this->view_data['page_title'] = 'Dashboard';
