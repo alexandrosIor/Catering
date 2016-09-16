@@ -4,11 +4,13 @@ $(document).ready(function() {
 	/* Datatables*/
 	$('#product_categories').DataTable({
 		'responsive': true,
-		'ajax': '/catalogue/datatable_product_categories_data',
-		'initComplete': function(settings, json) {
-			events();
-		}
+		'ajax': '/catalogue/datatable_product_categories_data'
 	});
+
+	/* to init events and plugins when datatable updates */
+	$(this).on( 'draw.dt', function () {
+		events();
+	} );
 
 });
 
@@ -162,21 +164,14 @@ function events()
 	});
 
 	/* change product_category status event */
-	$('.js-switch').each(function(){
-		$(this).on('change', function(){
-			change_status($(this));
-		});
+	$(document).on('change','.js-switch', function(e){
+		e.stopImmediatePropagation(e);
+		change_status($(this));
 	});
 
 	/* product_category delete event */
-	$('.delete-product-category').each(function(){
-		$(this).on('click', function(){
-			delete_product_category($(this));
-		});
+	$(document).on('click','.delete-product-category', function(e){
+		e.stopImmediatePropagation(e);
+		delete_product($(this));
 	});
-
-	/* to init events and plugins when datatable updates */
-	$(this).on( 'draw.dt', function () {
-		events();
-	} );
 }
