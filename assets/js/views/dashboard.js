@@ -31,29 +31,32 @@ function notify_user(user_record_id, notification_sender)
 		confirmButtonText: 'Αποστολή',   
 		cancelButtonText: 'Ακύρωση',
 	}, 
-	function(inputValue){
-		if (inputValue === '')
+	function(isConfirm, inputValue){
+		if (isConfirm)
 		{
-			var message = 'Σας κάλεσε ο: ';
-		}
-		else
-		{
-			var message = inputValue + '<br/>Απο: ';
-		}
-		
-		$.ajax({
-			type: 'POST',
-			url: '/store/ajax_send_notification',
-			async: false,
-			data: {'user_record_id' : user_record_id, 'notification_sender' : notification_sender, 'message' : message},
-			success: function(data) {		
-
-			},
-			error: function() {
-				alert('failure');
+			if (inputValue === '')
+			{
+				var message = 'Σας κάλεσε ο: ';
 			}
-		});
-		swal('Το μήνυμα εστάλη', '', 'success');
+			else
+			{
+				var message = inputValue + '<br/>Απο: ';
+			}
+			
+			$.ajax({
+				type: 'POST',
+				url: '/store/ajax_send_notification',
+				async: false,
+				data: {'user_record_id' : user_record_id, 'notification_sender' : notification_sender, 'message' : message},
+				success: function(data) {		
+
+				},
+				error: function() {
+					alert('failure');
+				}
+			});
+			swal('Το μήνυμα εστάλη', '', 'success');
+		}
 	});
 
 	/* Input mask to prevent from inserting invalid characters */

@@ -1,6 +1,9 @@
 var myApp = new Framework7({
 	modalTitle: 'Catering',
 	material: true,
+	materialRipple: false,
+	cache: false,
+	sortable: false,
 });
 
 var $$ = Dom7;

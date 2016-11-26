@@ -9,8 +9,8 @@
 	</div>
 	<div class="toolbar tabbar">
 		<div class="toolbar-inner">
-			<a href="#catalogue-tab" class="tab-link catalogue-tab-link active"><i class="fa fa-list fa-lg"></i><span class="tabbar-label">Καταλογος</span></a>
-			<a href="#order-tab" class="tab-link order-tab-link" disabled="true"><i class="fa fa-edit fa-lg"></i><span class="tabbar-label">Παραγγελια</span></a>
+			<a href="#catalogue-tab" class="tab-link catalogue-tab-link active"><i class="f7-icons sm">favorites</i><span class="tabbar-label">κατάλογος</span></a>
+			<a href="#order-tab" class="tab-link order-tab-link" disabled="true"><i class="f7-icons sm">compose</i><span class="tabbar-label">παραγγελία</span></a>
 		</div>
 	</div>
 
@@ -36,11 +36,11 @@
 													<div class="item-inner">
 														<div class="item-title">
 															<?=$product->name?>
-															<em><?=substr($product->short_description, 0, 10)?></em>
+															<span style="font-size:12px"><?=substr($product->short_description, 0, 10)?></span>
 														</div>
 		<?php if ($product->description){?>
 														<div class="right description">
-															<a href="#" data-popover=".my-popover" class="link open-popover"><i class="fa fa-info-circle fa-lg"></i></a>
+															<a href="#" data-popover=".my-popover" class="link open-popover"><i class="f7-icons md">info_fill</i></a>
 															<span class="hidden"><?=$product->description?></span>
 														</div>
 		<?php }?>
@@ -49,15 +49,15 @@
 												</div>
 												<div class="swipeout-actions-left">
 													<a href="#" class="action1 bg-gray">
-														<i class="fa fa-minus"></i>
+														<i class="f7-icons sm sub-q">delete</i>
 														<div class="product-quantity"> 1 </div>
-														<i class="fa fa-plus"></i>
+														<i class="f7-icons sm add-q">add</i>
 													</a>	
 													<a href="#" class="action2 bg-orange">
 														<div href="#" class="add-comment">Σχόλια</div>
 													</a>
 													<a href="#" class="action3 bg-green add-product" data-product_record_id="<?=$product->record_id?>" data-comments="" data-quantity="1" data-order_record_id="">
-														<i class="fa fa-check fa-lg"></i>
+														<i class="f7-icons md add-prod">check</i>
 													</a>
 												</div>
 											</li>

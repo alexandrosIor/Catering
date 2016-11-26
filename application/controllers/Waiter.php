@@ -353,7 +353,7 @@ class Waiter extends MY_Controller {
 					array_push($waiters, $waiter);
 				}
 			}
-
+			
 			$this->view_data['active_waiters'] = $waiters;
 
 			$this->layout_lib->load('waiter/active_waiters_view', NULL, $this->view_data);

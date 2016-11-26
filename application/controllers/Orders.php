@@ -105,12 +105,12 @@ class Orders extends MY_Controller {
 			if ($order_product->deleted_at)
 			{
 				$order_product->un_delete();
-				$order_product->message = '<i class="fa fa-times color-danger"></i> ' . $order->store_table_info->caption . ' | ' . $order_product->product_info->name;
+				$order_product->message = '<i class="f7-icons sm color-danger">close</i> ' . $order->store_table_info->caption . ' | ' . $order_product->product_info->name;
 			}
 			else
 			{
 				$order_product->soft_delete();
-				$order_product->message = '<i class="fa fa-check color-success"></i> ' . $order->store_table_info->caption . ' | ' . $order_product->product_info->name;
+				$order_product->message = '<i class="f7-icons sm color-success">check</i> ' . $order->store_table_info->caption . ' | ' . $order_product->product_info->name;
 			}
 
 			if ($order->all_order_products_completed())

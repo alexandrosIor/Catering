@@ -60,7 +60,7 @@ $$('#order-tab').on('show', function () {
 $('.add-product').each(function(){
 	var product = $(this);
 	$(product).on('click', function(){
-		$(product).find('i').removeClass('fa-check').addClass('loader');
+		$(product).find('i').addClass('loader');
 
 		var product_data = {
 			'order_record_id' : $('.products-list').data('order_record_id'),
@@ -75,7 +75,7 @@ $('.add-product').each(function(){
 			data: product_data,
 			async: false,
 			success: function(response) {		
-				$(product).find('i').removeClass('loader').addClass('fa-check');
+				$(product).find('i').removeClass('loader');
 				$('.products-list').data('order_record_id', response);
 				$('.order-tab-link').removeAttr('disabled');
 				close_swipe($('.product'));
@@ -143,8 +143,8 @@ function show_product_description_event()
 /* Update product quantity events */
 function update_product_quantity_events()
 {
-	/* increase product quantity event*/
-	$('.fa-minus').each(function(){
+	/* decrease product quantity event*/
+	$('.sub-q').each(function(){
 
 		/* Unbind previous event */
 		$(this).unbind();
@@ -153,8 +153,8 @@ function update_product_quantity_events()
 		})
 	});
 
-	/* decrease product quantity event*/
-	$('.fa-plus').each(function(){
+	/* increase product quantity event*/
+	$('.add-q').each(function(){
 
 		/* Unbind previous event */
 		$(this).unbind();
@@ -172,8 +172,8 @@ function confirm_order()
 		var order_record_id = $('.products-list').data('order_record_id');
 
 		myApp.modal({
-			title:  'Εξόφληση',
-			text: '<div>Σύνολο: <span class="total-cost">' + confirm_order_btn.text() + '<i class="fa fa-eur"></i></span></div>',
+			title:  'Ολοκλήρωση',
+			text: '<div>Σύνολο: <span class="total-cost">' + confirm_order_btn.text() + '</span></div>',
 			buttons: [
 			{
 				text: 'Ακυρωση',

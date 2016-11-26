@@ -25,15 +25,15 @@ body {
 	margin: 0 0px 0 0px;
 }
 
-.fa-plus {
+.add-q {
 	padding: 15px 15px 15px 20px;
 }
 
-.fa-minus {
+.sub-q {
 	padding: 15px 20px 15px 15px;
 }
 
-.fa-check , .fa-times{
+.rm-prod , .add-prod{
 	padding: 8px;
 }
 
@@ -182,10 +182,10 @@ input.modal-text-input {
 	font-size: 2px;
 	position: relative;
 	text-indent: -9999em;
-	border-top: 1.1em solid rgba(255, 255, 255, 0.2);
-	border-right: 1.1em solid rgba(255, 255, 255, 0.2);
-	border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
-	border-left: 1.1em solid #ffffff;
+	border-top: 0.3em solid rgba(255, 255, 255, 0.2);
+	border-right: 0.3em solid rgba(255, 255, 255, 0.2);
+	border-bottom: 0.3em solid rgba(255, 255, 255, 0.2);
+	border-left: 0.3em solid #ffffff;
 	-webkit-transform: translateZ(0);
 	-ms-transform: translateZ(0);
 	transform: translateZ(0);
@@ -195,9 +195,76 @@ input.modal-text-input {
 .loader,
 .loader:after {
 	border-radius: 50%;
-	width: 15em;
-	height: 15em;
+	width: 0px;
+	height: 0px;
 }
+
+.products-list li {
+	margin-left: 0;
+}
+
+.toolbar .toolbar-inner {
+	background: #44546e;
+}
+
+.tabbar .tab-link-highlight {
+	background: rgb(34, 186, 160);
+}
+
+.navbar .center, .subnavbar .center {
+	font-weight: 300;
+}
+
+.tabbar .tabbar-label {
+	text-transform: none;
+	line-height: 22px;
+}
+
+.panel-left .list-block .list-group-title {
+	background: none;
+    padding: 0;
+    border-bottom: 1px solid #1b9480;
+    height: auto;
+    line-height: 32px;
+    color: #293448;
+    font-size: 16px;
+}
+
+.panel-left .list-block ul:before {
+	background: none;
+}
+
+.panel-left .list-block .item-inner {
+	font-size: 14px;
+}
+
+#catalogue-tab .content-block .list-block,
+#catalogue-tab .content-block {
+	margin: 0;
+}
+
+#catalogue-tab .list-block .swipeout-content .item-title,
+.popup #order-products .list-block .swipeout-content .item-title {
+	width: 70%;
+}
+
+.popover {
+	width: auto;
+}
+
+.chip.incomplete-order .order-timer{
+	padding: 0 6px;
+}
+
+.popover-inner .content-block {
+	margin: 10px 0;
+}
+
+.f7-icons.xs {font-size: 10px;}
+.f7-icons.sm {font-size: 14px;}
+.f7-icons.md {font-size: 18px;}
+.f7-icons.lg {font-size: 24px;}
+
 @-webkit-keyframes load8 {
 	0% {
 		-webkit-transform: rotate(0deg);

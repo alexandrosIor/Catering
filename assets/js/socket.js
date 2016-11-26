@@ -1,5 +1,5 @@
 var hostname = document.location.hostname;
-	var conn = new WebSocket('ws://'+hostname+':8087/' + user_channel);
+	var conn = new WebSocket('ws://' + hostname + ':8087/' + user_channel);
 	conn.onopen = function (e) {
 		console.log("Connection to websocket established");
 	};
@@ -82,7 +82,7 @@ conn.onmessage = function (e) {
 	{
 		if (message_container.message.message_type == 'store_order_update')
 		{	
-			custom_notification(message_container.message.message_data.message, '<i class="fa fa-times fa-lg"></i>');
+			custom_notification(message_container.message.message_data.message, '<i class="f7-icons md">close</i>');
 
 			order_chip = $('.incomplete-order[data-order_record_id="' + message_container.message.message_data.order_record_id + '"] .chip-delete');
 
@@ -103,7 +103,7 @@ conn.onmessage = function (e) {
 
 		if (message_container.message.message_type == 'store_notify_waiter')
 		{
-			custom_notification(message_container.message.message_data.message + ' ' + message_container.message.message_data.notification_sender, '<i class="fa fa-bell fa-lg"></i>');
+			custom_notification(message_container.message.message_data.message + ' ' + message_container.message.message_data.notification_sender, '<i class="f7-icons md">close</i>');
 			notification_sound('notification');
 			if (message_container.message.message_data.store_order == 1)
 			{
@@ -117,7 +117,7 @@ conn.onmessage = function (e) {
 	{
 		if (message_container.message.message_type == 'waiter_transfer_order')
 		{
-			custom_notification(message_container.message.message_data.message, '<i class="fa fa-check fa-lg"></i>');
+			custom_notification(message_container.message.message_data.message, '<i class="f7-icons md">close</i>');
 			load_incomplete_waiter_orders($('#incomplete-orders'));
 			$('body').find('*').off();
 			init();
@@ -129,14 +129,13 @@ conn.onmessage = function (e) {
 		}		
 		if (message_container.message.message_type == 'waiter_order_updated_to_waiter')
 		{
-			custom_notification(message_container.message.message_data.message, '<i class="fa fa-check fa-lg"></i>');
+			custom_notification(message_container.message.message_data.message, '<i class="f7-icons md">close</i>');
 		}
 	}
 }
 
 conn.onclose = function (e)
 {
-	// το εκανα comment γιατι στον firefox αν ανοιξεις socket δεν μπορεις να κανεις navigate αλλου γιατι ερχετε πρωτα εδω
 	//location.reload();
 	console.log('Connection to websocket closed');
 }

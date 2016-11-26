@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="el">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -10,6 +10,7 @@
 		<title>Catering</title>
 		<link rel="stylesheet" href="/assets/plugins/framework7/dist/css/framework7.material.min.css">
 		<link rel="stylesheet" href="/assets/plugins/framework7/dist/css/framework7.material.colors.min.css">
+		<link rel="stylesheet" href="/assets/plugins/framework7/dist/css/framework7-icons.css">
 		<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
 		<link href="/assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
 		<link rel="stylesheet" href="/assets/css/custom_mobile.css">
@@ -29,13 +30,18 @@
 							</div>
 						</div>
 						<div class="page-content">
-							<div class="content-block-title"><?=$logged_in_user->firstname . ' ' . $logged_in_user->lastname?></div>
 							<div class="content-block">
 								<div class="list-group">
 									<div class="list-block">
 									    <ul>
 		      								<li class="list-group-title">Στοιχεία βάρδιας</li>
 		      								<li>
+												<div class="item-inner">
+													<div class="item-title">Όνομα:</div>
+													<div><?=$logged_in_user->firstname . ' ' . $logged_in_user->lastname?></div>
+												</div>
+											</li>
+											<li>
 												<div class="item-inner">
 													<div class="item-title">Ωρα έναρξης:</div>
 													<div><?=$start_date?></div>
@@ -68,7 +74,6 @@
 												<a href="#" class="item-link item-content external">
 													<div class="item-inner waiter-close-shift">
 														<div class="item-title">Κλείσιμο βάρδιας</div>
-														<div class="item-after"><i class="fa fa-history fa-lg"></i></div>
 													</div>
 												</a>
 											</li>									
@@ -76,7 +81,6 @@
 												<a href="/logout" class="item-link item-content external">
 													<div class="item-inner">
 														<div class="item-title">Αποσύνδεση</div>
-														<div class="item-after"><i class="fa fa-sign-out fa-lg"></i></div>
 													</div>
 												</a>
 											</li>
@@ -105,8 +109,8 @@
 
 						<div class="toolbar tabbar">
 							<div class="toolbar-inner">
-								<a href="#incomplete-orders" class="tab-link active"><i class="fa fa-hourglass-half fa-lg"></i><span class="tabbar-label">Προς υλοποιηση</span></a>
-								<a href="#unpaid-orders" class="tab-link "><i class="fa fa-money fa-lg"></i><span class="tabbar-label">Προς πληρωμη</span></a>
+								<a href="#incomplete-orders" class="tab-link active"><i class="f7-icons md">timer</i><span class="tabbar-label">εκκρεμούν</span></a>
+								<a href="#unpaid-orders" class="tab-link "><i class="f7-icons md">money_euro</i><span class="tabbar-label">απλήρωτες</span></a>
 							</div>
 						</div>
 

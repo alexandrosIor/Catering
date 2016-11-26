@@ -108,6 +108,8 @@ class Shifts extends MY_Controller {
 		{
 			$order->store_table_info();
 
+			//var_dump($order->store_table_info->caption);
+
 			array_push($data, [
 				0 => $key +1,
 				1 => $order->store_table_info->caption,

@@ -49,38 +49,41 @@ function incomplete_order_details(incomplete_orders)
 /* */
 function order_payment(order_record_id, total_price)
 {
-	var table_caption = $('.my-popup-title').text();
+	var table_caption = $('.my-popup-title span').text();
 	modal = myApp.modal({
-				title: 'Εξώφληση παραγγελίας',
-				text: 'Συνολικό ποσό: ' + total_price,
-				buttons: [
-				{
-					text: 'Ακύρωση'
-				},
-				{
-					text: 'Εξώφληση',
-					bold: true,
-					onClick: function () {
-						$.ajax({
-							type: 'POST',
-							url: '/waiter/ajax_order_payment',
-							data: {'order_record_id': order_record_id},
-							async: false,
-							success: function(data) {
-								myApp.alert('Η παραγγελία εξοφλήθη!');	
-								$('.incomplete-order[data-order_table_caption="'+table_caption+'"]').remove();
-								var unpaid_orders = parseInt($('.unpaid-orders').text());
-								$('.unpaid-orders').text(unpaid_orders - 1);
-								init();
-							},
-							error: function() {
-								alert('failure');
-							}
-						});
+		title: 'Εξώφληση παραγγελίας',
+		text: 'Συνολικό ποσό: ' + total_price,
+		buttons: [
+		{
+			text: 'Ακύρωση',
+			onClick: function() {
+				$('.order-payment').removeAttr('disabled');
+			}
+		},
+		{
+			text: 'Εξώφληση',
+			bold: true,
+			onClick: function () {
+				$.ajax({
+					type: 'POST',
+					url: '/waiter/ajax_order_payment',
+					data: {'order_record_id': order_record_id},
+					async: false,
+					success: function(data) {
+						myApp.alert('Η παραγγελία εξοφλήθη!');	
+						$('.incomplete-order[data-order_table_caption="'+table_caption+'"]').remove();
+						var unpaid_orders = parseInt($('.unpaid-orders').text());
+						$('.unpaid-orders').text(unpaid_orders - 1);
+						init();
+					},
+					error: function() {
+						alert('failure');
 					}
-				},
-				]
-			});
+				});
+			}
+		},
+		]
+	});
 }
 
 
@@ -173,7 +176,7 @@ function order_products_popup(order_record_id)
 			$('.my-popup').children().remove();
 			$('.my-popup').append(data);
 			$('.order-payment').on('click', function(){
-				order_payment(order_record_id, $(this).next().text());
+				order_payment(order_record_id, $(this).find('.order-total-price').text());
 				$(this).attr('disabled', true);
 			});
 			order_product_events_init();
@@ -236,7 +239,7 @@ function serve_product_event()
 	$('.serve-product').each(function(){
 		var product = $(this);
 		var order_product_record_id = product.data('product_record_id');
-		var table_caption = $('.my-popup-title').text();
+		var table_caption = $('.my-popup-title span').text();
 
 		product.on('click', function(){
 			$.ajax({
@@ -245,10 +248,10 @@ function serve_product_event()
 				data: {'order_product_record_id' : order_product_record_id, 'status' : 'served'},
 				async: false,
 				success: function(data) {		
-					product.parent().parent().find('.item-title').prepend('<i class="fa fa-check completed-product-mark"></i>');
+					product.parent().parent().find('.item-title').prepend('<i class="f7-icons md completed-product-mark">check</i>');
 					close_swipe(product.parent().parent());
 					product.removeClass('bg-green').addClass('bg-red');
-					product.find('i').removeClass('fa-check').addClass('fa-undo');
+					product.find('i.f7-icons').html('undo');
 
 					product.unbind();
 					product.on('click', function(){
@@ -272,7 +275,7 @@ function serve_product_event()
 function unserve_product_event(product)
 {
 	var order_product_record_id = product.data('product_record_id');
-	var table_caption = $('.my-popup-title').text();
+	var table_caption = $('.my-popup-title span').text();
 
 	$.ajax({
 		type: 'POST',
@@ -280,10 +283,10 @@ function unserve_product_event(product)
 		data: {'order_product_record_id' : order_product_record_id, 'status' : 'unserved'},
 		async: false,
 		success: function() {		
-			product.parent().parent().find('.fa-check').remove();
+			product.parent().parent().find('i.completed-product-mark').remove();
 			close_swipe(product.parent().parent());
 			product.removeClass('bg-red').addClass('bg-green');
-			product.find('i').removeClass('fa-undo').addClass('fa-check');
+			product.find('i.f7-icons').html('check');
 
 			product.unbind();
 			serve_product_event();
