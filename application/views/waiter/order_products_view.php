@@ -6,7 +6,7 @@
 					<div class="item-content">
 						<div class="item-inner">
 							<div class="item-input">
-								<input type="text" placeholder="Επιλέξτε τραπέζι" style="font-size:14px;height:26px" readonly id="table-picker" value="<?=isset($table->caption) ? $table->caption : ''?>">
+								<input type="text" placeholder="Επιλέξτε τραπέζι" style="font-size:14px;height:36px" readonly id="table-picker" value="<?=isset($table->caption) ? $table->caption : ''?>">
 							</div>
 						</div>
 					</div>

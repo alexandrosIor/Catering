@@ -4,6 +4,10 @@ var myApp = new Framework7({
 	materialRipple: false,
 	cache: false,
 	sortable: false,
+	materialPageLoadDelay: '20',
+	uniqueHistory: true,
+	uniqueHistoryIgnoreGetParameters: false,
+	preloadPreviousPage: true,
 });
 
 var $$ = Dom7;

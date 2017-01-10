@@ -99,7 +99,7 @@ body {
 }
 
 .button.button-fill {
-	background-color: #22BAA0;
+	background-color: #34425a;
 	color: #fff;
 }
 
@@ -241,11 +241,48 @@ input.modal-text-input {
 #catalogue-tab .content-block .list-block,
 #catalogue-tab .content-block {
 	margin: 0;
+	padding: 0;
 }
 
 #catalogue-tab .list-block .swipeout-content .item-title,
 .popup #order-products .list-block .swipeout-content .item-title {
 	width: 70%;
+	font-size: 12px;
+}
+
+#order-tab .list-block .item-title {
+	font-size: 12px;
+}
+
+#order-tab .content-block {
+	padding: 0;
+}
+
+#order-tab .current-order {
+	padding: 0 16px;
+}
+
+#order-tab .current-order .list-block .item-content {
+	min-height: 36px;
+    margin-bottom: 16px;
+}
+
+#order-tab .current-order .list-block .item-inner {
+	min-height: 36px;
+	padding: 0;
+}
+
+#order-tab .products-list .list-block .item-inner {
+	padding-left: 8px;
+}
+
+#catalogue-tab .products-list .item-inner {
+	padding-left: 12px;
+}
+
+#catalogue-tab .accordion-item .item-title {
+	font-size: 14px;
+	padding-left: 8px;
 }
 
 .popover {
